@@ -1,0 +1,26 @@
+body {
+  font-family: var(--font-primary);
+  background: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+p {
+  color: var(--color-text-muted);
+}
+
+section {
+  padding: 6rem 0;
+}

@@ -1,0 +1,58 @@
+:root {
+  /* ========= COLORS ========= */
+
+  --color-primary: #c04a2b;
+  --color-primary-hover: #d85a37;
+
+  --color-background: #121212;
+  --color-surface: #1b1b1b;
+  --color-surface-light: #242424;
+
+  --color-text: #f5f5f5;
+  --color-text-muted: #b8b8b8;
+
+  --color-border: rgba(255, 255, 255, 0.08);
+
+  --color-gold: #c9a96a;
+
+  /* ========= TYPOGRAPHY ========= */
+
+  --font-primary: "Inter", sans-serif;
+  --font-heading: "Cormorant Garamond", serif;
+
+  --font-size-xs: 0.875rem;
+  --font-size-sm: 1rem;
+  --font-size-md: 1.125rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 2.5rem;
+  --font-size-2xl: 3.5rem;
+
+  /* ========= SPACING ========= */
+
+  --space-xs: .5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 5rem;
+
+  /* ========= LAYOUT ========= */
+
+  --container-width: 1280px;
+  --container-padding: 1.5rem;
+
+  /* ========= RADIUS ========= */
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+
+  /* ========= SHADOW ========= */
+
+  --shadow-md: 0 12px 30px rgba(0,0,0,.25);
+
+  /* ========= TRANSITION ========= */
+
+  --transition: .25s ease;
+}
