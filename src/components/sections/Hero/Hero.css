@@ -244,7 +244,7 @@
 
   .hero__content {
     max-width: 100%;
-    padding-top: 9rem;
+    padding-top: 6rem;
     padding-bottom: 5rem;
   }
 
@@ -342,7 +342,7 @@
 
   .hero__content {
     margin: 0 auto;
-    padding-top: 8rem;
+    padding-top: 2rem;
   }
 
   .hero__badge {
@@ -370,7 +370,7 @@
   }
 
   .hero__content {
-    padding-top: 5rem;
+    padding-top: 1rem;
     padding-bottom: 4rem;
   }
 
