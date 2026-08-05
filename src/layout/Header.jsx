@@ -1,23 +1,37 @@
-import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
 import "./Header.css";
 
+const primaryNavigation = [
+  { label: "Speciality", type: "hash", to: "/#speciality" },
+  { label: "Denní menu", type: "hash", to: "/#denni-menu" },
+  { label: "Jídelní lístek", type: "route", to: "/jidelni-listek" },
+  { label: "Galerie", type: "route", to: "/galerie" },
+  { label: "O nás", type: "route", to: "/o-nas" },
+  { label: "Kontakt", type: "hash", to: "/#kontakt" },
+];
+
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { pathname, hash } = useLocation();
+  const previousBodyOverflow = useRef("");
 
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const toggleMenu = () => setIsMenuOpen((previousValue) => !previousValue);
   const closeMenu = () => setIsMenuOpen(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 80);
+      const nextIsScrolled = window.scrollY > 80;
+
+      setIsScrolled((currentValue) =>
+        currentValue === nextIsScrolled ? currentValue : nextIsScrolled,
+      );
     };
 
     handleScroll();
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -26,103 +40,105 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    const { style } = document.body;
+
+    if (isMenuOpen) {
+      previousBodyOverflow.current = style.overflow;
+      style.overflow = "hidden";
+    } else {
+      style.overflow = previousBodyOverflow.current;
+    }
 
     return () => {
-      document.body.style.overflow = "";
+      style.overflow = previousBodyOverflow.current;
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    closeMenu();
+  }, [pathname, hash]);
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return undefined;
+    }
+
+    const handleEscapeKey = (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    };
+
+    window.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isMenuOpen]);
+
+  const renderNavigationLink = ({ label, to, type }, includeDesktopClass = true) => {
+    if (type === "hash") {
+      return (
+        <HashLink
+          smooth
+          to={to}
+          className={includeDesktopClass ? "header__link" : undefined}
+          onClick={closeMenu}
+        >
+          {label}
+        </HashLink>
+      );
+    }
+
+    return (
+      <NavLink
+        to={to}
+        className={({ isActive }) =>
+          includeDesktopClass && isActive
+            ? "header__link header__link--active"
+            : includeDesktopClass
+              ? "header__link"
+              : undefined
+        }
+        onClick={closeMenu}
+      >
+        {label}
+      </NavLink>
+    );
+  };
 
   return (
     <header className={`header ${isScrolled ? "header--scrolled" : ""}`}>
       <div className="container header__container">
-        {/* Logo */}
-
         <Link
           to="/"
           className="header__logo"
-          aria-label="Kabura – Domovská stránka"
+          aria-label="Kabura – domovská stránka"
           onClick={closeMenu}
         >
-          <span className="header__logo-mark">◆</span>
+          <span className="header__logo-mark" aria-hidden="true">
+            ◆
+          </span>
 
           <div className="header__logo-content">
             <span className="header__logo-title">KABURA</span>
-
             <span className="header__logo-subtitle">Afghan Restaurant</span>
           </div>
         </Link>
 
-        {/* Desktop navigace */}
-
         <nav className="header__nav" aria-label="Hlavní navigace">
           <ul className="header__list">
-            <li className="header__item">
-              <HashLink smooth to="/#speciality" className="header__link">
-                Speciality
-              </HashLink>
-            </li>
-
-            <li className="header__item">
-              <HashLink smooth to="/#denni-menu" className="header__link">
-                Denní menu
-              </HashLink>
-            </li>
-
-            <li className="header__item">
-              <NavLink
-                to="/jidelni-listek"
-                className={({ isActive }) =>
-                  isActive
-                    ? "header__link header__link--active"
-                    : "header__link"
-                }
-              >
-                Jídelní lístek
-              </NavLink>
-            </li>
-
-            <li className="header__item">
-              <NavLink
-                to="/galerie"
-                className={({ isActive }) =>
-                  isActive
-                    ? "header__link header__link--active"
-                    : "header__link"
-                }
-              >
-                Galerie
-              </NavLink>
-            </li>
-
-            <li className="header__item">
-              <NavLink
-                to="/o-nas"
-                className={({ isActive }) =>
-                  isActive
-                    ? "header__link header__link--active"
-                    : "header__link"
-                }
-              >
-                O nás
-              </NavLink>
-            </li>
-
-            <li className="header__item">
-              <HashLink smooth to="/#kontakt" className="header__link">
-                Kontakt
-              </HashLink>
-            </li>
+            {primaryNavigation.map((item) => (
+              <li key={item.to} className="header__item">
+                {renderNavigationLink(item)}
+              </li>
+            ))}
           </ul>
         </nav>
-
-        {/* Desktop CTA */}
 
         <NavLink to="/rezervace" className="header__button">
           Rezervovat stůl
         </NavLink>
-
-        {/* Hamburger */}
 
         <button
           type="button"
@@ -134,55 +150,22 @@ function Header() {
           aria-controls="mobile-menu"
           onClick={toggleMenu}
         >
-          <span></span>
-          <span></span>
-          <span></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
         </button>
       </div>
-
-      {/* Mobile menu */}
 
       <aside
         id="mobile-menu"
         className={`mobile-menu ${isMenuOpen ? "mobile-menu--open" : ""}`}
+        aria-hidden={!isMenuOpen}
       >
         <nav aria-label="Mobilní navigace">
           <ul className="mobile-menu__list">
-            <li>
-              <HashLink smooth to="/#speciality" onClick={closeMenu}>
-                Speciality
-              </HashLink>
-            </li>
-
-            <li>
-              <HashLink smooth to="/#denni-menu" onClick={closeMenu}>
-                Denní menu
-              </HashLink>
-            </li>
-
-            <li>
-              <NavLink to="/jidelni-listek" onClick={closeMenu}>
-                Jídelní lístek
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink to="/galerie" onClick={closeMenu}>
-                Galerie
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink to="/o-nas" onClick={closeMenu}>
-                O nás
-              </NavLink>
-            </li>
-
-            <li>
-              <HashLink smooth to="/#kontakt" onClick={closeMenu}>
-                Kontakt
-              </HashLink>
-            </li>
+            {primaryNavigation.map((item) => (
+              <li key={`mobile-${item.to}`}>{renderNavigationLink(item, false)}</li>
+            ))}
           </ul>
 
           <NavLink

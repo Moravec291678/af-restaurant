@@ -1,5 +1,11 @@
 function Menu() {
-  return <h1>Jídelní lístek</h1>;
+  return (
+    <section className="page-shell" aria-labelledby="menu-title">
+      <div className="container">
+        <h1 id="menu-title">Jídelní lístek</h1>
+      </div>
+    </section>
+  );
 }
 
 export default Menu;
