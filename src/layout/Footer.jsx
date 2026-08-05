@@ -1,5 +1,10 @@
+import "./Footer.css";
 function Footer() {
-  return <footer>Footer</footer>;
+  return (
+    <footer>
+      <div>footer</div>
+    </footer>
+  );
 }
 
 export default Footer;
