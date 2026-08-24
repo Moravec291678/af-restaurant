@@ -76,7 +76,10 @@ function Header() {
     };
   }, [isMenuOpen]);
 
-  const renderNavigationLink = ({ label, to, type }, includeDesktopClass = true) => {
+  const renderNavigationLink = (
+    { label, to, type },
+    includeDesktopClass = true,
+  ) => {
     if (type === "hash") {
       return (
         <HashLink
@@ -108,54 +111,55 @@ function Header() {
   };
 
   return (
-    <header className={`header ${isScrolled ? "header--scrolled" : ""}`}>
-      <div className="container header__container">
-        <Link
-          to="/"
-          className="header__logo"
-          aria-label="Kabura – domovská stránka"
-          onClick={closeMenu}
-        >
-          <span className="header__logo-mark" aria-hidden="true">
-            ◆
-          </span>
+    <>
+      <header className={`header ${isScrolled ? "header--scrolled" : ""}`}>
+        <div className="container header__container">
+          <Link
+            to="/"
+            className="header__logo"
+            aria-label="Kabura – domovská stránka"
+            onClick={closeMenu}
+          >
+            <span className="header__logo-mark" aria-hidden="true">
+              ◆
+            </span>
 
-          <div className="header__logo-content">
-            <span className="header__logo-title">KABURA</span>
-            <span className="header__logo-subtitle">Afghan Restaurant</span>
-          </div>
-        </Link>
+            <div className="header__logo-content">
+              <span className="header__logo-title">KABURA</span>
+              <span className="header__logo-subtitle">Afghan Restaurant</span>
+            </div>
+          </Link>
 
-        <nav className="header__nav" aria-label="Hlavní navigace">
-          <ul className="header__list">
-            {primaryNavigation.map((item) => (
-              <li key={item.to} className="header__item">
-                {renderNavigationLink(item)}
-              </li>
-            ))}
-          </ul>
-        </nav>
+          <nav className="header__nav" aria-label="Hlavní navigace">
+            <ul className="header__list">
+              {primaryNavigation.map((item) => (
+                <li key={item.to} className="header__item">
+                  {renderNavigationLink(item)}
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <NavLink to="/rezervace" className="header__button">
-          Rezervovat stůl
-        </NavLink>
+          <NavLink to="/rezervace" className="header__button">
+            Rezervovat stůl
+          </NavLink>
 
-        <button
-          type="button"
-          className={`header__hamburger ${
-            isMenuOpen ? "header__hamburger--active" : ""
-          }`}
-          aria-label={isMenuOpen ? "Zavřít navigaci" : "Otevřít navigaci"}
-          aria-expanded={isMenuOpen}
-          aria-controls="mobile-menu"
-          onClick={toggleMenu}
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </button>
-      </div>
-
+          <button
+            type="button"
+            className={`header__hamburger ${
+              isMenuOpen ? "header__hamburger--active" : ""
+            }`}
+            aria-label={isMenuOpen ? "Zavřít navigaci" : "Otevřít navigaci"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+            onClick={toggleMenu}
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+      </header>
       <aside
         id="mobile-menu"
         className={`mobile-menu ${isMenuOpen ? "mobile-menu--open" : ""}`}
@@ -164,7 +168,9 @@ function Header() {
         <nav aria-label="Mobilní navigace">
           <ul className="mobile-menu__list">
             {primaryNavigation.map((item) => (
-              <li key={`mobile-${item.to}`}>{renderNavigationLink(item, false)}</li>
+              <li key={`mobile-${item.to}`}>
+                {renderNavigationLink(item, false)}
+              </li>
             ))}
           </ul>
 
@@ -177,7 +183,7 @@ function Header() {
           </NavLink>
         </nav>
       </aside>
-    </header>
+    </>
   );
 }
 
