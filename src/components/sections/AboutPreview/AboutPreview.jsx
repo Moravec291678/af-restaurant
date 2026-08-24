@@ -1,0 +1,49 @@
+import { Link } from "react-router-dom";
+import aboutImage from "../../../assets/images/about.webp";
+
+import "./AboutPreview.css";
+
+function AboutPreview() {
+  return (
+    <section className="about-preview" id="o-nas">
+      <div className="container">
+        <div className="about-preview__inner">
+          <div className="about-preview__content">
+            <div className="about-preview__eyebrow">
+              <span aria-hidden="true">—</span>
+              <span>O NÁS</span>
+              <span aria-hidden="true">—</span>
+            </div>
+
+            <h2 className="about-preview__title">
+              Příběh restaurace
+              <br />
+              Kabura
+            </h2>
+
+            <p className="about-preview__description">
+              Kabura je místem, kde se setkává tradice s pohostinností. Naši
+              kuchaři přinášejí autentické afghánské recepty připravované s
+              láskou z čerstvých surovin.
+            </p>
+
+            <Link to="/o-nas" className="about-preview__button">
+              Více o nás
+            </Link>
+          </div>
+
+          <figure className="about-preview__image">
+            <img
+              src={aboutImage}
+              alt="Interiér restaurace Kabura"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default AboutPreview;
