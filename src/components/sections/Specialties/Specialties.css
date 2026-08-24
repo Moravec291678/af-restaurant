@@ -327,58 +327,67 @@
 
 @media (max-width: 768px) {
   .specialties {
-    padding: 4.5rem 0 5.5rem;
+    padding: 3.5rem 0 4rem;
   }
 
   .specialties__header {
-    margin-bottom: 2.2rem;
+    margin-bottom: 1.8rem;
   }
 
   .specialties__title {
     gap: 0.7rem;
-
     font-size: 0.85rem;
-
     letter-spacing: 0.13em;
   }
 
   .specialties__grid {
     grid-template-columns: 1fr;
-
-    gap: 1.25rem;
+    gap: 0.9rem;
   }
 
   .specialties__card {
     display: grid;
+    grid-template-columns: 36% 64%;
 
-    grid-template-columns: 42% 58%;
+    height: 135px;
+    min-height: 135px;
   }
 
   .specialties__image {
-    aspect-ratio: auto;
-
-    min-height: 180px;
     height: 100%;
+    min-height: 0;
+    aspect-ratio: auto;
   }
 
   .specialties__content {
-    min-height: 180px;
-
-    padding: 1.15rem 1.2rem;
+    height: 100%;
+    min-height: 0;
+    padding: 0.85rem 1rem;
   }
 
   .specialties__name {
-    font-size: 1.15rem;
+    margin-bottom: 0.4rem;
+    font-size: 1.05rem;
   }
 
   .specialties__description {
     max-width: 100%;
+    font-size: 0.7rem;
+    line-height: 1.45;
 
-    font-size: 0.75rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .specialties__price {
+    padding-top: 0.4rem;
+    font-size: 0.78rem;
   }
 
   .specialties__action {
-    margin-top: 2.3rem;
+    margin-top: 1.8rem;
   }
 }
 
@@ -388,45 +397,70 @@
 
 @media (max-width: 480px) {
   .specialties {
-    padding: 4rem 0 5rem;
+    padding: 3rem 0 4rem;
+  }
+
+  .specialties__header {
+    margin-bottom: 1.5rem;
   }
 
   .specialties__title {
-    font-size: 0.75rem;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
   }
 
   .specialties__title span {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
+  }
+
+  .specialties__grid {
+    gap: 0.75rem;
   }
 
   .specialties__card {
-    grid-template-columns: 1fr;
+    grid-template-columns: 36% 64%;
+
+    height: 120px;
+    min-height: 120px;
   }
 
   .specialties__image {
-    aspect-ratio: 1.45 / 1;
-
+    height: 100%;
     min-height: 0;
+    aspect-ratio: auto;
   }
 
   .specialties__content {
-    min-height: 155px;
+    height: 100%;
+    min-height: 0;
+    padding: 0.7rem 0.8rem;
   }
 
   .specialties__name {
-    font-size: 1.15rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
   }
 
   .specialties__description {
-    font-size: 0.75rem;
+    font-size: 0.63rem;
+    line-height: 1.35;
 
-    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .specialties__price {
+    padding-top: 0.3rem;
+    font-size: 0.7rem;
   }
 
   .specialties__button {
     width: 100%;
-
     min-width: 0;
+    min-height: 44px;
   }
 }
 

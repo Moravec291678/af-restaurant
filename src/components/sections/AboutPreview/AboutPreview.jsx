@@ -16,15 +16,15 @@ function AboutPreview() {
             </div>
 
             <h2 className="about-preview__title">
-              Příběh restaurace
+              Dvě suroviny
               <br />
-              Kabura
+              Jedna tradice
             </h2>
 
             <p className="about-preview__description">
-              Kabura je místem, kde se setkává tradice s pohostinností. Naši
-              kuchaři přinášejí autentické afghánské recepty připravované s
-              láskou z čerstvých surovin.
+              Naan o Namak - "chleb a sůl" <br />
+              je tradiční afghánská fráze, kterou hostitel vítá hosta u svého
+              stolu. Není to jen jídlo, je to slib pohostinnosti.
             </p>
 
             <Link to="/o-nas" className="about-preview__button">

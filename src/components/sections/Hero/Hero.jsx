@@ -22,20 +22,16 @@ function Hero() {
         <div className="container">
           <div className="hero__content">
             <div className="hero__badge">
-              ❖ AUTENTICKÁ AFGHÁNSKÁ GASTRONOMIE ❖
+              ❖ AUTENTICKÁ ORIENTÁLNÍ GASTRONOMIE ❖
             </div>
 
             <h1 id="hero-title" className="hero__title">
-              Chuť Hedvábné
-              <br />
-              Stezky v Srdci
-              <br />
-              Prahy
+              Chuťová cesta do srdce Asie
             </h1>
 
             <p className="hero__description">
-              Vstupte do světa hřejivých světel, vůně čerstvě mletého kardamomu,
-              šafránu a šťavnatého masa grilovaného na otevřeném dřevěném uhlí.
+              Poznejte harmonii jemných bylinek, šťavnatého masa a aromatického
+              koření. Orientální kuchyně čeká, až ji objevíte.
             </p>
 
             <div className="hero__buttons">
@@ -78,7 +74,7 @@ function Hero() {
                 <span className="hero__footer-label">Adresa:</span>
 
                 <a
-                  href="https://maps.google.com/?q=Vodičkova+12,+Praha+1"
+                  href="https://www.google.com/maps/place/Kv%C4%9Btnov%C3%A9ho+povst%C3%A1n%C3%AD+21%2F21,+103+00+Praha-Benice/@50.0137868,14.6020157,17z/data=!4m6!3m5!1s0x470b8c2e77c9630f:0x7f36b02fd66e5768!8m2!3d50.0137834!4d14.6045906!16s%2Fg%2F11cpqg2kww?entry=ttu&g_ep=EgoyMDI2MDgyMC4wIKXMDSoASAFQAw%3D%3D"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Otevřít adresu restaurace Kabura na Google Maps"
