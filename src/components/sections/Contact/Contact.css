@@ -1,0 +1,810 @@
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact {
+  background: #e8dfcf;
+  color: #1a1512;
+  padding: 5rem 0;
+}
+
+.contact__inner {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: stretch;
+}
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 3rem 4rem 3rem 2.5rem;
+}
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.contact__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  margin-bottom: 2.4rem;
+}
+
+.contact__heading h2 {
+  margin: 0;
+
+  color: #4d3a2b;
+
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.contact__line {
+  width: 22px;
+  height: 1px;
+
+  background: rgba(116, 89, 55, 0.65);
+}
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.contact__details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+
+.contact__icon {
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  height: 20px;
+
+  margin-top: 1px;
+
+  color: #76552f;
+}
+
+.contact__icon svg {
+  display: block;
+
+  width: 17px;
+  height: 17px;
+}
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.contact__label {
+  display: block;
+
+  margin-bottom: 0.35rem;
+
+  color: #8a6d48;
+
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.contact__item address,
+.contact__item a,
+.contact__value {
+  display: block;
+
+  margin: 0;
+
+  color: #332a24;
+
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.55;
+
+  text-decoration: none;
+}
+
+.contact__item address {
+  font-style: normal;
+}
+
+.contact__item a {
+  transition: color 0.2s ease;
+}
+
+.contact__item a:hover {
+  color: #741723;
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.contact__actions {
+  display: flex;
+  gap: 0.75rem;
+
+  margin-top: 2rem;
+}
+
+.contact__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 130px;
+  height: 42px;
+
+  padding: 0 1.2rem;
+
+  border: 1px solid #741723;
+
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.contact__button:hover {
+  transform: translateY(-2px);
+}
+
+.contact__button--primary {
+  background: #741723;
+  color: #e7c878;
+}
+
+.contact__button--primary:hover {
+  background: #62131d;
+  border-color: #62131d;
+  color: #efd58e;
+}
+
+.contact__button--secondary {
+  background: transparent;
+  color: #5f1820;
+}
+
+.contact__button--secondary:hover {
+  background: #741723;
+  border-color: #741723;
+  color: #e7c878;
+}
+
+.contact__button:focus-visible {
+  outline: 1px solid #8b6c45;
+  outline-offset: 4px;
+}
+
+/* =========================================================
+   MAP
+========================================================= */
+
+.contact__map {
+  position: relative;
+
+  min-height: 380px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(83, 65, 48, 0.3);
+}
+
+.contact__map iframe {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+
+  border: 0;
+
+  filter: grayscale(0.55) sepia(0.08) saturate(0.7) contrast(0.98)
+    brightness(0.9);
+
+  transition:
+    filter 0.6s ease,
+    transform 0.6s ease;
+}
+.contact__map::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    135deg,
+    rgba(91, 18, 27, 0.08),
+    rgba(201, 169, 106, 0.03)
+  );
+
+  pointer-events: none;
+
+  transition: opacity 0.6s ease;
+}
+
+/* =========================================================
+   MAP INTERACTION
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .contact__map:hover iframe {
+    filter:
+      grayscale(0.05)
+      sepia(0)
+      saturate(1.05)
+      contrast(1.02)
+      brightness(0.98);
+
+    transform: scale(1.015);
+  }
+
+  .contact__map:hover::after {
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   TABLET — 992px
+========================================================= */
+
+@media (max-width: 992px) {
+  .contact {
+    padding: 4.5rem 0;
+  }
+
+  .contact__inner {
+    grid-template-columns:
+      minmax(0, 0.92fr)
+      minmax(0, 1.08fr);
+
+    gap: 1.5rem;
+  }
+
+  .contact__info {
+    padding: 2rem 0;
+  }
+
+  .contact__heading {
+    margin-bottom: 2rem;
+  }
+
+  .contact__details {
+    gap: 1.1rem;
+  }
+
+  .contact__item {
+    gap: 0.7rem;
+  }
+
+  .contact__icon {
+    width: 19px;
+    height: 19px;
+  }
+
+  .contact__icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .contact__label {
+    font-size: 0.55rem;
+    letter-spacing: 0.14em;
+  }
+
+  .contact__item address,
+  .contact__item a,
+  .contact__value {
+    font-size: 0.74rem;
+    line-height: 1.45;
+  }
+
+  .contact__actions {
+    gap: 0.6rem;
+    margin-top: 1.8rem;
+  }
+
+  .contact__button {
+    min-width: 0;
+    height: 41px;
+    padding: 0 0.85rem;
+
+    font-size: 0.56rem;
+    letter-spacing: 0.1em;
+  }
+
+  .contact__map {
+    min-height: 340px;
+  }
+
+  .contact__map iframe {
+    min-height: 340px;
+  }
+}
+
+
+/* =========================================================
+   COMPACT TABLET — 768px
+========================================================= */
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 3.8rem 0;
+  }
+
+  /*
+    Stále držíme dvě kolony.
+    Mapa využívá celý pravý prostor.
+  */
+
+  .contact__inner {
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 0.9fr)
+      minmax(0, 1.1fr);
+
+    align-items: stretch;
+
+    gap: 1.4rem;
+  }
+
+  /* -----------------------------------------
+     INFO
+  ----------------------------------------- */
+
+  .contact__info {
+    min-width: 0;
+    padding: 1.3rem 0;
+  }
+
+  .contact__heading {
+    margin-bottom: 1.7rem;
+  }
+
+  .contact__heading h2 {
+    font-size: 0.69rem;
+    letter-spacing: 0.13em;
+  }
+
+  .contact__line {
+    width: 18px;
+  }
+
+  .contact__details {
+    gap: 1rem;
+  }
+
+  .contact__item {
+    min-width: 0;
+    gap: 0.6rem;
+  }
+
+  .contact__icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .contact__icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .contact__label {
+    margin-bottom: 0.25rem;
+
+    font-size: 0.51rem;
+    letter-spacing: 0.11em;
+  }
+
+  .contact__item address,
+  .contact__item a,
+  .contact__value {
+    font-size: 0.69rem;
+    line-height: 1.4;
+  }
+
+  /* -----------------------------------------
+     ACTIONS
+  ----------------------------------------- */
+
+  .contact__actions {
+    display: flex;
+
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .contact__button {
+    flex: 1;
+
+    min-width: 0;
+    height: 39px;
+
+    padding: 0 0.5rem;
+
+    font-size: 0.51rem;
+    letter-spacing: 0.08em;
+
+    text-align: center;
+  }
+
+  /* -----------------------------------------
+     MAP
+  ----------------------------------------- */
+
+  .contact__map {
+    width: 100%;
+    min-height: 330px;
+    height: auto;
+
+    margin: 0;
+  }
+
+  .contact__map iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 330px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE — 670px
+========================================================= */
+
+@media (max-width: 670px) {
+  .contact {
+    padding: 3.2rem 0 3.8rem;
+  }
+
+  /*
+    Od 670px už máme dostatečně úzký prostor,
+    proto přecházíme na jeden sloupec.
+  */
+
+  .contact__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* -----------------------------------------
+     INFO
+  ----------------------------------------- */
+
+  .contact__info {
+    width: 100%;
+    padding: 0;
+  }
+
+  .contact__heading {
+    margin-bottom: 1.7rem;
+  }
+
+  .contact__heading h2 {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+  }
+
+  .contact__line {
+    width: 18px;
+  }
+
+  /* -----------------------------------------
+     DETAILS — 2 × 2
+  ----------------------------------------- */
+
+  .contact__details {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    column-gap: 1.25rem;
+    row-gap: 1.05rem;
+  }
+
+  .contact__item {
+    min-width: 0;
+    gap: 0.6rem;
+  }
+
+  .contact__icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .contact__icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .contact__label {
+    margin-bottom: 0.25rem;
+
+    font-size: 0.52rem;
+    letter-spacing: 0.12em;
+  }
+
+  .contact__item address,
+  .contact__item a,
+  .contact__value {
+    font-size: 0.7rem;
+    line-height: 1.4;
+  }
+
+  /* -----------------------------------------
+     ACTIONS
+  ----------------------------------------- */
+
+  .contact__actions {
+    display: flex;
+
+    width: 100%;
+
+    gap: 0.6rem;
+    margin-top: 1.6rem;
+  }
+
+  .contact__button {
+    flex: 1;
+
+    min-width: 0;
+    height: 40px;
+
+    padding: 0 0.6rem;
+
+    font-size: 0.53rem;
+    letter-spacing: 0.09em;
+  }
+
+  /* -----------------------------------------
+     MAP
+  ----------------------------------------- */
+
+  .contact__map {
+    width: 100%;
+    height: 230px;
+    min-height: 230px;
+
+    margin-top: 1.8rem;
+  }
+
+  .contact__map iframe {
+    width: 100%;
+    height: 230px;
+    min-height: 230px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE — 480px
+========================================================= */
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 3rem 0 3.5rem;
+  }
+
+  .contact__heading {
+    margin-bottom: 1.6rem;
+  }
+
+  .contact__heading h2 {
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+  }
+
+  .contact__line {
+    width: 16px;
+  }
+
+  /* -----------------------------------------
+     DETAILS
+  ----------------------------------------- */
+
+  .contact__details {
+    column-gap: 0.9rem;
+    row-gap: 1rem;
+  }
+
+  .contact__item {
+    gap: 0.55rem;
+  }
+
+  .contact__icon {
+    width: 17px;
+    height: 17px;
+  }
+
+  .contact__icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .contact__label {
+    margin-bottom: 0.22rem;
+
+    font-size: 0.49rem;
+    letter-spacing: 0.1em;
+  }
+
+  .contact__item address,
+  .contact__item a,
+  .contact__value {
+    font-size: 0.67rem;
+    line-height: 1.4;
+  }
+
+  /* -----------------------------------------
+     ACTIONS
+  ----------------------------------------- */
+
+  .contact__actions {
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .contact__button {
+    height: 40px;
+
+    padding: 0 0.45rem;
+
+    font-size: 0.5rem;
+    letter-spacing: 0.075em;
+  }
+
+  /* -----------------------------------------
+     MAP
+  ----------------------------------------- */
+
+  .contact__map {
+    height: 215px;
+    min-height: 215px;
+
+    margin-top: 1.7rem;
+  }
+
+  .contact__map iframe {
+    height: 215px;
+    min-height: 215px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE — 380px
+========================================================= */
+
+@media (max-width: 380px) {
+  .contact {
+    padding: 2.8rem 0 3.2rem;
+  }
+
+  .contact__details {
+    column-gap: 0.7rem;
+    row-gap: 0.9rem;
+  }
+
+  .contact__item {
+    gap: 0.45rem;
+  }
+
+  .contact__icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .contact__icon svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .contact__label {
+    font-size: 0.46rem;
+    letter-spacing: 0.08em;
+  }
+
+  .contact__item address,
+  .contact__item a,
+  .contact__value {
+    font-size: 0.63rem;
+    line-height: 1.35;
+  }
+
+  /* -----------------------------------------
+     ACTIONS
+  ----------------------------------------- */
+
+  .contact__actions {
+    gap: 0.45rem;
+    margin-top: 1.4rem;
+  }
+
+  .contact__button {
+    height: 38px;
+
+    padding: 0 0.35rem;
+
+    font-size: 0.47rem;
+    letter-spacing: 0.065em;
+  }
+
+  /* -----------------------------------------
+     MAP
+  ----------------------------------------- */
+
+  .contact__map {
+    height: 195px;
+    min-height: 195px;
+
+    margin-top: 1.5rem;
+  }
+
+  .contact__map iframe {
+    height: 195px;
+    min-height: 195px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__button,
+  .contact__item a,
+  .contact__map iframe,
+  .contact__map::after {
+    transition: none;
+  }
+
+  .contact__button:hover {
+    transform: none;
+  }
+
+  .contact__map:hover iframe {
+    transform: none;
+  }
+}
