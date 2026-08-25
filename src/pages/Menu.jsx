@@ -1,7 +1,38 @@
 import { useEffect, useMemo, useState } from "react";
 import "./Menu.css";
-import falafel from "../assets/images/menu/falafel.png";
 
+import ashak from "../assets/images/menu/ashak.png";
+import ashakVege from "../assets/images/menu/ashakVege.png";
+import baghlawa from "../assets/images/menu/baghlawa.png";
+import bartha from "../assets/images/menu/bartha.png";
+import boloni from "../assets/images/menu/boloni.png";
+import boraniBadenjan from "../assets/images/menu/boraniBadenjan.png";
+import catni from "../assets/images/menu/catni.png";
+import daal from "../assets/images/menu/daal.png";
+import dalSoup from "../assets/images/menu/dalSoup.png";
+import falafel from "../assets/images/menu/falafel.png";
+import grilovanyPstruh from "../assets/images/menu/grilovanyPstruh.png";
+import grilovanyLosos from "../assets/images/menu/grilovanyLosos.png";
+import hoveziSaslik from "../assets/images/menu/hoveziSaslik.png";
+import hranolky from "../assets/images/menu/hranolky.png";
+import chalouBasmati from "../assets/images/menu/chalouBasmati.png";
+import iceFerni from "../assets/images/menu/iceFerni.png";
+import jehneciKotlety from "../assets/images/menu/jehneciKotlety.png";
+import jehneciSaslik from "../assets/images/menu/jehneciSaslik.png";
+import koftaChalow from "../assets/images/menu/koftaChalow.png";
+import kureciKridla from "../assets/images/menu/kureciKridla.png";
+import kureciStehna from "../assets/images/menu/kureciStehna.png";
+import mantu from "../assets/images/menu/mantu.png";
+import nanePlacka from "../assets/images/menu/nanePlacka.png";
+import pro2Osoby from "../assets/images/menu/pro2Osoby.png";
+import pro4Osoby from "../assets/images/menu/pro4Osoby.png";
+import qabuliPalow from "../assets/images/menu/qabuliPalow.png";
+import qormeBamia from "../assets/images/menu/qormeBamia.png";
+import salatMix from "../assets/images/menu/salatMix.png";
+import sambosa from "../assets/images/menu/sambosa.png";
+import samiKebab from "../assets/images/menu/samiKebab.png";
+import torshi from "../assets/images/menu/torshi.png";
+import zabziSpenat from "../assets/images/menu/zabziSpenat.png";
 /* =========================================================
    MENU DATA
    ========================================================= */
@@ -23,6 +54,7 @@ const menuItems = [
     image: falafel,
     imageAlt: "Falafel",
   },
+
   {
     id: "bartha",
     name: "Bartha",
@@ -33,7 +65,10 @@ const menuItems = [
     price: 119,
     vegetarian: true,
     allergens: [],
+    image: bartha,
+    imageAlt: "Bartha",
   },
+
   {
     id: "sambosa",
     name: "Sambosa",
@@ -44,7 +79,10 @@ const menuItems = [
     price: 129,
     vegetarian: true,
     allergens: [],
+    image: sambosa,
+    imageAlt: "Sambosa",
   },
+
   {
     id: "boloni",
     name: "Boloni",
@@ -55,6 +93,8 @@ const menuItems = [
     price: 149,
     vegetarian: true,
     allergens: [],
+    image: boloni,
+    imageAlt: "Boloni",
   },
 
   /* =======================================================
@@ -70,7 +110,10 @@ const menuItems = [
     price: 59,
     vegetarian: true,
     allergens: [],
+    image: dalSoup,
+    imageAlt: "Dal Soup",
   },
+
   {
     id: "polevka-dne",
     name: "Polévka dne",
@@ -80,7 +123,9 @@ const menuItems = [
     price: 59,
     vegetarian: false,
     allergens: [],
+    image: null,
   },
+
   {
     id: "salat-mix",
     name: "Salát Mix",
@@ -90,7 +135,10 @@ const menuItems = [
     price: 149,
     vegetarian: true,
     allergens: [],
+    image: salatMix,
+    imageAlt: "Salát Mix",
   },
+
   {
     id: "shor-na-chod",
     name: "Shor-na-chod",
@@ -100,7 +148,9 @@ const menuItems = [
     price: 79,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "kureci-salat",
     name: "Kuřecí salát",
@@ -110,6 +160,7 @@ const menuItems = [
     price: 149,
     vegetarian: false,
     allergens: [],
+    image: null,
   },
 
   /* =======================================================
@@ -123,14 +174,33 @@ const menuItems = [
     description:
       "Dušená rýže Basmati s rozinkami a mrkví dle výběru masa, se směsí zeleniny v rajčatové omáčce.",
     variants: [
-      { label: "Hovězí kousky", portion: "200 g", price: 299 },
-      { label: "Jehněčí kousky", portion: "200 g", price: 299 },
-      { label: "Kuřecí kousky", portion: "200 g", price: 299 },
-      { label: "Jehněčí koleno", portion: "350 g", price: 399 },
+      {
+        label: "Hovězí kousky",
+        portion: "200 g",
+        price: 299,
+      },
+      {
+        label: "Jehněčí kousky",
+        portion: "200 g",
+        price: 299,
+      },
+      {
+        label: "Kuřecí kousky",
+        portion: "200 g",
+        price: 299,
+      },
+      {
+        label: "Jehněčí koleno",
+        portion: "350 g",
+        price: 399,
+      },
     ],
     vegetarian: false,
     allergens: [],
+    image: qabuliPalow,
+    imageAlt: "Qabuli Palow",
   },
+
   {
     id: "kofta-chalow",
     name: "Kofta Chalow",
@@ -141,7 +211,10 @@ const menuItems = [
     price: 199,
     vegetarian: false,
     allergens: [],
+    image: koftaChalow,
+    imageAlt: "Kofta Chalow",
   },
+
   {
     id: "mantu",
     name: "Mantu",
@@ -152,7 +225,10 @@ const menuItems = [
     price: 199,
     vegetarian: false,
     allergens: [],
+    image: mantu,
+    imageAlt: "Mantu",
   },
+
   {
     id: "ashak",
     name: "Ashak",
@@ -163,6 +239,8 @@ const menuItems = [
     price: 189,
     vegetarian: false,
     allergens: [],
+    image: ashak,
+    imageAlt: "Ashak",
   },
 
   /* =======================================================
@@ -177,7 +255,10 @@ const menuItems = [
     price: 259,
     vegetarian: false,
     allergens: [],
+    image: kureciKridla,
+    imageAlt: "Kuřecí křídla",
   },
+
   {
     id: "kureci-stehna",
     name: "Kuřecí stehna",
@@ -186,7 +267,10 @@ const menuItems = [
     price: 259,
     vegetarian: false,
     allergens: [],
+    image: kureciStehna,
+    imageAlt: "Kuřecí stehna",
   },
+
   {
     id: "kureci-prsa",
     name: "Kuřecí prsa",
@@ -195,16 +279,21 @@ const menuItems = [
     price: 259,
     vegetarian: false,
     allergens: [],
+    image: null,
   },
+
   {
-    id: "jehnecí-kotlety",
+    id: "jehneci-kotlety",
     name: "Jehněčí kotlety",
     category: "gril",
     portion: "200 g",
     price: 299,
     vegetarian: false,
     allergens: [],
+    image: jehneciKotlety,
+    imageAlt: "Jehněčí kotlety",
   },
+
   {
     id: "hovezi-saslik",
     name: "Hovězí šašlik",
@@ -213,7 +302,10 @@ const menuItems = [
     price: 289,
     vegetarian: false,
     allergens: [],
+    image: hoveziSaslik,
+    imageAlt: "Hovězí šašlik",
   },
+
   {
     id: "jehneci-saslik",
     name: "Jehněčí šašlik",
@@ -222,7 +314,10 @@ const menuItems = [
     price: 259,
     vegetarian: false,
     allergens: [],
+    image: jehneciSaslik,
+    imageAlt: "Jehněčí šašlik",
   },
+
   {
     id: "sami-kebab",
     name: "Šami kebab",
@@ -231,6 +326,8 @@ const menuItems = [
     price: 299,
     vegetarian: false,
     allergens: [],
+    image: samiKebab,
+    imageAlt: "Šami kebab",
   },
 
   /* =======================================================
@@ -247,7 +344,10 @@ const menuItems = [
     price: 599,
     vegetarian: false,
     allergens: [],
+    image: pro2Osoby,
+    imageAlt: "Mix Grill pro 2 osoby",
   },
+
   {
     id: "mix-grill-4",
     name: "Mix Grill pro 4 osoby",
@@ -258,6 +358,8 @@ const menuItems = [
     price: 1249,
     vegetarian: false,
     allergens: [],
+    image: pro4Osoby,
+    imageAlt: "Mix Grill pro 4 osoby",
   },
 
   /* =======================================================
@@ -274,7 +376,10 @@ const menuItems = [
     price: 139,
     vegetarian: true,
     allergens: [],
+    image: daal,
+    imageAlt: "Daal",
   },
+
   {
     id: "zabzi-spenat",
     name: "Zabzi – Špenát",
@@ -284,7 +389,10 @@ const menuItems = [
     price: 169,
     vegetarian: true,
     allergens: [],
+    image: zabziSpenat,
+    imageAlt: "Zabzi – Špenát",
   },
+
   {
     id: "qorme-bamia",
     name: "Qorme Bamia",
@@ -295,7 +403,10 @@ const menuItems = [
     price: 99,
     vegetarian: true,
     allergens: [],
+    image: qormeBamia,
+    imageAlt: "Qorme Bamia",
   },
+
   {
     id: "ashak-vegetariansky",
     name: "Ashak",
@@ -306,7 +417,10 @@ const menuItems = [
     price: 169,
     vegetarian: true,
     allergens: [],
+    image: ashakVege,
+    imageAlt: "Vegetariánský Ashak",
   },
+
   {
     id: "borani-badenjan",
     name: "Borani Badenjan",
@@ -317,6 +431,8 @@ const menuItems = [
     price: 189,
     vegetarian: true,
     allergens: [],
+    image: boraniBadenjan,
+    imageAlt: "Borani Badenjan",
   },
 
   /* =======================================================
@@ -333,7 +449,10 @@ const menuItems = [
     price: 249,
     vegetarian: false,
     allergens: [],
+    image: grilovanyLosos,
+    imageAlt: "Grilovaný losos",
   },
+
   {
     id: "grilovany-pstruh",
     name: "Grilovaný pstruh",
@@ -343,6 +462,8 @@ const menuItems = [
     price: 349,
     vegetarian: false,
     allergens: [],
+    image: grilovanyPstruh,
+    imageAlt: "Grilovaný pstruh",
   },
 
   /* =======================================================
@@ -358,7 +479,10 @@ const menuItems = [
     price: 39,
     vegetarian: true,
     allergens: [],
+    image: nanePlacka,
+    imageAlt: "Nane – placka",
   },
+
   {
     id: "catni",
     name: "Čatní",
@@ -368,7 +492,10 @@ const menuItems = [
     price: 49,
     vegetarian: true,
     allergens: [],
+    image: catni,
+    imageAlt: "Čatní",
   },
+
   {
     id: "hranolky",
     name: "Hranolky",
@@ -377,7 +504,10 @@ const menuItems = [
     price: 39,
     vegetarian: true,
     allergens: [],
+    image: hranolky,
+    imageAlt: "Hranolky",
   },
+
   {
     id: "chalou",
     name: "Chalou",
@@ -387,7 +517,10 @@ const menuItems = [
     price: 69,
     vegetarian: true,
     allergens: [],
+    image: chalouBasmati,
+    imageAlt: "Chalou",
   },
+
   {
     id: "basmati",
     name: "Basmati",
@@ -397,7 +530,9 @@ const menuItems = [
     price: 69,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "torshi",
     name: "Torshi",
@@ -407,6 +542,8 @@ const menuItems = [
     price: 69,
     vegetarian: true,
     allergens: [],
+    image: torshi,
+    imageAlt: "Torshi",
   },
 
   /* =======================================================
@@ -422,7 +559,10 @@ const menuItems = [
     price: 69,
     vegetarian: true,
     allergens: [],
+    image: baghlawa,
+    imageAlt: "Baghlawa",
   },
+
   {
     id: "ice-ferni",
     name: "Ice Ferni",
@@ -432,10 +572,12 @@ const menuItems = [
     price: 49,
     vegetarian: true,
     allergens: [],
+    image: iceFerni,
+    imageAlt: "Ice Ferni",
   },
 
   /* =======================================================
-     NEALCO NÁPOJE
+     NEALKO NÁPOJE
      ======================================================= */
 
   {
@@ -446,7 +588,9 @@ const menuItems = [
     price: 49,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "mattoni",
     name: "Mattoni perlivá / jemně perlivá",
@@ -455,7 +599,9 @@ const menuItems = [
     price: 49,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "lipton",
     name: "Lipton",
@@ -464,7 +610,9 @@ const menuItems = [
     price: 49,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "dzus",
     name: "Džus",
@@ -474,7 +622,9 @@ const menuItems = [
     price: 49,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "tocena-limonada",
     name: "Točená limonáda",
@@ -483,7 +633,9 @@ const menuItems = [
     price: 49,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "pepsi",
     name: "Pepsi Cola",
@@ -492,7 +644,9 @@ const menuItems = [
     price: 69,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "pepsi-zero",
     name: "Pepsi Zero Sugar",
@@ -501,7 +655,9 @@ const menuItems = [
     price: 59,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "mirinda",
     name: "Mirinda",
@@ -510,7 +666,9 @@ const menuItems = [
     price: 59,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "7up",
     name: "7Up",
@@ -519,7 +677,9 @@ const menuItems = [
     price: 59,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "tonic",
     name: "Schweppes Indian / Pink Tonic",
@@ -528,6 +688,7 @@ const menuItems = [
     price: 59,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
 
   /* =======================================================
@@ -543,7 +704,9 @@ const menuItems = [
     price: 69,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "mango-lassi",
     name: "Mango Lassi",
@@ -553,6 +716,7 @@ const menuItems = [
     price: 109,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
 
   /* =======================================================
@@ -566,7 +730,9 @@ const menuItems = [
     price: 59,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "espresso-doppio",
     name: "Espresso Doppio",
@@ -574,7 +740,9 @@ const menuItems = [
     price: 99,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "lungo",
     name: "Lungo",
@@ -582,7 +750,9 @@ const menuItems = [
     price: 59,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "cappuccino",
     name: "Cappuccino",
@@ -590,7 +760,9 @@ const menuItems = [
     price: 69,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "latte",
     name: "Latte",
@@ -598,7 +770,9 @@ const menuItems = [
     price: 79,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "zeleny-caj",
     name: "Zelený čaj s kardamonem",
@@ -606,6 +780,7 @@ const menuItems = [
     price: 79,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
 
   /* =======================================================
@@ -622,7 +797,9 @@ const menuItems = [
     ],
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "kozel-svetly",
     name: "Kozel světlý",
@@ -633,7 +810,9 @@ const menuItems = [
     ],
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "kozel-cerny",
     name: "Kozel černý",
@@ -642,7 +821,9 @@ const menuItems = [
     price: 69,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "birell",
     name: "Nealkoholické pivo Birell",
@@ -651,6 +832,7 @@ const menuItems = [
     price: 59,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
 
   /* =======================================================
@@ -666,7 +848,9 @@ const menuItems = [
     price: 499,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "alazani",
     name: "Alazani",
@@ -676,7 +860,9 @@ const menuItems = [
     price: 499,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "saperavi",
     name: "Saperavi",
@@ -686,7 +872,9 @@ const menuItems = [
     price: 499,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "armenia",
     name: "Armenia z granátového jablka",
@@ -696,6 +884,7 @@ const menuItems = [
     price: 599,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
 
   /* =======================================================
@@ -710,7 +899,9 @@ const menuItems = [
     price: 79,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "jack-daniels",
     name: "Jack Daniel's",
@@ -719,7 +910,9 @@ const menuItems = [
     price: 99,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "becherovka",
     name: "Becherovka",
@@ -728,7 +921,9 @@ const menuItems = [
     price: 69,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
+
   {
     id: "ararat",
     name: "Ararat 5 Y.O.",
@@ -737,6 +932,7 @@ const menuItems = [
     price: 99,
     vegetarian: true,
     allergens: [],
+    image: null,
   },
 ];
 
