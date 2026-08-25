@@ -6,7 +6,7 @@ import "./Header.css";
 
 const primaryNavigation = [
   { label: "Speciality", type: "hash", to: "/#speciality" },
-  { label: "Denní menu", type: "hash", to: "/#denni-menu" },
+  { label: "Ppolední menu", type: "hash", to: "/#poledni-menu" },
   { label: "Jídelní lístek", type: "route", to: "/jidelni-listek" },
   { label: "Galerie", type: "route", to: "/galerie" },
   { label: "O nás", type: "route", to: "/o-nas" },
@@ -114,8 +114,9 @@ function Header() {
     <>
       <header className={`header ${isScrolled ? "header--scrolled" : ""}`}>
         <div className="container header__container">
-          <Link
-            to="/"
+          <HashLink
+            smooth
+            to="/#hero"
             className="header__logo"
             aria-label="Kabura – domovská stránka"
             onClick={closeMenu}
@@ -128,7 +129,7 @@ function Header() {
               <span className="header__logo-title">KABURA</span>
               <span className="header__logo-subtitle">Afghan Restaurant</span>
             </div>
-          </Link>
+          </HashLink>
 
           <nav className="header__nav" aria-label="Hlavní navigace">
             <ul className="header__list">

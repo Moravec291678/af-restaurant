@@ -5,7 +5,7 @@
 .lunch-menu {
   position: relative;
   overflow: hidden;
-
+  scroll-margin-top: 50px;
   padding: 6.5rem 0;
 
   color: #f4efe7;

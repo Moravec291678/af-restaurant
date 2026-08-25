@@ -56,11 +56,7 @@ function Hero() {
               className="hero__anchor"
               aria-hidden="true"
             ></span>
-            <span
-              id="kontakt"
-              className="hero__anchor"
-              aria-hidden="true"
-            ></span>
+            <span className="hero__anchor" aria-hidden="true"></span>
           </div>
         </div>
         <div className="hero__footer">

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { HashLink } from "react-router-hash-link";
 import "./Footer.css";
 
 function Footer() {
@@ -15,13 +15,14 @@ function Footer() {
         <div className="footer__main">
           {/* BRAND */}
           <div className="footer__brand">
-            <Link
-              to="/"
+            <HashLink
+              smooth
+              to="/#hero"
               className="footer__logo"
               aria-label="Naan O Namak – domů"
             >
               NAAN O NAMAK
-            </Link>
+            </HashLink>
 
             <p className="footer__description">
               Autentická orientální kuchyně v srdci Prahy. Tradiční receptury,

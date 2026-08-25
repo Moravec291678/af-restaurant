@@ -4,14 +4,11 @@
 
 .specialties {
   position: relative;
-
   padding: 6rem 0 6.5rem;
-
   background: #0d0b0b;
-
   color: #fff;
-
   overflow: hidden;
+  scroll-margin-top: 80px;
 }
 
 /* =========================================================

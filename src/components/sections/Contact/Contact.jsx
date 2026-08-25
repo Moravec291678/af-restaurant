@@ -12,7 +12,7 @@ function Contact() {
           ========================================= */}
 
           <div className="contact__info">
-            <div className="contact__heading">
+            <div className="contact__heading" >
               <span className="contact__line" aria-hidden="true" />
 
               <h2 id="contact-title">Kde nás najdete</h2>
