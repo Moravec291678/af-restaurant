@@ -1,7 +1,766 @@
-footer {
-  height: 250px;
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+  position: relative;
+  background: linear-gradient(180deg, #0d0b0b 0%, #0b0909 100%);
+  color: #f2ece2;
+  border-top: 1px solid rgba(201, 169, 106, 0.12);
+}
+
+/* =========================================================
+   MAIN FOOTER
+========================================================= */
+
+.footer__main {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr 1fr 0.95fr;
+
+  gap: 3rem;
+
+  padding: 3.8rem 0 3.2rem;
+}
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.footer__brand {
+  min-width: 0;
+  max-width: 290px;
+}
+
+.footer__logo {
+  display: inline-block;
+
+  margin-bottom: 1rem;
+
+  color: var(--color-gold);
+
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1;
+
+  text-decoration: none;
+
+  transition: color 0.25s ease;
+}
+
+.footer__logo:hover {
+  color: #e9cb83;
+}
+
+.footer__description {
+  max-width: 255px;
+
+  margin: 0;
+
+  color: rgba(242, 236, 226, 0.48);
+
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   COLUMN HEADINGS
+========================================================= */
+
+.footer__heading {
+  position: relative;
+
+  margin: 0 0 1.35rem;
+
+  color: var(--color-gold);
+
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+
+  text-transform: uppercase;
+}
+
+.footer__heading::after {
+  content: "";
+
+  display: block;
+
+  width: 20px;
+  height: 1px;
+
+  margin-top: 0.7rem;
+
+  background: rgba(201, 169, 106, 0.45);
+}
+
+/* =========================================================
+   QUICK LINKS
+========================================================= */
+
+.footer__links {
   display: flex;
   flex-direction: column;
-  text-align: center;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.footer__links li {
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+}
+
+.footer__links a {
+  display: inline-block;
+
+  color: rgba(242, 236, 226, 0.63);
+
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 400;
+  line-height: 1.2;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer__links a:hover {
+  color: var(--color-gold);
+  transform: translateX(3px);
+}
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.footer__address {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.38rem;
+
+  margin: 0;
+
+  font-style: normal;
+}
+
+.footer__address span,
+.footer__address a {
+  display: block;
+
+  color: rgba(242, 236, 226, 0.63);
+
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 400;
+  line-height: 1.45;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.footer__address a:first-of-type {
+  margin-top: 0.35rem;
+}
+
+.footer__address a:hover {
+  color: var(--color-gold);
+}
+
+/* =========================================================
+   OPENING HOURS
+========================================================= */
+
+.footer__hours-list {
+  margin: 0 0 1.35rem;
+}
+
+.footer__hours-list > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.28rem;
+}
+
+.footer__hours-list span {
+  color: rgba(242, 236, 226, 0.42);
+
+  font-family: var(--font-body);
+  font-size: 0.61rem;
+  line-height: 1.4;
+}
+
+.footer__hours-list time {
+  color: rgba(242, 236, 226, 0.72);
+
+  font-family: var(--font-body);
+  font-size: 0.69rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   RESERVATION BUTTON
+========================================================= */
+
+.footer__reservation {
+  display: inline-flex;
+
+  align-items: center;
   justify-content: center;
+
+  min-width: 145px;
+  height: 40px;
+
+  padding: 0 1.15rem;
+
+  border: 1px solid rgba(201, 169, 106, 0.65);
+
+  background: rgba(61, 12, 17, 0.35);
+
+  color: var(--color-gold);
+
+  font-family: var(--font-body);
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  line-height: 1;
+
+  text-decoration: none;
+  text-transform: uppercase;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.footer__reservation:hover {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: #0d0b0b;
+
+  transform: translateY(-2px);
+}
+
+.footer__reservation:focus-visible {
+  outline: 1px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 58px;
+
+  gap: 1.5rem;
+
+  border-top: 1px solid rgba(201, 169, 106, 0.1);
+}
+
+.footer__copyright {
+  margin: 0;
+
+  color: rgba(242, 236, 226, 0.3);
+
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.footer__legal {
+  display: flex;
+  align-items: center;
+
+  gap: 0.55rem;
+
+  flex-shrink: 0;
+}
+
+.footer__legal a,
+.footer__legal span {
+  color: rgba(242, 236, 226, 0.3);
+
+  font-family: var(--font-body);
+  font-size: 0.54rem;
+  font-weight: 400;
+  line-height: 1.5;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.footer__legal a:hover {
+  color: var(--color-gold);
+}
+
+.footer__legal span {
+  color: rgba(201, 169, 106, 0.2);
+}
+
+/* =========================================================
+   TABLET — 1100px
+========================================================= */
+
+@media (max-width: 1100px) {
+  .footer__main {
+    grid-template-columns:
+      1.3fr
+      1fr
+      1fr
+      0.9fr;
+
+    gap: 2rem;
+  }
+
+  .footer__brand {
+    max-width: 250px;
+  }
+}
+
+/* =========================================================
+   TABLET — 992px
+========================================================= */
+
+@media (max-width: 992px) {
+  .footer__main {
+    grid-template-columns: 1.25fr 1fr 1fr 1fr;
+
+    gap: 1.5rem;
+
+    padding: 3.5rem 0 3rem;
+  }
+
+  .footer__brand {
+    max-width: 220px;
+  }
+
+  .footer__logo {
+    font-size: 1.3rem;
+  }
+
+  .footer__description {
+    max-width: 210px;
+    font-size: 0.65rem;
+  }
+
+  .footer__heading {
+    font-size: 0.56rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .footer__links a,
+  .footer__address span,
+  .footer__address a {
+    font-size: 0.62rem;
+  }
+
+  .footer__hours {
+    grid-column: auto;
+
+    display: block;
+  }
+
+  .footer__hours .footer__heading {
+    margin-bottom: 1.1rem;
+  }
+
+  .footer__hours .footer__heading::after {
+    display: block;
+  }
+
+  .footer__hours-list {
+    margin: 0 0 1.1rem;
+  }
+
+  .footer__reservation {
+    margin-left: 0;
+
+    min-width: 125px;
+    height: 38px;
+
+    font-size: 0.51rem;
+  }
+
+  .footer__bottom {
+    min-height: 0;
+    padding: 1rem 0 1.15rem;
+  }
+}
+
+/* =========================================================
+   SMALL TABLET — 768px
+========================================================= */
+
+@media (max-width: 768px) {
+  .footer__main {
+    grid-template-columns: 1.2fr 1fr 1fr;
+
+    gap: 2.3rem 1.5rem;
+
+    padding: 3.2rem 0 2.8rem;
+  }
+
+  /* -----------------------------------------
+     BRAND
+  ----------------------------------------- */
+
+  .footer__brand {
+    grid-column: 1 / -1;
+
+    max-width: 100%;
+  }
+
+  .footer__logo {
+    font-size: 1.3rem;
+  }
+
+  .footer__description {
+    max-width: 300px;
+    font-size: 0.66rem;
+  }
+
+  /* -----------------------------------------
+     QUICK LINKS
+  ----------------------------------------- */
+
+  .footer__heading {
+    margin-bottom: 1rem;
+    font-size: 0.55rem;
+  }
+
+  .footer__links a,
+  .footer__address span,
+  .footer__address a {
+    font-size: 0.63rem;
+  }
+
+  /* -----------------------------------------
+     HOURS — SAME ROW
+  ----------------------------------------- */
+
+  .footer__hours {
+    grid-column: auto;
+
+    display: block;
+  }
+
+  .footer__hours .footer__heading {
+    margin-bottom: 1rem;
+  }
+
+  .footer__hours-list {
+    margin-bottom: 1rem;
+  }
+
+  .footer__hours-list span {
+    font-size: 0.56rem;
+  }
+
+  .footer__hours-list time {
+    font-size: 0.64rem;
+  }
+
+  .footer__reservation {
+    min-width: 120px;
+    height: 37px;
+
+    font-size: 0.49rem;
+    letter-spacing: 0.09em;
+  }
+
+  /* -----------------------------------------
+     BOTTOM
+  ----------------------------------------- */
+
+  .footer__bottom {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 0.55rem;
+
+    padding: 1rem 0 1.15rem;
+  }
+
+  .footer__copyright {
+    font-size: 0.5rem;
+  }
+
+  .footer__legal {
+    width: 100%;
+  }
+
+  .footer__legal a,
+  .footer__legal span {
+    font-size: 0.49rem;
+  }
+}
+
+/* =========================================================
+   MOBILE — 600px
+========================================================= */
+
+@media (max-width: 600px) {
+  .footer__main {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 2rem 1rem;
+
+    padding: 2.8rem 0 2.4rem;
+  }
+
+  /* -----------------------------------------
+     BRAND
+  ----------------------------------------- */
+
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer__logo {
+    font-size: 1.18rem;
+    letter-spacing: 0.13em;
+  }
+
+  .footer__description {
+    max-width: 260px;
+    font-size: 0.62rem;
+    line-height: 1.6;
+  }
+
+  /* -----------------------------------------
+     ALL THREE COLUMNS
+  ----------------------------------------- */
+
+  .footer__heading {
+    font-size: 0.51rem;
+    letter-spacing: 0.11em;
+    margin-bottom: 0.9rem;
+  }
+
+  .footer__heading::after {
+    width: 15px;
+    margin-top: 0.5rem;
+  }
+
+  .footer__links a,
+  .footer__address span,
+  .footer__address a {
+    font-size: 0.58rem;
+    line-height: 1.35;
+  }
+
+  .footer__address {
+    gap: 0.32rem;
+  }
+
+  /* -----------------------------------------
+     HOURS
+  ----------------------------------------- */
+
+  .footer__hours {
+    display: block;
+  }
+
+  .footer__hours-list {
+    margin-bottom: 0.9rem;
+  }
+
+  .footer__hours-list > div {
+    gap: 0.22rem;
+  }
+
+  .footer__hours-list span {
+    font-size: 0.52rem;
+  }
+
+  .footer__hours-list time {
+    font-size: 0.59rem;
+  }
+
+  .footer__reservation {
+    width: 100%;
+    min-width: 0;
+
+    height: 36px;
+
+    padding: 0 0.5rem;
+
+    font-size: 0.46rem;
+    letter-spacing: 0.07em;
+  }
+
+  /* -----------------------------------------
+     BOTTOM
+  ----------------------------------------- */
+
+  .footer__bottom {
+    padding: 0.95rem 0 1.1rem;
+  }
+
+  .footer__copyright {
+    font-size: 0.48rem;
+  }
+
+  .footer__legal {
+    gap: 0.35rem 0.45rem;
+  }
+
+  .footer__legal a,
+  .footer__legal span {
+    font-size: 0.47rem;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE — 480px
+========================================================= */
+
+@media (max-width: 480px) {
+  .footer__main {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 1.8rem 0.75rem;
+
+    padding: 2.5rem 0 2.2rem;
+  }
+
+  .footer__logo {
+    font-size: 1.08rem;
+  }
+
+  .footer__description {
+    max-width: 230px;
+    font-size: 0.59rem;
+  }
+
+  .footer__heading {
+    font-size: 0.48rem;
+    letter-spacing: 0.09em;
+  }
+
+  .footer__links a,
+  .footer__address span,
+  .footer__address a {
+    font-size: 0.55rem;
+  }
+
+  .footer__hours-list span {
+    font-size: 0.49rem;
+  }
+
+  .footer__hours-list time {
+    font-size: 0.55rem;
+  }
+
+  .footer__reservation {
+    height: 35px;
+
+    font-size: 0.43rem;
+    letter-spacing: 0.06em;
+  }
+
+  .footer__copyright {
+    font-size: 0.46rem;
+  }
+
+  .footer__legal a,
+  .footer__legal span {
+    font-size: 0.45rem;
+  }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE — 380px
+========================================================= */
+
+@media (max-width: 380px) {
+  .footer__main {
+    gap: 1.6rem 0.6rem;
+
+    padding: 2.3rem 0 2rem;
+  }
+
+  .footer__logo {
+    font-size: 1rem;
+  }
+
+  .footer__description {
+    max-width: 210px;
+    font-size: 0.56rem;
+  }
+
+  .footer__heading {
+    font-size: 0.45rem;
+  }
+
+  .footer__links a,
+  .footer__address span,
+  .footer__address a {
+    font-size: 0.52rem;
+  }
+
+  .footer__hours-list span {
+    font-size: 0.46rem;
+  }
+
+  .footer__hours-list time {
+    font-size: 0.52rem;
+  }
+
+  .footer__reservation {
+    height: 33px;
+
+    font-size: 0.4rem;
+  }
+
+  .footer__copyright {
+    font-size: 0.43rem;
+  }
+
+  .footer__legal a,
+  .footer__legal span {
+    font-size: 0.42rem;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__logo,
+  .footer__links a,
+  .footer__address a,
+  .footer__reservation,
+  .footer__legal a {
+    transition: none;
+  }
+
+  .footer__links a:hover,
+  .footer__reservation:hover {
+    transform: none;
+  }
 }
