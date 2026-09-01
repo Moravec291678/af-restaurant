@@ -103,7 +103,14 @@ function Header() {
               ? "header__link"
               : undefined
         }
-        onClick={closeMenu}
+        onClick={() => {
+          closeMenu();
+
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }}
       >
         {label}
       </NavLink>
