@@ -244,6 +244,14 @@
     filter 0.6s ease,
     transform 0.6s ease;
 }
+
+.contact__map-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
 .contact__map::after {
   content: "";
 

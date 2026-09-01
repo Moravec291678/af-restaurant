@@ -52,9 +52,7 @@ function Contact() {
                   <span className="contact__label">Adresa</span>
 
                   <address>
-                    Vodičkova 12, Praha 1
-                    <br />
-                    110 00 Česká republika
+                    Květnového povstání 21/21
                   </address>
                 </div>
               </div>
@@ -76,7 +74,7 @@ function Contact() {
                 <div>
                   <span className="contact__label">Telefon</span>
 
-                  <a href="tel:+420123456789">+420 123 456 789</a>
+                  <a href="tel:+420721700777">+420 721 700 777</a>
                 </div>
               </div>
 
@@ -131,7 +129,7 @@ function Contact() {
 
             <div className="contact__actions">
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Vodi%C4%8Dkova+12%2C+Praha+1"
+                href="https://maps.app.goo.gl/DY48kqa17Xgm1AEb7"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact__button contact__button--primary"
@@ -155,9 +153,16 @@ function Contact() {
           <div className="contact__map">
             <iframe
               title="Mapa restaurace Naan o Namak"
-              src="https://www.google.com/maps?q=Vodi%C4%8Dkova+12%2C+Praha+1&output=embed"
+              src="https://www.google.com/maps?q=50.0137834,14.6045906&z=17&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
+            />
+            <a
+              href="https://maps.app.goo.gl/DY48kqa17Xgm1AEb7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact__map-link"
+              aria-label="Otevřít restauraci v Google Maps"
             />
           </div>
         </div>

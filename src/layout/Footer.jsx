@@ -63,11 +63,9 @@ function Footer() {
             <h2 className="footer__heading">Kontakt</h2>
 
             <address className="footer__address">
-              <span>Vodičkova 12, Praha 1</span>
+              <span>Květnového povstání 21/21</span>
 
-              <span>110 00 Česká republika</span>
-
-              <a href="tel:+420123456789">+420 123 456 789</a>
+              <a href="tel:+420721700777">+420 721 700 777</a>
 
               <a href="mailto:info@naanonamak.cz">info@naanonamak.cz</a>
             </address>

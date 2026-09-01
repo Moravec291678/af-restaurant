@@ -153,7 +153,7 @@ function Hero() {
                 <span className="hero__footer-label">Adresa:</span>
 
                 <a
-                  href="https://maps.app.goo.gl/2AYiR87hXZrwgRG57"
+                  href="https://maps.app.goo.gl/DY48kqa17Xgm1AEb7"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Otevřít adresu restaurace Kabura na Google Maps"
@@ -190,7 +190,7 @@ function Hero() {
                 </span>
 
                 <a
-                  href="tel:+420123456789"
+                  href="tel:+420721700777"
                   aria-label="Zavolat do restaurace Kabura"
                 >
                   +420 721 700 777
@@ -199,10 +199,10 @@ function Hero() {
             </div>
 
             <div className="hero__mobile-actions">
-              <a href="tel:+420123456789">📞 Zavolat</a>
+              <a href="tel:+420721700777">📞 Zavolat</a>
 
               <a
-                href="https://maps.google.com/?q=Vodičkova+12,+Praha+1"
+                href="https://maps.app.goo.gl/DY48kqa17Xgm1AEb7"
                 target="_blank"
                 rel="noopener noreferrer"
               >
