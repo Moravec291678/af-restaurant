@@ -197,21 +197,20 @@ function Hero() {
                 </a>
               </div>
             </div>
-
-            <div className="hero__mobile-actions">
-              <a href="tel:+420721700777">📞 Zavolat</a>
-
-              <a
-                href="https://maps.app.goo.gl/DY48kqa17Xgm1AEb7"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                📍 Navigovat
-              </a>
-            </div>
           </div>
         </div>
       </section>
+      <div className="hero__mobile-actions">
+        <a href="tel:+420721700777">📞 Zavolat</a>
+
+        <a
+          href="https://maps.app.goo.gl/DY48kqa17Xgm1AEb7"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          📍 Navigovat
+        </a>
+      </div>
     </>
   );
 }
