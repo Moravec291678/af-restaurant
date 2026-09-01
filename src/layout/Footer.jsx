@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import logo from "../assets/icons/logo.png";
 import "./Footer.css";
 
 function Footer() {
@@ -21,7 +22,7 @@ function Footer() {
               className="footer__logo"
               aria-label="Naan O Namak – domů"
             >
-              NAAN O NAMAK
+              <img src={logo} alt="Naan O Namak" />
             </HashLink>
 
             <p className="footer__description">
@@ -78,9 +79,14 @@ function Footer() {
 
             <div className="footer__hours-list">
               <div>
+                <span>Po – Pá</span>
+
+                <time dateTime="11:00-23:00">11:00 – 22:00</time>
+              </div>
+              <div>
                 <span>Po – Ne</span>
 
-                <time dateTime="11:30-23:00">11:30 – 23:00</time>
+                <time dateTime="11:30-23:00">11:30 – 22:00</time>
               </div>
             </div>
 

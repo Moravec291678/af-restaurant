@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import logo from "../assets/icons/logo.png";
 
 import "./Header.css";
 
@@ -128,13 +129,12 @@ function Header() {
             aria-label="Kabura – domovská stránka"
             onClick={closeMenu}
           >
-            <span className="header__logo-mark" aria-hidden="true">
-              ◆
-            </span>
-
             <div className="header__logo-content">
-              <span className="header__logo-title">KABURA</span>
-              <span className="header__logo-subtitle">Afghan Restaurant</span>
+              <img
+                className="header__logo-image"
+                src={logo}
+                alt="Naan O Namak"
+              />
             </div>
           </HashLink>
 

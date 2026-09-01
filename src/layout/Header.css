@@ -31,42 +31,25 @@
 =========================================================== */
 
 .header__logo {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: fit-content;
+  display: block;
+  width: 180px;
+  line-height: 0;
 }
 
 .header__logo:hover {
   text-decoration: none;
 }
 
-.header__logo-mark {
-  color: var(--color-gold);
-  font-size: 0.9rem;
-  transform: translateY(-2px);
-}
-
 .header__logo-content {
-  display: flex;
-  flex-direction: column;
+  display: block;
 }
 
-.header__logo-title {
-  color: var(--color-gold);
-  font-family: var(--font-heading);
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  line-height: 1;
-}
-
-.header__logo-subtitle {
-  margin-top: 0.35rem;
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 0.62rem;
-  text-transform: uppercase;
-  letter-spacing: 0.34em;
+.header__logo-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 48px;
+  object-fit: contain;
 }
 
 /* ===========================================================
@@ -387,13 +370,8 @@
     display: block;
   }
 
-  .header__logo-title {
-    font-size: 1.7rem;
-  }
-
-  .header__logo-subtitle {
-    font-size: 0.55rem;
-    letter-spacing: 0.28em;
+  .header__logo {
+    width: 160px;
   }
 }
 
@@ -419,13 +397,8 @@
     display: block;
   }
 
-  .header__logo-title {
-    font-size: 1.7rem;
-  }
-
-  .header__logo-subtitle {
-    font-size: 0.55rem;
-    letter-spacing: 0.28em;
+  .header__logo {
+    width: 160px;
   }
 }
 
@@ -435,26 +408,13 @@
   }
 
   .header__logo {
-    gap: 0.8rem;
-  }
-
-  .header__logo-title {
-    font-size: 1.5rem;
-    letter-spacing: 0.16em;
-  }
-
-  .header__logo-mark {
-    font-size: 0.8rem;
+    width: 148px;
   }
 }
 
 @media (max-width: 480px) {
-  .header__logo-title {
-    font-size: 1.3rem;
-  }
-
-  .header__logo-subtitle {
-    display: none;
+  .header__logo {
+    width: 128px;
   }
 
   .mobile-menu__list {
@@ -478,14 +438,6 @@
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(201, 169, 106, 0.12);
   box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
-}
-
-.header--scrolled .header__logo-title {
-  color: var(--color-gold);
-}
-
-.header--scrolled .header__logo-subtitle {
-  color: rgba(255, 255, 255, 0.45);
 }
 
 .header--scrolled .header__link {
