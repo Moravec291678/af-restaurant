@@ -30,13 +30,13 @@ const heroVideos = [
 ];
 
 const openingHours = [
-  { day: "Po", open: "", close: "" },
-  { day: "Út", open: "", close: "" },
-  { day: "St", open: "", close: "" },
-  { day: "Čt", open: "", close: "" },
-  { day: "Pá", open: "", close: "" },
-  { day: "So", open: "", close: "" },
-  { day: "Ne", open: "", close: "" },
+  { day: "Po", open: "11:00", close: "22:00" },
+  { day: "Út", open: "11:00", close: "22:00" },
+  { day: "St", open: "11:00", close: "22:00" },
+  { day: "Čt", open: "11:00", close: "22:00" },
+  { day: "Pá", open: "11:00", close: "22:00" },
+  { day: "So", open: "11:30", close: "22:00" },
+  { day: "Ne", open: "11:30", close: "22:00" },
 ];
 
 const todayIndex = new Date().getDay();

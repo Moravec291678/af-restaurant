@@ -118,9 +118,9 @@ function Contact() {
                 </span>
 
                 <div className="contact__value contact__opening-hours">
-                  <span>Po – Pá: 00:00 – 00:00</span>
+                  <span>Po – Pá: 11:00 – 22:00</span>
                   <br />
-                  <span>So – Ne: 00:00 – 00:00</span>
+                  <span>So – Ne: 11:30 – 22:00</span>
                 </div>
               </div>
             </div>
