@@ -1,35 +1,37 @@
 import "./Specialties.css";
-import plov from "../../../assets/images/plov.webp";
-import fish from "../../../assets/images/fish.webp";
-import baklava from "../../../assets/images/baklava.jpg";
+
+import qabuliPalow from "../../../assets/images/menu/qabuliPalow.png";
+import mantu from "../../../assets/images/menu/mantu.png";
+import pro2Osoby from "../../../assets/images/menu/pro2Osoby.png";
+
 function Specialties() {
   const specialties = [
     {
-      id: "kabuli-pulao",
-      name: "Kabuli Pulao",
+      id: "qabuli-palow",
+      name: "Qabuli Palow",
       description:
-        "Tradiční afghánská rýže basmati s jemným masem, mrkví, rozinkami a voňavým kořením.",
-      price: "239 Kč",
-      image: plov,
-      imageAlt: "Kabuli Pulao",
+        "Dušená rýže Basmati s rozinkami a mrkví dle výběru masa, se směsí zeleniny v rajčatové omáčce.",
+      price: "299 Kč",
+      image: qabuliPalow,
+      imageAlt: "Qabuli Palow",
     },
     {
       id: "mantu",
-      name: "Mantú",
+      name: "Mantu",
       description:
-        "Domácí taštičky plněné mletým masem, podávané s česnekovým jogurtem a mátou.",
-      price: "209 Kč",
-      image: fish,
-      imageAlt: "Mantú",
+        "Plněné taštičky s mletým hovězím masem a cibulí vařené v páře, navrchu hrách v rajčatové omáčce, čerstvé bylinky a jogurt s česnekem.",
+      price: "199 Kč",
+      image: mantu,
+      imageAlt: "Mantu",
     },
     {
-      id: "chapli-kebab",
-      name: "Chapli Kebab",
+      id: "mix-grill-2",
+      name: "Mix Grill pro 2 osoby",
       description:
-        "Tradiční afghánský kebab z mletého hovězího masa s bylinkami a výrazným kořením.",
-      price: "229 Kč",
-      image: baklava,
-      imageAlt: "Chapli Kebab",
+        "Kuřecí, jehněčí a hovězí špízy, jehněčí kotlety, placky, salát, čatní, grilovaná zelenina, turshi a hranolky.",
+      price: "599 Kč",
+      image: pro2Osoby,
+      imageAlt: "Mix Grill pro 2 osoby",
     },
   ];
 
@@ -48,14 +50,12 @@ function Specialties() {
           {specialties.map((specialty) => (
             <article className="specialties__card" key={specialty.id}>
               <div className="specialties__image">
-                {specialty.image && (
-                  <img
-                    src={specialty.image}
-                    alt={specialty.imageAlt}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                )}
+                <img
+                  src={specialty.image}
+                  alt={specialty.imageAlt}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
 
               <div className="specialties__content">
@@ -72,7 +72,7 @@ function Specialties() {
         </div>
 
         <div className="specialties__action">
-          <a href="/speciality" className="specialties__button">
+          <a href="/jidelni-listek" className="specialties__button">
             Více o specialitách
           </a>
         </div>

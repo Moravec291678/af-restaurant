@@ -2,6 +2,20 @@ import { Link } from "react-router-dom";
 
 import "./Contact.css";
 
+const openingHours = [
+  { day: "Po", open: "", close: "" },
+  { day: "Út", open: "", close: "" },
+  { day: "St", open: "", close: "" },
+  { day: "Čt", open: "", close: "" },
+  { day: "Pá", open: "", close: "" },
+  { day: "So", open: "", close: "" },
+  { day: "Ne", open: "", close: "" },
+];
+
+const todayIndex = new Date().getDay();
+const openingDayIndex = todayIndex === 0 ? 6 : todayIndex - 1;
+const todayHours = openingHours[openingDayIndex];
+
 function Contact() {
   return (
     <section className="contact" id="kontakt" aria-labelledby="contact-title">
@@ -12,7 +26,7 @@ function Contact() {
           ========================================= */}
 
           <div className="contact__info">
-            <div className="contact__heading" >
+            <div className="contact__heading">
               <span className="contact__line" aria-hidden="true" />
 
               <h2 id="contact-title">Kde nás najdete</h2>
@@ -103,10 +117,10 @@ function Contact() {
                   </svg>
                 </span>
 
-                <div>
-                  <span className="contact__label">Otevírací doba</span>
-
-                  <span className="contact__value">Po – Ne: 11:30 – 23:00</span>
+                <div className="contact__value contact__opening-hours">
+                  <span>Po – Pá: 00:00 – 00:00</span>
+                  <br />
+                  <span>So – Ne: 00:00 – 00:00</span>
                 </div>
               </div>
             </div>
