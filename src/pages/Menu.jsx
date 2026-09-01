@@ -50,7 +50,7 @@ const menuItems = [
     portion: "6 ks",
     price: 119,
     vegetarian: true,
-    allergens: [],
+    allergens: ["test"],
     image: falafel,
     imageAlt: "Falafel",
   },
@@ -1108,52 +1108,6 @@ function Menu() {
           </header>
 
           {/* =================================================
-              SEARCH + FILTERS
-          ================================================= */}
-
-          <div className="menu-page__toolbar">
-            <div className="menu-page__search">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="11" cy="11" r="6.5" />
-                <path d="m16 16 5 5" />
-              </svg>
-
-              <input
-                type="search"
-                value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="Hledat jídlo..."
-                aria-label="Hledat v jídelním lístku"
-              />
-
-              {searchQuery && (
-                <button
-                  type="button"
-                  className="menu-page__search-clear"
-                  onClick={() => setSearchQuery("")}
-                  aria-label="Vymazat hledání"
-                >
-                  ×
-                </button>
-              )}
-            </div>
-
-            <button
-              type="button"
-              className={`menu-page__vegetarian ${
-                vegetarianOnly ? "menu-page__vegetarian--active" : ""
-              }`}
-              aria-pressed={vegetarianOnly}
-              onClick={() => setVegetarianOnly((currentValue) => !currentValue)}
-            >
-              <span className="menu-page__vegetarian-icon" aria-hidden="true">
-                ◆
-              </span>
-              Vegetariánské
-            </button>
-          </div>
-
-          {/* =================================================
               CATEGORY NAVIGATION
           ================================================= */}
 
@@ -1168,7 +1122,14 @@ function Menu() {
                     : ""
                 }`}
                 aria-pressed={activeCategory === category.id}
-                onClick={() => setActiveCategory(category.id)}
+                onClick={() => {
+                  setActiveCategory(category.id);
+
+                  window.scrollTo({
+                    top: 180,
+                    behavior: "smooth",
+                  });
+                }}
               >
                 {category.label}
               </button>
@@ -1216,9 +1177,20 @@ function Menu() {
                     <div className="menu-page__item-heading">
                       <h3 className="menu-page__item-name">{item.name}</h3>
 
-                      {item.vegetarian && (
-                        <span className="menu-page__badge">VEGE</span>
-                      )}
+                      {item.vegetarian &&
+                        ![
+                          "vegetarianska",
+                          "prilohy",
+                          "dezerty",
+                          "nealko",
+                          "domaci-napoje",
+                          "teple-napoje",
+                          "pivo",
+                          "vino",
+                          "tvrdý-alkohol",
+                        ].includes(item.category) && (
+                          <span className="menu-page__badge">VEGE</span>
+                        )}
                     </div>
 
                     {item.price && (

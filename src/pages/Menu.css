@@ -406,18 +406,27 @@
 ========================================================= */
 
 .menu-page__categories {
+  position: sticky;
+  top: 80px;
+  z-index: 50;
+
   display: flex;
   align-items: center;
-
   gap: 0.45rem;
 
-  margin-bottom: 2.7rem;
+  margin: 0 0 2.7rem;
   padding: 0.65rem 0;
 
   overflow-x: auto;
 
+  background: rgba(11, 9, 9, 0.96);
+  border-bottom: 1px solid rgba(201, 169, 106, 0.12);
+
   scrollbar-width: thin;
   scrollbar-color: rgba(201, 169, 106, 0.25) transparent;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .menu-page__categories::-webkit-scrollbar {
