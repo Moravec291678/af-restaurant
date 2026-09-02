@@ -85,7 +85,7 @@ function Gallery() {
             <h1 className="gallery-page__title">Galerie</h1>
 
             <p className="gallery-page__description">
-              Místo, kde se potkává tradiční afghánská kuchyně, pohostinnost a
+              Místo, kde se potkává tradiční orientální kuchyně, pohostinnost a
               atmosféra našeho stolu.
             </p>
 
