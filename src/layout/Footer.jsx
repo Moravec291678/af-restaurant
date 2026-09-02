@@ -37,23 +37,28 @@ function Footer() {
 
             <ul className="footer__links">
               <li>
-                <Link to="/speciality">Speciality</Link>
+                <HashLink smooth to="/#speciality">
+                  Speciality
+                </HashLink>
               </li>
-
+              <li>
+                <HashLink smooth to="/#poledni-menu">
+                  Ppolední menu
+                </HashLink>
+              </li>
               <li>
                 <Link to="/jidelni-listek">Jídelní lístek</Link>
               </li>
-
               <li>
                 <Link to="/galerie">Galerie</Link>
               </li>
-
               <li>
                 <Link to="/o-nas">O nás</Link>
               </li>
-
               <li>
-                <Link to="/kontakt">Kontakt</Link>
+                <HashLink smooth to="/#kontakt">
+                  Kontakt
+                </HashLink>
               </li>
             </ul>
           </nav>

@@ -106,11 +106,7 @@ function Header() {
         }
         onClick={() => {
           closeMenu();
-
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
+          window.scrollTo(0, 0);
         }}
       >
         {label}
