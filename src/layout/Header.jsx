@@ -7,7 +7,7 @@ import "./Header.css";
 
 const primaryNavigation = [
   { label: "Speciality", type: "hash", to: "/#speciality" },
-  { label: "Ppolední menu", type: "hash", to: "/#poledni-menu" },
+  { label: "Polední menu", type: "hash", to: "/#poledni-menu" },
   { label: "Jídelní lístek", type: "route", to: "/jidelni-listek" },
   { label: "Galerie", type: "route", to: "/galerie" },
   { label: "O nás", type: "route", to: "/o-nas" },
