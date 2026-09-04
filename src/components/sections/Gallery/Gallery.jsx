@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import gallery01 from "../../../assets/images/gallery01.jpg";
 import gallery02 from "../../../assets/images/gallery02.jpg";
-import gallery03 from "../../../assets/images/gallery03.jpg";
+import gallery03 from "../../../assets/images/tata.jpg";
 import gallery04 from "../../../assets/images/gallery04.avif";
 
 import "./Gallery.css";

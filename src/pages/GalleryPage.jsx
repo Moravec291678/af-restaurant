@@ -2,8 +2,14 @@ import { useEffect, useState } from "react";
 
 import gallery01 from "../assets/images/gallery01.jpg";
 import gallery02 from "../assets/images/gallery02.jpg";
-import gallery03 from "../assets/images/gallery03.jpg";
+import gallery03 from "../assets/images/tata.jpg";
 import gallery04 from "../assets/images/gallery04.avif";
+import gallery05 from "../assets/images/gallery05.jpg";
+import gallery06 from "../assets/images/gallery06.jpg";
+import gallery07 from "../assets/images/gallery07.png";
+import gallery08 from "../assets/images/gallery08.jpg";
+import gallery09 from "../assets/images/gallery09.jpg";
+import gallery10 from "../assets/images/gallery10.jpg";
 
 import "./GalleryPage.css";
 
@@ -27,6 +33,36 @@ const galleryItems = [
     id: 4,
     image: gallery04,
     alt: "Tradiční čaj a orientální interiér restaurace Naan o Namak",
+  },
+  {
+    id: 5,
+    image: gallery05,
+    alt: "Interiér restaurace Naan o Namak",
+  },
+  {
+    id: 6,
+    image: gallery06,
+    alt: "Afghánské speciality v restauraci Naan o Namak",
+  },
+  {
+    id: 7,
+    image: gallery07,
+    alt: "Tradiční afghánská kuchyně v restauraci Naan o Namak",
+  },
+  {
+    id: 8,
+    image: gallery08,
+    alt: "Prostředí restaurace Naan o Namak",
+  },
+  {
+    id: 9,
+    image: gallery09,
+    alt: "Jídlo připravené v restauraci Naan o Namak",
+  },
+  {
+    id: 10,
+    image: gallery10,
+    alt: "Atmosféra restaurace Naan o Namak",
   },
 ];
 

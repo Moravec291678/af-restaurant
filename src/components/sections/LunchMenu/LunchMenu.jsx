@@ -53,7 +53,7 @@ function LunchMenu() {
             </h2>
 
             <p className="lunch-menu__subtitle">
-              Každý všední den pro vás připravujeme výběr oblíbených afghánských
+              Každý všední den pro vás připravujeme výběr oblíbených českých
               jídel.
             </p>
           </header>
