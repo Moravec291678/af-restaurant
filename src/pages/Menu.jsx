@@ -33,6 +33,7 @@ import sambosa from "../assets/images/menu/sambosa.png";
 import samiKebab from "../assets/images/menu/samiKebab.png";
 import torshi from "../assets/images/menu/torshi.png";
 import zabziSpenat from "../assets/images/menu/zabziSpenat.png";
+import shorNachod from "../assets/images/menu/shorNachod.jpg";
 /* =========================================================
    MENU DATA
    ========================================================= */
@@ -148,7 +149,7 @@ const menuItems = [
     price: 79,
     vegetarian: true,
     allergens: [],
-    image: null,
+    image: shorNachod,
   },
 
   {
