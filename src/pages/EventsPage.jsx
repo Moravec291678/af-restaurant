@@ -5,20 +5,7 @@ import event01 from "../assets/images/event01.jpg";
 
 import "./EventsPage.css";
 
-const events = [
-  {
-    id: 1,
-    slug: "afghansky-vecer",
-    date: "12. října 2026",
-    time: "18:00",
-    title: "Afghánský večer",
-    description: "Večer plný tradiční afghánské kuchyně a příjemné atmosféry.",
-    image: event01,
-    location: "Naan O Namak",
-    price: "Cena bude upřesněna",
-    details: "Přijďte si užít večer plný tradičních afghánských chutí.",
-  },
-];
+const events = [];
 
 function EventsPage() {
   const hasEvents = events.length > 0;
@@ -92,7 +79,7 @@ function EventsPage() {
 
               <p className="events-page__empty-description">
                 Plánujete oslavu, firemní večírek, svatbu nebo jinou událost?
-                Připravíme pro vás catering s tradiční afghánskou kuchyní a
+                Připravíme pro vás catering s tradiční afghánskou i českou kuchyní a
                 postaráme se o to, aby vaše setkání bylo výjimečné.
               </p>
 
