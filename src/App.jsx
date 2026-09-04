@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import GalleryPage from "./pages/GalleryPage";
 import EventsPage from "./pages/EventsPage";
 import EventDetailPage from "./pages/EventDetailPage";
+import Reservation from "./pages/Reservation";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/galerie" element={<GalleryPage />} />
         <Route path="/akce" element={<EventsPage />} />
         <Route path="/akce/:slug" element={<EventDetailPage />} />
+        <Route path="/rezervace" element={<Reservation />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>

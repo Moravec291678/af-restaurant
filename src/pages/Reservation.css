@@ -1,0 +1,366 @@
+/* =========================================================
+   RESERVATION PAGE
+   ========================================================= */
+
+.reservation-page {
+  min-height: 100vh;
+  background: var(--color-background, #f7f5f0);
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.reservation-hero {
+  padding: 150px 0 75px;
+  text-align: center;
+}
+
+.reservation-eyebrow {
+  margin: 0 0 16px;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  opacity: 0.65;
+}
+
+.reservation-hero h1 {
+  max-width: 850px;
+  margin: 0 auto;
+
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.reservation-intro {
+  max-width: 570px;
+  margin: 25px auto 0;
+
+  font-size: 1rem;
+  line-height: 1.75;
+
+  opacity: 0.68;
+}
+
+/* =========================================================
+   FORM AREA
+   ========================================================= */
+
+.reservation-form {
+  color: #1c1c1c;
+}
+
+.reservation-field input,
+.reservation-field select,
+.reservation-field textarea {
+  color: #1c1c1c;
+}
+
+.reservation-field input::placeholder,
+.reservation-field textarea::placeholder {
+  color: #1c1c1c;
+  opacity: 0.45;
+}
+
+.reservation-field select {
+  color: #1c1c1c;
+}
+
+.reservation-field select option {
+  color: #1c1c1c;
+  background: #fff;
+}
+
+.reservation-section {
+  padding: 20px 0 130px;
+}
+
+.reservation-form {
+  max-width: 880px;
+  margin: 0 auto;
+
+  padding: 55px 60px 60px;
+
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 2px;
+
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.06);
+}
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.reservation-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 30px;
+}
+
+.reservation-field-full {
+  grid-column: 1 / -1;
+}
+
+/* =========================================================
+   FIELDS
+   ========================================================= */
+
+.reservation-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.reservation-field label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reservation-field label span {
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  opacity: 0.5;
+}
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.reservation-field input,
+.reservation-field select,
+.reservation-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 14px 15px;
+
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 2px;
+
+  background: #fff;
+
+  color: inherit;
+  font: inherit;
+  font-size: 0.95rem;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.reservation-field input,
+.reservation-field select {
+  height: 50px;
+}
+
+.reservation-field textarea {
+  min-height: 125px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* PLACEHOLDERS */
+
+.reservation-field input::placeholder,
+.reservation-field textarea::placeholder {
+  color: inherit;
+  opacity: 0.4;
+}
+
+/* FOCUS */
+
+.reservation-field input:focus,
+.reservation-field select:focus,
+.reservation-field textarea:focus {
+  outline: none;
+
+  border-color: rgba(0, 0, 0, 0.55);
+
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================================================
+   DATE / TIME CONTROLS
+   ========================================================= */
+
+.reservation-field input[type="date"],
+.reservation-field input[type="time"] {
+  cursor: pointer;
+}
+
+/* =========================================================
+   SUBMIT
+   ========================================================= */
+
+.reservation-submit {
+  grid-column: 1 / -1;
+
+  display: flex;
+  justify-content: center;
+
+  margin-top: 10px;
+}
+
+.reservation-submit button {
+  min-width: 230px;
+
+  padding: 15px 30px;
+
+  border: 1px solid #1c1c1c;
+  border-radius: 2px;
+
+  background: #1c1c1c;
+  color: #fff;
+
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.reservation-submit button:hover {
+  background: transparent;
+  color: #1c1c1c;
+
+  transform: translateY(-1px);
+}
+
+.reservation-submit button:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   INFORMATION
+   ========================================================= */
+
+.reservation-note {
+  max-width: 680px;
+  margin: 25px auto 0;
+
+  text-align: center;
+
+  font-size: 0.78rem;
+  line-height: 1.7;
+
+  opacity: 0.55;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+  .reservation-hero {
+    padding: 125px 0 60px;
+  }
+
+  .reservation-form {
+    padding: 45px 40px 50px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .reservation-hero {
+    padding: 110px 0 50px;
+  }
+
+  .reservation-eyebrow {
+    margin-bottom: 13px;
+  }
+
+  .reservation-hero h1 {
+    font-size: clamp(2.5rem, 12vw, 3.5rem);
+  }
+
+  .reservation-intro {
+    margin-top: 20px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .reservation-section {
+    padding: 10px 0 80px;
+  }
+
+  .reservation-form {
+    grid-template-columns: 1fr;
+
+    gap: 22px;
+
+    padding: 32px 22px 35px;
+
+    border-radius: 2px;
+  }
+
+  .reservation-field-full {
+    grid-column: auto;
+  }
+
+  .reservation-field input,
+  .reservation-field select {
+    height: 50px;
+  }
+
+  .reservation-field textarea {
+    min-height: 120px;
+  }
+
+  .reservation-submit {
+    grid-column: auto;
+
+    margin-top: 8px;
+  }
+
+  .reservation-submit button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .reservation-note {
+    padding: 0 15px;
+
+    font-size: 0.75rem;
+  }
+}
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .reservation-form {
+    padding: 28px 18px 30px;
+  }
+
+  .reservation-field label {
+    font-size: 0.7rem;
+  }
+
+  .reservation-field input,
+  .reservation-field select,
+  .reservation-field textarea {
+    font-size: 0.9rem;
+  }
+}
