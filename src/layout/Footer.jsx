@@ -53,6 +53,9 @@ function Footer() {
                 <Link to="/galerie">Galerie</Link>
               </li>
               <li>
+                <Link to="/akce">Akce</Link>
+              </li>
+              <li>
                 <Link to="/o-nas">O nás</Link>
               </li>
               <li>

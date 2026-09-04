@@ -34,6 +34,7 @@ function Gallery() {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const isLightboxOpen = activeIndex !== null;
+  const [touchStart, setTouchStart] = useState(null);
 
   const showPrevious = () => {
     setActiveIndex((current) => {
@@ -53,6 +54,27 @@ function Gallery() {
 
   const closeLightbox = () => {
     setActiveIndex(null);
+  };
+
+  const handleTouchStart = (event) => {
+    setTouchStart(event.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (event) => {
+    if (touchStart === null) return;
+
+    const touchEnd = event.changedTouches[0].clientX;
+    const distance = touchStart - touchEnd;
+
+    if (Math.abs(distance) > 50) {
+      if (distance > 0) {
+        showNext();
+      } else {
+        showPrevious();
+      }
+    }
+
+    setTouchStart(null);
   };
 
   useEffect(() => {
@@ -135,11 +157,16 @@ function Gallery() {
           aria-modal="true"
           aria-label="Náhled fotografie galerie"
           onClick={closeLightbox}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           <button
             type="button"
-            className="gallery-page__lightbox-close"
-            onClick={closeLightbox}
+            className="gallery__lightbox-close"
+            onClick={(event) => {
+              event.stopPropagation();
+              closeLightbox();
+            }}
             aria-label="Zavřít fotografii"
           >
             ×

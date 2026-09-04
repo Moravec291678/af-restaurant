@@ -10,6 +10,7 @@ const primaryNavigation = [
   { label: "Polední menu", type: "hash", to: "/#poledni-menu" },
   { label: "Jídelní lístek", type: "route", to: "/jidelni-listek" },
   { label: "Galerie", type: "route", to: "/galerie" },
+  { label: "Akce", type: "route", to: "/akce" },
   { label: "O nás", type: "route", to: "/o-nas" },
   { label: "Kontakt", type: "hash", to: "/#kontakt" },
 ];

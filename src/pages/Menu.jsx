@@ -509,8 +509,8 @@ const menuItems = [
   },
 
   {
-    id: "chalou",
-    name: "Chalou",
+    id: "chalouBasmati",
+    name: "Chalou Basmati",
     category: "prilohy",
     description: "Bílá dlouhozrnná rýže.",
     portion: "100 g",
@@ -519,18 +519,6 @@ const menuItems = [
     allergens: [],
     image: chalouBasmati,
     imageAlt: "Chalou",
-  },
-
-  {
-    id: "basmati",
-    name: "Basmati",
-    category: "prilohy",
-    description: "Bílá dlouhozrnná rýže.",
-    portion: "100 g",
-    price: 69,
-    vegetarian: true,
-    allergens: [],
-    image: null,
   },
 
   {
