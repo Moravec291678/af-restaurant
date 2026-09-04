@@ -7,35 +7,28 @@ import "./LunchMenu.css";
 const lunchMenuItems = [
   {
     id: 1,
-    name: "Polévka dle nabídky",
-    description: "Denní nabídka čerstvé domácí polévky.",
+    name: "Smažený řízek - Kuřecí prsa 200g",
+    description: "Podavané s bramborovým salátem nebo hranolkami",
     price: "59 Kč",
   },
   {
     id: 2,
-    name: "Kuře Korma",
-    description: "Kuřecí maso v jemné krémové omáčce s rýží basmati.",
-    price: "189 Kč",
+    name: "Hovězí guláš 200g",
+    description:
+      "Hovězí guláš podavaný s houskovým knedlíkem a čerstvou červenou cibulkou",
+    price: "199 Kč",
   },
   {
     id: 3,
-    name: "Vegetariánský Mantu",
-    description: "Tradiční afghánské taštičky plněné zeleninovou směsí.",
-    price: "169 Kč",
+    name: "Kuřecí prsa 200g",
+    description: "grilované kuřecí prsa podávané se smetanovou omáčkou",
+    price: "249 Kč",
   },
   {
     id: 4,
-    name: "Kabuli Pulao",
-    description:
-      "Voňavá basmati rýže s mrkví, rozinkami a jemně kořeněným masem.",
+    name: "Smažený sýr 200g",
+    description: "Obalovný eidam s hranolky a tatarskou omáčkou ",
     price: "219 Kč",
-  },
-  {
-    id: 5,
-    name: "Chapli Kebab",
-    description:
-      "Tradiční afghánský kebab z mletého masa s čerstvými bylinkami.",
-    price: "229 Kč",
   },
 ];
 

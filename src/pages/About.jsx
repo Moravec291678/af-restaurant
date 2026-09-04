@@ -128,7 +128,7 @@ function About() {
                 <h3>Tradiční dobroty</h3>
 
                 <p>
-                  Doporučujeme ochutnat například Kabli palau, plněné taštičky
+                  Doporučujeme ochutnat například Kabuli palau, plněné taštičky
                   mantu nebo šťavnaté maso připravované na jehle.
                 </p>
               </article>
