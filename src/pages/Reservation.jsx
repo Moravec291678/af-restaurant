@@ -10,20 +10,17 @@ function Reservation() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const form = event.currentTarget;
+
     setIsSending(true);
     setStatus("");
 
     try {
-      await emailjs.sendForm(
-        "service_webibio",
-        "template_ibcgkrs",
-        event.currentTarget,
-        {
-          publicKey: "sfeXmXN7z7_Etpogz",
-        },
-      );
+      await emailjs.sendForm("service_wibebio", "template_ibcqkrs", form, {
+        publicKey: "sfeXmXN7z7_Etpogz",
+      });
 
-      event.currentTarget.reset();
+      form.reset();
 
       setStatus(
         "Děkujeme. Vaše žádost o rezervaci byla odeslána. Ozveme se vám s potvrzením.",
