@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
-import event01 from "../assets/images/event01.jpg";
-
 import "./EventsPage.css";
 
 const events = [];
@@ -79,8 +77,8 @@ function EventsPage() {
 
               <p className="events-page__empty-description">
                 Plánujete oslavu, firemní večírek, svatbu nebo jinou událost?
-                Připravíme pro vás catering s tradiční afghánskou i českou kuchyní a
-                postaráme se o to, aby vaše setkání bylo výjimečné.
+                Připravíme pro vás catering s tradiční afghánskou i českou
+                kuchyní a postaráme se o to, aby vaše setkání bylo výjimečné.
               </p>
 
               <HashLink

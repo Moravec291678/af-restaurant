@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 
-import event01 from "../assets/images/event01.jpg";
-
 import "./EventDetailPage.css";
 
 function EventDetailPage() {

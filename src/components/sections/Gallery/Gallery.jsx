@@ -2,10 +2,10 @@ import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import gallery01 from "../../../assets/images/gallery01.jpg";
-import gallery02 from "../../../assets/images/gallery02.jpg";
-import gallery03 from "../../../assets/images/tata.jpg";
-import gallery04 from "../../../assets/images/gallery04.avif";
+import gallery01 from "../../../assets/images/gallery06.jpg";
+import gallery02 from "../../../assets/images/tata.jpg";
+import gallery03 from "../../../assets/images/gallery05.jpg";
+import gallery04 from "../../../assets/images/gallery08.jpg";
 
 import "./Gallery.css";
 
@@ -13,12 +13,12 @@ const galleryItems = [
   {
     id: 1,
     image: gallery01,
-    alt: "Interiér restaurace Naan o Namak",
+    alt: "Afghánské jídlo v restauraci Naan o Namak",
   },
   {
     id: 2,
     image: gallery02,
-    alt: "Interiér afghánské restaurace Naan o Namak",
+    alt: "Afghánské jídlo v restauraci Naan o Namak",
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ const galleryItems = [
   {
     id: 4,
     image: gallery04,
-    alt: "Tradiční čaj a orientální interiér restaurace Naan o Namak",
+    alt: "Afghánské jídlo v restauraci Naan o Namak",
   },
 ];
 
