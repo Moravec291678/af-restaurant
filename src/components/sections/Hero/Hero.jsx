@@ -90,6 +90,7 @@ function Hero() {
               }}
               onCanPlay={(event) => {
                 event.currentTarget.playbackRate = 0.6;
+                event.currentTarget.play().catch(() => {});
               }}
               onEnded={handleVideoEnded}
             >
@@ -107,7 +108,8 @@ function Hero() {
             </div>
 
             <h1 id="hero-title" className="hero__title">
-              Naan O Namak <br/>restaurace v Benicích
+              Naan O Namak <br />
+              restaurace v Benicích
             </h1>
 
             <p className="hero__description">
