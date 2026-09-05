@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import logo from "../assets/icons/logo.png";
+import logo from "../assets/icons/logo.webp";
 
 const siteUrl = "https://naanonamak.cz";
 const brandImageUrl = new URL(logo, siteUrl).href;

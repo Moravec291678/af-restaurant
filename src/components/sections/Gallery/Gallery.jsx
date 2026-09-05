@@ -2,10 +2,10 @@ import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import gallery01 from "../../../assets/images/gallery06.jpg";
-import gallery02 from "../../../assets/images/tata.jpg";
-import gallery03 from "../../../assets/images/gallery05.jpg";
-import gallery04 from "../../../assets/images/gallery08.jpg";
+import gallery01 from "../../../assets/images/gallery06.webp";
+import gallery02 from "../../../assets/images/tata.webp";
+import gallery03 from "../../../assets/images/gallery05.webp";
+import gallery04 from "../../../assets/images/gallery08.webp";
 
 import "./Gallery.css";
 

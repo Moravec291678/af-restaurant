@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import logo from "../assets/icons/logo.png";
+import logo from "../assets/icons/logo.webp";
 
 import "./Header.css";
 
@@ -131,6 +131,10 @@ function Header() {
                 className="header__logo-image"
                 src={logo}
                 alt="Naan O Namak"
+                width="720"
+                height="240"
+                fetchPriority="high"
+                decoding="sync"
               />
             </div>
           </HashLink>

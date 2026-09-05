@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-import gallery03 from "../assets/images/tata.jpg";
+import gallery03 from "../assets/images/tata.webp";
 
-import gallery05 from "../assets/images/gallery05.jpg";
-import gallery06 from "../assets/images/gallery06.jpg";
+import gallery05 from "../assets/images/gallery05.webp";
+import gallery06 from "../assets/images/gallery06.webp";
 
-import gallery08 from "../assets/images/gallery08.jpg";
+import gallery08 from "../assets/images/gallery08.webp";
 
-import gallery10 from "../assets/images/gallery10.jpg";
+import gallery10 from "../assets/images/gallery10.webp";
 
 import "./GalleryPage.css";
 

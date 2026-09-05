@@ -1,8 +1,8 @@
 import "./Specialties.css";
 
-import qabuliPalow from "../../../assets/images/menu/qabuliPalow.png";
-import mantu from "../../../assets/images/menu/mantu.png";
-import pro2Osoby from "../../../assets/images/menu/pro2Osoby.png";
+import qabuliPalow from "../../../assets/images/menu/qabuliPalow.webp";
+import mantu from "../../../assets/images/menu/mantu.webp";
+import pro2Osoby from "../../../assets/images/menu/pro2Osoby.webp";
 
 function Specialties() {
   const specialties = [

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import aboutImage from "../assets/images/tata.jpg";
+import aboutImage from "../assets/images/tata.webp";
 
 import ScrollReveal from "../components/ScrollReveal";
 
@@ -58,7 +58,12 @@ function About() {
             <ScrollReveal>
               <div className="about-story-image">
                 <div className="about-image-placeholder">
-                  <img src={aboutImage} alt="Naan O Namak" />
+                  <img
+                    src={aboutImage}
+                    alt="Naan O Namak"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
               </div>
             </ScrollReveal>

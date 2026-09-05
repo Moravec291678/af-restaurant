@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import logo from "../assets/icons/logo.png";
+import logo from "../assets/icons/logo.webp";
 import "./Footer.css";
 
 function Footer() {
@@ -22,7 +22,14 @@ function Footer() {
               className="footer__logo"
               aria-label="Naan O Namak – domů"
             >
-              <img src={logo} alt="Naan O Namak" />
+              <img
+                src={logo}
+                alt="Naan O Namak"
+                width="720"
+                height="240"
+                loading="lazy"
+                decoding="async"
+              />
             </HashLink>
 
             <p className="footer__description">
