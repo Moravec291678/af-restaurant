@@ -43,7 +43,7 @@ function Footer() {
               </li>
               <li>
                 <HashLink smooth to="/#poledni-menu">
-                  Ppolední menu
+                  Polední menu
                 </HashLink>
               </li>
               <li>

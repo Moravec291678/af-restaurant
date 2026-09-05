@@ -483,3 +483,43 @@
     transform: translateY(0);
   }
 }
+
+@media (max-height: 700px) and (max-width: 768px) {
+  .mobile-menu {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: 6rem 2rem 2rem;
+  }
+
+  .mobile-menu__list {
+    gap: 1.1rem;
+  }
+
+  .mobile-menu__list a {
+    font-size: 1.7rem;
+  }
+
+  .mobile-menu__button {
+    height: 50px;
+    margin-top: 2rem;
+  }
+}
+
+@media (max-height: 600px) and (max-width: 768px) {
+  .mobile-menu {
+    padding: 7rem 1.5rem 1.5rem;
+  }
+
+  .mobile-menu__list {
+    gap: 0.7rem;
+  }
+
+  .mobile-menu__list a {
+    font-size: 1.45rem;
+  }
+
+  .mobile-menu__button {
+    height: 46px;
+    margin-top: 1.2rem;
+  }
+}
