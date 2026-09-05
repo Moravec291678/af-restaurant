@@ -1060,14 +1060,17 @@ function Menu() {
         <div className="container">
           <div className="menu-page__hero-content">
             <span className="menu-page__eyebrow">
-              ❖ AUTENTICKÁ AFGHÁNSKÁ KUCHYNĚ ❖
+              ❖ AUTENTICKÁ PERSKÁ KUCHYNĚ ❖
             </span>
 
-            <h1 className="menu-page__title">Jídelní lístek</h1>
+            <h1 className="menu-page__title">
+              Jídelní lístek <br /> Naan O Namak
+            </h1>
 
             <p className="menu-page__intro">
-              Objevte tradiční chutě Afghánistánu, připravované s respektem k
-              původním recepturám a kvalitním surovinám.
+              Objevte tradiční chutě perské a středoasijské kuchyně v
+              restauraci Naan O Namak v Praze-Benicích – od mantu a Qabuli Palow
+              po speciality z grilu.
             </p>
           </div>
         </div>

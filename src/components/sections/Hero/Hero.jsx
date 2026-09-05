@@ -107,12 +107,12 @@ function Hero() {
             </div>
 
             <h1 id="hero-title" className="hero__title">
-              Chuťová cesta do srdce Asie
+              Naan O Namak <br/>restaurace v Benicích
             </h1>
 
             <p className="hero__description">
-              Poznejte harmonii jemných bylinek, šťavnatého masa a aromatického
-              koření. Orientální kuchyně čeká, až ji objevíte.
+              Autentická perská a středoasijská kuchyně v Praze-Benicích.
+              Přijďte na oběd nebo večeři a ochutnejte naše speciality z grilu.
             </p>
 
             <div className="hero__buttons">
@@ -156,7 +156,7 @@ function Hero() {
                   href="https://maps.app.goo.gl/vbrWUgVyCbaiBvWy6"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Otevřít adresu restaurace Kabura na Google Maps"
+                  aria-label="Otevřít adresu restaurace Naan O Namak na Google Maps"
                 >
                   Květnového povstání 21/21
                 </a>
@@ -191,7 +191,7 @@ function Hero() {
 
                 <a
                   href="tel:+420721700777"
-                  aria-label="Zavolat do restaurace Kabura"
+                  aria-label="Zavolat do restaurace Naan O Namak"
                 >
                   +420 721 700 777
                 </a>

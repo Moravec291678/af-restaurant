@@ -22,8 +22,8 @@ function AboutPreview() {
             </h2>
 
             <p className="about-preview__description">
-              Naan o Namak - "chleb a sůl" <br />
-              je tradiční afghánská fráze, kterou hostitel vítá hosta u svého
+              Naan O Namak – „chléb a sůl“ <br />
+              je tradiční perská fráze, kterou hostitel vítá hosta u svého
               stolu. Není to jen jídlo, je to slib pohostinnosti.
             </p>
 
@@ -35,7 +35,7 @@ function AboutPreview() {
           <figure className="about-preview__image">
             <img
               src={aboutImage}
-              alt="Interiér restaurace Kabura"
+              alt="Interiér restaurace Naan O Namak v Praze-Benicích"
               loading="lazy"
               decoding="async"
             />

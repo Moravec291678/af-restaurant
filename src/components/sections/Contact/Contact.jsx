@@ -51,7 +51,7 @@ function Contact() {
                 <div>
                   <span className="contact__label">Adresa</span>
 
-                  <address>Květnového povstání 21/21</address>
+                  <address>Květnového povstání 21/21, Praha-Benice</address>
                 </div>
               </div>
 
@@ -94,7 +94,7 @@ function Contact() {
                 <div>
                   <span className="contact__label">E-mail</span>
 
-                  <a href="mailto:info@naan-o-namak.cz">info@naan-o-namak.cz</a>
+                  <a href="mailto:info@naanonamak.cz">info@naanonamak.cz</a>
                 </div>
               </div>
 
@@ -150,7 +150,7 @@ function Contact() {
 
           <div className="contact__map">
             <iframe
-              title="Mapa restaurace Naan o Namak"
+              title="Mapa restaurace Naan O Namak v Praze-Benicích"
               src="https://www.google.com/maps?q=50.0137834,14.6045906&z=17&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

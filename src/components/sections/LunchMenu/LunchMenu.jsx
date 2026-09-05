@@ -86,7 +86,7 @@ function LunchMenu() {
             <div className="lunch-menu__image">
               <img
                 src={heroImage}
-                alt="Afghánské polední menu restaurace Kabura"
+                alt="Jídlo z nabídky restaurace Naan O Namak v Praze-Benicích"
                 loading="lazy"
                 decoding="async"
               />

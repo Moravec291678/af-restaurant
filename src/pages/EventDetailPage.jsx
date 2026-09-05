@@ -13,13 +13,13 @@ function EventDetailPage() {
 
           <article className="event-detail">
             <div className="event-detail__image">
-              <img src={event01} alt="Afghánský večer" />
+              <img src={event01} alt="Perský večer" />
             </div>
 
             <div className="event-detail__content">
               <span className="event-detail__eyebrow">NAAN O NAMAK</span>
 
-              <h1 className="event-detail__title">Afghánský večer</h1>
+              <h1 className="event-detail__title">Perský večer</h1>
 
               <div className="event-detail__decorative-line" />
 
@@ -44,7 +44,7 @@ function EventDetailPage() {
                 <h2>O akci</h2>
 
                 <p>
-                  Přijďte si užít večer plný tradiční afghánské kuchyně,
+                  Přijďte si užít večer plný tradiční perské kuchyně,
                   autentických chutí a příjemné atmosféry.
                 </p>
 

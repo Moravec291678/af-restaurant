@@ -123,7 +123,7 @@ function Header() {
             smooth
             to="/#hero"
             className="header__logo"
-            aria-label="Kabura – domovská stránka"
+            aria-label="Naan O Namak – domovská stránka"
             onClick={closeMenu}
           >
             <div className="header__logo-content">

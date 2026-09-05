@@ -77,7 +77,7 @@ function EventsPage() {
 
               <p className="events-page__empty-description">
                 Plánujete oslavu, firemní večírek, svatbu nebo jinou událost?
-                Připravíme pro vás catering s tradiční afghánskou i českou
+                Připravíme pro vás catering s tradiční perskou i českou
                 kuchyní a postaráme se o to, aby vaše setkání bylo výjimečné.
               </p>
 

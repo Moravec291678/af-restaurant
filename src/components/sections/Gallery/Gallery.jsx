@@ -13,22 +13,22 @@ const galleryItems = [
   {
     id: 1,
     image: gallery01,
-    alt: "Afghánské jídlo v restauraci Naan o Namak",
+    alt: "Perské jídlo v restauraci Naan o Namak",
   },
   {
     id: 2,
     image: gallery02,
-    alt: "Afghánské jídlo v restauraci Naan o Namak",
+    alt: "Perské jídlo v restauraci Naan o Namak",
   },
   {
     id: 3,
     image: gallery03,
-    alt: "Afghánské jídlo v restauraci Naan o Namak",
+    alt: "Perské jídlo v restauraci Naan o Namak",
   },
   {
     id: 4,
     image: gallery04,
-    alt: "Afghánské jídlo v restauraci Naan o Namak",
+    alt: "Perské jídlo v restauraci Naan o Namak",
   },
 ];
 

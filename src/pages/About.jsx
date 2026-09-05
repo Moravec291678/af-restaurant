@@ -20,8 +20,8 @@ function About() {
             </h1>
 
             <p className="about-intro">
-              Poznejte příběh člověka, který přinesl své dlouholeté zkušenosti s
-              kuchyní do klidného prostředí pražských Benic.
+              Poznejte příběh restaurace Naan O Namak, která přináší dlouholeté
+              zkušenosti s kuchyní do klidného prostředí pražských Benic.
             </p>
           </ScrollReveal>
         </div>
@@ -86,11 +86,11 @@ function About() {
               <article className="about-feature">
                 <span className="about-feature-number">01</span>
 
-                <h3>Afghánská a středoasijská kuchyně</h3>
+                <h3>Perská a středoasijská kuchyně</h3>
 
                 <p>
                   Čerstvá, pestrá a lehce kořeněná jídla inspirovaná tradiční
-                  kuchyní Střední Asie a Afghánistánu.
+                  kuchyní Střední Asie a Persie.
                 </p>
               </article>
             </ScrollReveal>

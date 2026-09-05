@@ -26,8 +26,8 @@ function Footer() {
             </HashLink>
 
             <p className="footer__description">
-              Autentická orientální kuchyně v srdci Prahy. Tradiční receptury,
-              čerstvé suroviny a atmosféra, ke které se budete rádi vracet.
+              Perská a středoasijská restaurace v Praze-Benicích. Tradiční
+              receptury, čerstvé suroviny a atmosféra, ke které se budete rádi vracet.
             </p>
           </div>
 
@@ -71,7 +71,7 @@ function Footer() {
             <h2 className="footer__heading">Kontakt</h2>
 
             <address className="footer__address">
-              <span>Květnového povstání 21/21</span>
+              <span>Květnového povstání 21/21, Praha-Benice</span>
 
               <a href="tel:+420721700777">+420 721 700 777</a>
 
@@ -87,10 +87,10 @@ function Footer() {
               <div>
                 <span>Po – Pá</span>
 
-                <time dateTime="11:00-23:00">11:00 – 22:00</time>
+                <time dateTime="11:00-22:00">11:00 – 22:00</time>
               </div>
               <div>
-                <span>Po – Ne</span>
+                <span>So – Ne</span>
 
                 <time dateTime="11:30-23:00">11:30 – 22:00</time>
               </div>
@@ -108,7 +108,7 @@ function Footer() {
 
         <div className="footer__bottom">
           <p className="footer__copyright">
-            © {currentYear} Naan O Namak – Autentická orientální restaurace.
+            © {currentYear} Naan O Namak – Perská restaurace v Benicích.
             Všechna práva vyhrazena.
           </p>
 

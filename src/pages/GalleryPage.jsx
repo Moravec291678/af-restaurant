@@ -15,7 +15,7 @@ const galleryItems = [
   {
     id: 3,
     image: gallery03,
-    alt: "Afghánské jídlo v restauraci Naan o Namak",
+    alt: "Perské jídlo v restauraci Naan o Namak",
   },
 
   {
@@ -26,7 +26,7 @@ const galleryItems = [
   {
     id: 6,
     image: gallery06,
-    alt: "Afghánské speciality v restauraci Naan o Namak",
+    alt: "Perské speciality v restauraci Naan o Namak",
   },
 
   {
@@ -174,7 +174,7 @@ function Gallery() {
         >
           <button
             type="button"
-            className="gallery__lightbox-close"
+            className="gallery-page__lightbox-close"
             onClick={(event) => {
               event.stopPropagation();
               closeLightbox();
