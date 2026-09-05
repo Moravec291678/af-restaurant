@@ -9,7 +9,7 @@ const lunchMenuItems = [
     id: 1,
     name: "Smažený řízek - Kuřecí prsa 200g",
     description: "Podavané s bramborovým salátem nebo hranolkami",
-    price: "59 Kč",
+    price: "199 Kč",
   },
   {
     id: 2,
