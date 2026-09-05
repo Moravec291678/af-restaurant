@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -33,7 +34,6 @@ const galleryItems = [
 
 function Gallery() {
   const [activeIndex, setActiveIndex] = useState(null);
-
   const isLightboxOpen = activeIndex !== null;
 
   const showPrevious = () => {
@@ -78,7 +78,6 @@ function Gallery() {
     };
 
     document.addEventListener("keydown", handleKeyDown);
-
     document.body.style.overflow = "hidden";
 
     return () => {
@@ -102,7 +101,6 @@ function Gallery() {
 
     const touchEnd = event.changedTouches[0].clientX;
     const difference = touchStart - touchEnd;
-
     const swipeThreshold = 50;
 
     if (difference > swipeThreshold) {
@@ -177,65 +175,75 @@ function Gallery() {
           LIGHTBOX
       ========================================= */}
 
-      {isLightboxOpen && (
-        <div
-          className="gallery__lightbox"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Náhled fotografie galerie"
-          onClick={closeLightbox}
-        >
-          <button
-            type="button"
-            className="gallery__lightbox-close"
-            onClick={closeLightbox}
-            aria-label="Zavřít fotografii"
-          >
-            ×
-          </button>
-
-          <button
-            type="button"
-            className="gallery__lightbox-arrow gallery__lightbox-arrow--prev"
-            onClick={(event) => {
-              event.stopPropagation();
-              showPrevious();
-            }}
-            aria-label="Předchozí fotografie"
-          >
-            ‹
-          </button>
-
+      {isLightboxOpen &&
+        createPortal(
           <div
-            className="gallery__lightbox-content"
-            onClick={(event) => event.stopPropagation()}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
+            className="gallery__lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Náhled fotografie galerie"
+            onClick={closeLightbox}
           >
-            <img
-              src={galleryItems[activeIndex].image}
-              alt={galleryItems[activeIndex].alt}
-              className="gallery__lightbox-image"
-            />
+            {/* CLOSE */}
 
-            <span className="gallery__lightbox-counter">
-              {activeIndex + 1} / {galleryItems.length}
-            </span>
-          </div>
+            <button
+              type="button"
+              className="gallery__lightbox-close"
+              onClick={closeLightbox}
+              aria-label="Zavřít fotografii"
+            >
+              ×
+            </button>
 
-          <button
-            type="button"
-            className="gallery__lightbox-arrow gallery__lightbox-arrow--next"
-            onClick={(event) => {
-              event.stopPropagation();
-              showNext();
-            }}
-            aria-label="Další fotografie"
-          >
-            ›
-          </button>
-        </div>
-      )}
+            {/* PREVIOUS */}
+
+            <button
+              type="button"
+              className="gallery__lightbox-arrow gallery__lightbox-arrow--prev"
+              onClick={(event) => {
+                event.stopPropagation();
+                showPrevious();
+              }}
+              aria-label="Předchozí fotografie"
+            >
+              ‹
+            </button>
+
+            {/* IMAGE */}
+
+            <div
+              className="gallery__lightbox-content"
+              onClick={(event) => event.stopPropagation()}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
+              <img
+                src={galleryItems[activeIndex].image}
+                alt={galleryItems[activeIndex].alt}
+                className="gallery__lightbox-image"
+              />
+
+              <span className="gallery__lightbox-counter">
+                {activeIndex + 1} / {galleryItems.length}
+              </span>
+            </div>
+
+            {/* NEXT */}
+
+            <button
+              type="button"
+              className="gallery__lightbox-arrow gallery__lightbox-arrow--next"
+              onClick={(event) => {
+                event.stopPropagation();
+                showNext();
+              }}
+              aria-label="Další fotografie"
+            >
+              ›
+            </button>
+          </div>,
+          document.body,
+        )}
     </section>
   );
 }
