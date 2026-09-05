@@ -51,9 +51,7 @@ function Contact() {
                 <div>
                   <span className="contact__label">Adresa</span>
 
-                  <address>
-                    Květnového povstání 21/21
-                  </address>
+                  <address>Květnového povstání 21/21</address>
                 </div>
               </div>
 
@@ -129,7 +127,7 @@ function Contact() {
 
             <div className="contact__actions">
               <a
-                href="https://maps.app.goo.gl/DY48kqa17Xgm1AEb7"
+                href="https://maps.app.goo.gl/vbrWUgVyCbaiBvWy6"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact__button contact__button--primary"
@@ -158,7 +156,7 @@ function Contact() {
               referrerPolicy="no-referrer-when-downgrade"
             />
             <a
-              href="https://maps.app.goo.gl/DY48kqa17Xgm1AEb7"
+              href="https://maps.app.goo.gl/vbrWUgVyCbaiBvWy6"
               target="_blank"
               rel="noopener noreferrer"
               className="contact__map-link"

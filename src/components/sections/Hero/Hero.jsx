@@ -153,7 +153,7 @@ function Hero() {
                 <span className="hero__footer-label">Adresa:</span>
 
                 <a
-                  href="https://maps.app.goo.gl/DY48kqa17Xgm1AEb7"
+                  href="https://maps.app.goo.gl/vbrWUgVyCbaiBvWy6"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Otevřít adresu restaurace Kabura na Google Maps"
@@ -204,7 +204,7 @@ function Hero() {
         <a href="tel:+420721700777">📞 Zavolat</a>
 
         <a
-          href="https://maps.app.goo.gl/DY48kqa17Xgm1AEb7"
+          href="https://maps.app.goo.gl/vbrWUgVyCbaiBvWy6"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -216,5 +216,3 @@ function Hero() {
 }
 
 export default Hero;
-
-
