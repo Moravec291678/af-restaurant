@@ -5,16 +5,16 @@ import { HashLink } from "react-router-hash-link";
 
 import "./Hero.css";
 
-import heroVideo1 from "../../../assets/videos/hero-1.mp4";
-import heroVideo2 from "../../../assets/videos/hero-2.mp4";
-import heroVideo3 from "../../../assets/videos/hero-3.mp4";
-import heroVideo4 from "../../../assets/videos/hero-4.mp4";
-import heroVideo5 from "../../../assets/videos/hero-5.mp4";
-import heroVideo6 from "../../../assets/videos/hero-6.mp4";
-import heroVideo7 from "../../../assets/videos/hero-7.mp4";
-import heroVideo8 from "../../../assets/videos/hero-8.mp4";
-import heroVideo9 from "../../../assets/videos/hero-9.mp4";
-import heroVideo10 from "../../../assets/videos/hero-10.mp4";
+import heroVideo1 from "../../../assets/videos/optimized/hero-1.mp4";
+import heroVideo2 from "../../../assets/videos/optimized/hero-2.mp4";
+import heroVideo3 from "../../../assets/videos/optimized/hero-3.mp4";
+import heroVideo4 from "../../../assets/videos/optimized/hero-4.mp4";
+import heroVideo5 from "../../../assets/videos/optimized/hero-5.mp4";
+import heroVideo6 from "../../../assets/videos/optimized/hero-6.mp4";
+import heroVideo7 from "../../../assets/videos/optimized/hero-7.mp4";
+import heroVideo8 from "../../../assets/videos/optimized/hero-8.mp4";
+import heroVideo9 from "../../../assets/videos/optimized/hero-9.mp4";
+import heroVideo10 from "../../../assets/videos/optimized/hero-10.mp4";
 
 const heroVideos = [
   heroVideo1,
