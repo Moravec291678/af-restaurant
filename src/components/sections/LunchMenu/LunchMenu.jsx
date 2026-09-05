@@ -16,7 +16,7 @@ const lunchMenuItems = [
     name: "Hovězí guláš 200g",
     description:
       "Hovězí guláš podavaný s houskovým knedlíkem a čerstvou červenou cibulkou",
-    price: "199 Kč",
+    price: "219 Kč",
   },
   {
     id: 3,
