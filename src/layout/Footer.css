@@ -434,7 +434,7 @@
   }
 
   .footer__description {
-    max-width: 300px;
+    width: 80%;
     font-size: 0.66rem;
   }
 
@@ -756,5 +756,241 @@
   .footer__links a:hover,
   .footer__reservation:hover {
     transform: none;
+  }
+} /* =====================================================
+   CREATOR CREDIT
+===================================================== */
+
+.footer__creator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 24px;
+  padding-top: 18px;
+
+  border-top: 1px solid rgba(201, 169, 106, 0.18);
+}
+
+.footer__creator-label {
+  color: var(--color-gold);
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+.footer__creator-name {
+  color: rgba(242, 236, 226, 0.88);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.footer__creator-instagram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 30px;
+
+  width: 30px;
+  height: 30px;
+  margin-left: 2px;
+
+  border: 1px solid rgba(201, 169, 106, 0.28);
+  border-radius: 50%;
+
+  background: transparent;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.footer__creator-instagram img {
+  display: block;
+
+  width: 15px;
+  height: 15px;
+
+  object-fit: contain;
+
+  transition: transform 0.25s ease;
+}
+
+.footer__creator-instagram:hover {
+  background: rgba(201, 169, 106, 0.1);
+  border-color: var(--color-gold);
+  transform: translateY(-2px);
+}
+
+.footer__creator-instagram:hover img {
+  transform: scale(1.08);
+}
+
+/* =====================================================
+   CREATOR — MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+  .footer__brand {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+
+    column-gap: 1.5rem;
+    row-gap: 0;
+
+    align-items: center;
+  }
+
+  .footer__logo {
+    grid-column: 1;
+    grid-row: 1;
+
+    margin-bottom: 0.9rem;
+  }
+
+  .footer__description {
+    grid-column: 1;
+    grid-row: 2;
+
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .footer__creator {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+
+    display: grid;
+    grid-template-columns: auto 29px;
+    grid-template-rows: auto auto;
+
+    align-items: center;
+    justify-content: end;
+
+    column-gap: 9px;
+    row-gap: 5px;
+
+    min-width: max-content;
+
+    margin: 0;
+    padding: 0;
+
+    border-top: none;
+  }
+
+  .footer__creator-label {
+    grid-column: 1 / -1;
+    grid-row: 1;
+
+    justify-self: end;
+
+    margin: 0;
+
+    font-size: 0.56rem;
+    letter-spacing: 0.14em;
+  }
+
+  .footer__creator-name {
+    grid-column: 1;
+    grid-row: 2;
+
+    justify-self: end;
+
+    margin: 0;
+
+    font-size: 0.76rem;
+  }
+
+  .footer__creator-instagram {
+    grid-column: 2;
+    grid-row: 2;
+
+    width: 29px;
+    height: 29px;
+    margin: 0;
+  }
+
+  .footer__creator-instagram img {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* =====================================================
+   CREATOR — SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+  .footer__brand {
+    column-gap: 1.1rem;
+  }
+
+  .footer__creator {
+    grid-template-columns: auto 27px;
+    column-gap: 8px;
+  }
+
+  .footer__creator-label {
+    font-size: 0.51rem;
+    letter-spacing: 0.12em;
+  }
+
+  .footer__creator-name {
+    font-size: 0.69rem;
+  }
+
+  .footer__creator-instagram {
+    width: 27px;
+    height: 27px;
+  }
+
+  .footer__creator-instagram img {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+/* =====================================================
+   CREATOR — VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+  .footer__brand {
+    column-gap: 0.8rem;
+  }
+
+  .footer__creator {
+    grid-template-columns: auto 25px;
+    column-gap: 7px;
+  }
+
+  .footer__creator-label {
+    font-size: 0.47rem;
+  }
+
+  .footer__creator-name {
+    font-size: 0.63rem;
+  }
+
+  .footer__creator-instagram {
+    width: 25px;
+    height: 25px;
+  }
+
+  .footer__creator-instagram img {
+    width: 12px;
+    height: 12px;
   }
 }

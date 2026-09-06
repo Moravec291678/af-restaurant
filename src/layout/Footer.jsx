@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import logo from "../assets/icons/logo.webp";
 import "./Footer.css";
+import instagramIcon from "../assets/icons/instagram.png";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -34,8 +35,24 @@ function Footer() {
 
             <p className="footer__description">
               Perská a středoasijská restaurace v Praze-Benicích. Tradiční
-              receptury, čerstvé suroviny a atmosféra, ke které se budete rádi vracet.
+              receptury, čerstvé suroviny a atmosféra, ke které se budete rádi
+              vracet.
             </p>
+
+            <div className="footer__creator">
+              <span className="footer__creator-label">Created by</span>
+              <span className="footer__creator-name">David Moravec</span>
+
+              <a
+                href="https://www.instagram.com/david_moravec7/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__creator-instagram"
+                aria-label="Instagram Davida Moravce"
+              >
+                <img src={instagramIcon} alt="" aria-hidden="true" />
+              </a>
+            </div>
           </div>
 
           {/* RYCHLÉ ODKAZY */}
@@ -115,8 +132,8 @@ function Footer() {
 
         <div className="footer__bottom">
           <p className="footer__copyright">
-            © {currentYear} Naan O Namak – Perská restaurace v Benicích.
-            Všechna práva vyhrazena.
+            © {currentYear} Naan O Namak – Perská restaurace v Benicích. Všechna
+            práva vyhrazena.
           </p>
 
           <div className="footer__legal">
