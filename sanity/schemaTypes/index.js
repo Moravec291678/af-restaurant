@@ -4,6 +4,7 @@ import menuItem from "./menuItem";
 import restaurantSettings from "./restaurantSettings";
 import galleryImage from "./galleryImage";
 import event from "./event";
+import review from "./review";
 
 export const schemaTypes = [
   restaurantSettings,
@@ -12,4 +13,5 @@ export const schemaTypes = [
   lunchMenu,
   galleryImage,
   event,
+  review,
 ];
