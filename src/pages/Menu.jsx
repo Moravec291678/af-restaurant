@@ -4,6 +4,7 @@ import "./Menu.css";
 import { sanityClient } from "../lib/sanityClient";
 import { menuCategoriesQuery, menuItemsQuery } from "../lib/queries";
 import { getMenuImage } from "../lib/menuImages";
+import { getSanityImageUrl } from "../lib/sanityImage";
 
 import ashak from "../assets/images/menu/ashak.webp";
 import ashakVege from "../assets/images/menu/ashakVege.webp";
@@ -1019,13 +1020,18 @@ function Menu() {
           return;
         }
 
-        const mappedItems = items.map((item) => ({
-          ...item,
-          id: item._id.replace("menuItem-", ""),
-          category: item.category?.slug ?? "",
-          image: getMenuImage(item._id.replace("menuItem-", "")),
-          imageAlt: item.imageAlt || item.name,
-        }));
+        const mappedItems = items.map((item) => {
+          const sanityImage = getSanityImageUrl(item.image);
+          const localImage = getMenuImage(item._id.replace("menuItem-", ""));
+
+          return {
+            ...item,
+            id: item._id.replace("menuItem-", ""),
+            category: item.category?.slug ?? "",
+            image: sanityImage || localImage,
+            imageAlt: item.imageAlt || item.name,
+          };
+        });
 
         if (!cancelled) {
           setSanityItems(mappedItems);
