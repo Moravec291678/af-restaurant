@@ -22,3 +22,28 @@ export const menuItemsQuery = `*[
   active,
   order
 }`;
+export const menuCategoriesQuery = `*[
+  _type == "menuCategory"
+  && active != false
+] | order(order asc, title asc) {
+  _id,
+  title,
+  "slug": slug.current,
+  order,
+  active
+}`;
+export const lunchMenuQuery = `*[
+  _type == "lunchMenu"
+][0]{
+  _id,
+  eyebrow,
+  title,
+  description,
+  image,
+  imageAlt,
+  items[]{
+    title,
+    description,
+    price
+  }
+}`;

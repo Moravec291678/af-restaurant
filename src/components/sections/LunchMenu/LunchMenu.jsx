@@ -1,38 +1,39 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import heroImage from "../../../assets/images/hero.webp";
 
+import { sanityClient } from "../../../lib/sanityClient";
+import { lunchMenuQuery } from "../../../lib/queries";
+
 import "./LunchMenu.css";
 
-const lunchMenuItems = [
-  {
-    id: 1,
-    name: "Smažený řízek - Kuřecí prsa 200g",
-    description: "Podavané s bramborovým salátem nebo hranolkami",
-    price: "199 Kč",
-  },
-  {
-    id: 2,
-    name: "Hovězí guláš 200g",
-    description:
-      "Hovězí guláš podavaný s houskovým knedlíkem a čerstvou červenou cibulkou",
-    price: "219 Kč",
-  },
-  {
-    id: 3,
-    name: "Kuřecí prsa 200g",
-    description: "grilované kuřecí prsa podávané se smetanovou omáčkou",
-    price: "249 Kč",
-  },
-  {
-    id: 4,
-    name: "Smažený sýr 200g",
-    description: "Obalovný eidam s hranolky a tatarskou omáčkou ",
-    price: "219 Kč",
-  },
-];
-
 function LunchMenu() {
+  const [lunchMenu, setLunchMenu] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    sanityClient
+      .fetch(lunchMenuQuery)
+      .then((data) => {
+        if (cancelled) {
+          return;
+        }
+
+        setLunchMenu(data);
+      })
+      .catch((error) => {
+        console.error("Sanity lunch menu error:", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const items = lunchMenu?.items ?? [];
+
   return (
     <section
       className="lunch-menu"
@@ -43,46 +44,49 @@ function LunchMenu() {
         <div className="lunch-menu__inner">
           {/* =========================================
               HEADER
-          ========================================= */}
-
+              ========================================= */}
           <header className="lunch-menu__header">
-            <p className="lunch-menu__eyebrow">❖ MENU PRO VŠEDNÍ DEN ❖</p>
+            <p className="lunch-menu__eyebrow">
+              {lunchMenu?.eyebrow || "❖ MENU PRO VŠEDNÍ DEN ❖"}
+            </p>
 
             <h2 id="lunch-menu-title" className="lunch-menu__title">
-              Polední menu
+              {lunchMenu?.title || "Polední menu"}
             </h2>
 
             <p className="lunch-menu__subtitle">
-              Každý všední den pro vás připravujeme výběr oblíbených českých
-              jídel.
+              {lunchMenu?.description ||
+                "Každý všední den pro vás připravujeme výběr oblíbených českých jídel."}
             </p>
           </header>
 
           {/* =========================================
               CONTENT
-          ========================================= */}
-
+              ========================================= */}
           <div className="lunch-menu__content">
             {/* MENU ITEMS */}
-
             <div className="lunch-menu__list">
-              {lunchMenuItems.map((item) => (
-                <article className="lunch-menu__item" key={item.id}>
+              {items.map((item, index) => (
+                <article
+                  className="lunch-menu__item"
+                  key={`${item.title}-${index}`}
+                >
                   <div className="lunch-menu__item-content">
-                    <h3 className="lunch-menu__item-name">{item.name}</h3>
+                    <h3 className="lunch-menu__item-name">{item.title}</h3>
 
                     <p className="lunch-menu__item-description">
                       {item.description}
                     </p>
                   </div>
 
-                  <span className="lunch-menu__item-price">{item.price}</span>
+                  <span className="lunch-menu__item-price">
+                    {item.price} Kč
+                  </span>
                 </article>
               ))}
             </div>
 
             {/* IMAGE */}
-
             <div className="lunch-menu__image">
               <img
                 src={heroImage}
@@ -100,8 +104,7 @@ function LunchMenu() {
 
           {/* =========================================
               ACTION
-          ========================================= */}
-
+              ========================================= */}
           <div className="lunch-menu__action">
             <Link to="/jidelni-listek" className="lunch-menu__button">
               Prohlédnout jídelní lístek
