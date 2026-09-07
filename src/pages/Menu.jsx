@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import "./Menu.css";
 
+import { sanityClient } from "../lib/sanityClient";
+import { menuItemsQuery } from "../lib/queries";
+import { getMenuImage } from "../lib/menuImages";
+
 import ashak from "../assets/images/menu/ashak.webp";
 import ashakVege from "../assets/images/menu/ashakVege.webp";
 import baghlawa from "../assets/images/menu/baghlawa.webp";
@@ -987,8 +991,43 @@ function Menu() {
   const [searchQuery, setSearchQuery] = useState("");
   const [showAllergens, setShowAllergens] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [sanityItems, setSanityItems] = useState(null);
 
-  const imageItems = useMemo(() => menuItems.filter((item) => item.image), []);
+  const displayItems = sanityItems ?? menuItems;
+  const imageItems = useMemo(
+    () => displayItems.filter((item) => item.image),
+    [displayItems],
+  );
+  useEffect(() => {
+    let cancelled = false;
+
+    sanityClient
+      .fetch(menuItemsQuery)
+      .then((items) => {
+        if (cancelled || !Array.isArray(items) || items.length === 0) {
+          return;
+        }
+
+        const mappedItems = items.map((item) => ({
+          ...item,
+          id: item._id.replace("menuItem-", ""),
+          category: item.category?.slug ?? "",
+          image: getMenuImage(item._id.replace("menuItem-", "")),
+          imageAlt: item.imageAlt || item.name,
+        }));
+
+        if (!cancelled) {
+          setSanityItems(mappedItems);
+        }
+      })
+      .catch((error) => {
+        console.error("Sanity menu error:", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const openLightbox = (item) => {
     const index = imageItems.findIndex((imageItem) => imageItem.id === item.id);
@@ -1035,7 +1074,7 @@ function Menu() {
   const filteredItems = useMemo(() => {
     const normalizedSearch = searchQuery.trim().toLowerCase();
 
-    return menuItems.filter((item) => {
+    return displayItems.filter((item) => {
       const matchesCategory =
         activeCategory === "vse" || item.category === activeCategory;
 
@@ -1048,7 +1087,7 @@ function Menu() {
 
       return matchesCategory && matchesVegetarian && matchesSearch;
     });
-  }, [activeCategory, vegetarianOnly, searchQuery]);
+  }, [activeCategory, vegetarianOnly, searchQuery, displayItems]);
 
   return (
     <main className="menu-page">
@@ -1068,9 +1107,9 @@ function Menu() {
             </h1>
 
             <p className="menu-page__intro">
-              Objevte tradiční chutě perské a středoasijské kuchyně v
-              restauraci Naan O Namak v Praze-Benicích – od mantu a Qabuli Palow
-              po speciality z grilu.
+              Objevte tradiční chutě perské a středoasijské kuchyně v restauraci
+              Naan O Namak v Praze-Benicích – od mantu a Qabuli Palow po
+              speciality z grilu.
             </p>
           </div>
         </div>
