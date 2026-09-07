@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import "./Menu.css";
 
 import { sanityClient } from "../lib/sanityClient";
-import { menuItemsQuery } from "../lib/queries";
+import { menuCategoriesQuery, menuItemsQuery } from "../lib/queries";
 import { getMenuImage } from "../lib/menuImages";
 
 import ashak from "../assets/images/menu/ashak.webp";
@@ -992,6 +992,16 @@ function Menu() {
   const [showAllergens, setShowAllergens] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [sanityItems, setSanityItems] = useState(null);
+  const [sanityCategories, setSanityCategories] = useState(null);
+  const displayCategories = sanityCategories
+    ? [
+        { id: "vse", label: "Vše" },
+        ...sanityCategories.map((category) => ({
+          id: category.slug,
+          label: category.title,
+        })),
+      ]
+    : categories;
 
   const displayItems = sanityItems ?? menuItems;
   const imageItems = useMemo(
@@ -999,6 +1009,7 @@ function Menu() {
     [displayItems],
   );
   useEffect(() => {
+    console.log("MENU USEEFFECT RUNS");
     let cancelled = false;
 
     sanityClient
@@ -1022,6 +1033,20 @@ function Menu() {
       })
       .catch((error) => {
         console.error("Sanity menu error:", error);
+      });
+
+    sanityClient
+      .fetch(menuCategoriesQuery)
+      .then((categories) => {
+        if (cancelled || !Array.isArray(categories)) {
+          return;
+        }
+
+        console.log("SANITY CATEGORIES:", categories);
+        setSanityCategories(categories);
+      })
+      .catch((error) => {
+        console.error("Sanity categories error:", error);
       });
 
     return () => {
@@ -1143,7 +1168,7 @@ function Menu() {
           ================================================= */}
 
           <nav className="menu-page__categories" aria-label="Kategorie jídel">
-            {categories.map((category) => (
+            {displayCategories.map((category) => (
               <button
                 key={category.id}
                 type="button"
