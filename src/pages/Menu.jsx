@@ -949,7 +949,7 @@ const categories = [
   { id: "teple-napoje", label: "Teplé nápoje" },
   { id: "pivo", label: "Pivo" },
   { id: "vino", label: "Víno" },
-  { id: "tvrdý-alkohol", label: "Destiláty" },
+  { id: "tvrdy-alkohol", label: "Destiláty" },
 ];
 
 /* =========================================================
