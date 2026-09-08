@@ -68,13 +68,15 @@ function Specialties() {
                   <span className="specialties__price">
                     {specialty.price != null
                       ? `${specialty.price} Kč`
-                      : specialty.variants?.length
-                        ? `od ${Math.min(
-                            ...specialty.variants
-                              .map((variant) => variant.price)
-                              .filter((price) => price != null),
-                          )} Kč`
-                        : ""}
+                      : (() => {
+                          const variantPrices = specialty.variants
+                            ?.map((variant) => variant.price)
+                            .filter((price) => price != null);
+
+                          return variantPrices?.length
+                            ? `od ${Math.min(...variantPrices)} Kč`
+                            : "";
+                        })()}
                   </span>
                 </div>
               </article>

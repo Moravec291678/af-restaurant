@@ -60,17 +60,18 @@ function Gallery() {
       cancelled = true;
     };
   }, []);
+  const sanityGalleryItems =
+    sanityItems
+      ?.filter((item) => item.showOnHomepage)
+      .map((item) => ({
+        id: item._id,
+        image: getSanityImageUrl(item.image),
+        alt: item.alt || "Fotografie restaurace Naan O Namak",
+      }))
+      .filter((item) => item.image) ?? [];
+
   const displayItems =
-    sanityItems && sanityItems.length > 0
-      ? sanityItems
-          .filter((item) => item.showOnHomepage)
-          .map((item) => ({
-            id: item._id,
-            image: getSanityImageUrl(item.image),
-            alt: item.alt || "Fotografie restaurace Naan O Namak",
-          }))
-          .filter((item) => item.image)
-      : galleryItems;
+    sanityGalleryItems.length > 0 ? sanityGalleryItems : galleryItems;
   const isLightboxOpen = activeIndex !== null;
 
   const showPrevious = () => {
