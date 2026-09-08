@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import logo from "../assets/icons/logo.webp";
 
 import { sanityClient } from "../lib/sanityClient";
-import { restaurantSettingsQuery } from "../lib/queries";
+import { eventBySlugQuery, restaurantSettingsQuery } from "../lib/queries";
 
 const siteUrl = "https://naanonamak.cz";
 const brandImageUrl = new URL(logo, siteUrl).href;
@@ -150,11 +150,23 @@ function setMeta(selector, attribute, value) {
 function Seo() {
   const { pathname } = useLocation();
   const [settings, setSettings] = useState(null);
+  const [event, setEvent] = useState(null);
 
-  const metadata = pageMetadata[pathname] ?? {
-    title: "Stránka nebyla nalezena – Naan O Namak",
-    description: "Požadovaná stránka nebyla nalezena.",
-  };
+  const eventSlug = pathname.startsWith("/akce/")
+    ? pathname.replace("/akce/", "")
+    : "";
+
+  const metadata = event
+    ? {
+        title: `${event.title} – Naan O Namak | Benice`,
+        description:
+          event.description ||
+          `Přijďte na akci ${event.title} v restauraci Naan O Namak v Praze-Benicích.`,
+      }
+    : (pageMetadata[pathname] ?? {
+        title: "Stránka nebyla nalezena – Naan O Namak",
+        description: "Požadovaná stránka nebyla nalezena.",
+      });
 
   const canonicalUrl = `${siteUrl}${pathname === "/" ? "/" : pathname}`;
 
@@ -178,6 +190,32 @@ function Seo() {
       cancelled = true;
     };
   }, []);
+  useEffect(() => {
+    if (!eventSlug) {
+      setEvent(null);
+      return;
+    }
+
+    let cancelled = false;
+
+    sanityClient
+      .fetch(eventBySlugQuery, { slug: eventSlug })
+      .then((data) => {
+        if (!cancelled) {
+          setEvent(data);
+        }
+      })
+      .catch((error) => {
+        console.error("Sanity event SEO error:", error);
+        if (!cancelled) {
+          setEvent(null);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [eventSlug]);
 
   useEffect(() => {
     document.title = metadata.title;
