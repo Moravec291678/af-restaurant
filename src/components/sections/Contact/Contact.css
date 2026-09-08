@@ -132,6 +132,18 @@
 
   text-decoration: none;
 }
+.contact__opening-hours {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+
+  line-height: 1.45;
+}
+
+.contact__opening-hours span {
+  display: block;
+  white-space: nowrap;
+}
 
 .contact__item address {
   font-style: normal;

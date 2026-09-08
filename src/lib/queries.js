@@ -88,3 +88,35 @@ export const eventBySlugQuery = `*[
   active,
   order
 }`;
+export const reviewsQuery = `*[
+  _type == "review"
+  && active != false
+] | order(order asc, _createdAt asc) {
+  _id,
+  author,
+  text,
+  rating,
+  active,
+  order
+}`;
+export const restaurantSettingsQuery = `*[
+  _type == "restaurantSettings"
+][0]{
+  _id,
+  name,
+  shortDescription,
+  address{
+    line1,
+    line2
+  },
+  phone,
+  email,
+  openingHours[]{
+    day,
+    open,
+    close
+  },
+  mapUrl,
+  mapEmbedUrl,
+  reservationUrl
+}`;

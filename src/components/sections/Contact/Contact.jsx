@@ -1,22 +1,34 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import { sanityClient } from "../../../lib/sanityClient";
+import { restaurantSettingsQuery } from "../../../lib/queries";
 
 import "./Contact.css";
 
-const openingHours = [
-  { day: "Po", open: "", close: "" },
-  { day: "Út", open: "", close: "" },
-  { day: "St", open: "", close: "" },
-  { day: "Čt", open: "", close: "" },
-  { day: "Pá", open: "", close: "" },
-  { day: "So", open: "", close: "" },
-  { day: "Ne", open: "", close: "" },
-];
-
-const todayIndex = new Date().getDay();
-const openingDayIndex = todayIndex === 0 ? 6 : todayIndex - 1;
-const todayHours = openingHours[openingDayIndex];
-
 function Contact() {
+  const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    sanityClient
+      .fetch(restaurantSettingsQuery)
+      .then((data) => {
+        if (cancelled) {
+          return;
+        }
+
+        setSettings(data);
+      })
+      .catch((error) => {
+        console.error("Sanity restaurant settings error:", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   return (
     <section className="contact" id="kontakt" aria-labelledby="contact-title">
       <div className="container">
@@ -51,7 +63,10 @@ function Contact() {
                 <div>
                   <span className="contact__label">Adresa</span>
 
-                  <address>Květnového povstání 21/21, Praha-Benice</address>
+                  <address>
+                    {settings?.address?.line1 || ""}
+                    {settings?.address?.line2 && `, ${settings.address.line2}`}
+                  </address>
                 </div>
               </div>
 
@@ -72,7 +87,9 @@ function Contact() {
                 <div>
                   <span className="contact__label">Telefon</span>
 
-                  <a href="tel:+420721700777">+420 721 700 777</a>
+                  <a href={`tel:${settings?.phone || ""}`}>
+                    {settings?.phone || ""}
+                  </a>
                 </div>
               </div>
 
@@ -94,7 +111,9 @@ function Contact() {
                 <div>
                   <span className="contact__label">E-mail</span>
 
-                  <a href="mailto:info@naanonamak.cz">info@naanonamak.cz</a>
+                  <a href={`mailto:${settings?.email || ""}`}>
+                    {settings?.email || ""}
+                  </a>
                 </div>
               </div>
 
@@ -114,9 +133,11 @@ function Contact() {
                 </span>
 
                 <div className="contact__value contact__opening-hours">
-                  <span>Po – Pá: 11:00 – 22:00</span>
-                  <br />
-                  <span>So – Ne: 11:30 – 22:00</span>
+                  {settings?.openingHours?.map((hours) => (
+                    <span key={hours.day}>
+                      {hours.day}: {hours.open} – {hours.close}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -127,7 +148,7 @@ function Contact() {
 
             <div className="contact__actions">
               <a
-                href="https://maps.app.goo.gl/vbrWUgVyCbaiBvWy6"
+                href={settings?.mapUrl || ""}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact__button contact__button--primary"
@@ -151,7 +172,7 @@ function Contact() {
           <div className="contact__map">
             <iframe
               title="Mapa restaurace Naan O Namak v Praze-Benicích"
-              src="https://www.google.com/maps?q=50.0137834,14.6045906&z=17&output=embed"
+              src={settings?.mapEmbedUrl || ""}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />

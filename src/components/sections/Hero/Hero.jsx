@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { sanityClient } from "../../../lib/sanityClient";
+import { restaurantSettingsQuery } from "../../../lib/queries";
 
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
@@ -29,21 +32,38 @@ const heroVideos = [
   heroVideo10,
 ];
 
-const openingHours = [
-  { day: "Po", open: "11:00", close: "22:00" },
-  { day: "Út", open: "11:00", close: "22:00" },
-  { day: "St", open: "11:00", close: "22:00" },
-  { day: "Čt", open: "11:00", close: "22:00" },
-  { day: "Pá", open: "11:00", close: "22:00" },
-  { day: "So", open: "11:30", close: "22:00" },
-  { day: "Ne", open: "11:30", close: "22:00" },
-];
-
-const todayIndex = new Date().getDay();
-const openingDayIndex = todayIndex === 0 ? 6 : todayIndex - 1;
-const todayHours = openingHours[openingDayIndex];
-
 function Hero() {
+  const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    sanityClient
+      .fetch(restaurantSettingsQuery)
+      .then((data) => {
+        if (cancelled) {
+          return;
+        }
+
+        setSettings(data);
+      })
+      .catch((error) => {
+        console.error("Sanity restaurant settings error:", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  const todayIndex = new Date().getDay();
+  const openingHours = settings?.openingHours || [];
+
+  const todayHours =
+    openingHours.length === 2
+      ? todayIndex === 0 || todayIndex === 6
+        ? openingHours[1]
+        : openingHours[0]
+      : openingHours[todayIndex === 0 ? 6 : todayIndex - 1];
   const [currentVideo, setCurrentVideo] = useState(() => {
     const lastVideo = sessionStorage.getItem("lastHeroVideo");
 
@@ -155,12 +175,12 @@ function Hero() {
                 <span className="hero__footer-label">Adresa:</span>
 
                 <a
-                  href="https://maps.app.goo.gl/vbrWUgVyCbaiBvWy6"
+                  href={settings?.mapUrl || ""}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Otevřít adresu restaurace Naan O Namak na Google Maps"
                 >
-                  Květnového povstání 21/21
+                  {settings?.address?.line1 || ""}
                 </a>
               </address>
 
@@ -170,14 +190,20 @@ function Hero() {
                 </span>
 
                 <span className="hero__footer-label">
-                  {todayHours.open && todayHours.close
-                    ? `${todayHours.day}:`
+                  {todayHours?.day && /[-–—]/.test(todayHours.day)
+                    ? ""
                     : "Dnes:"}
                 </span>
 
-                <time dateTime={todayHours.open || undefined}>
-                  {todayHours.open && todayHours.close
-                    ? `${todayHours.open} – ${todayHours.close}`
+                <time
+                  dateTime={
+                    todayHours?.open && todayHours?.close
+                      ? `${todayHours.open}-${todayHours.close}`
+                      : undefined
+                  }
+                >
+                  {todayHours?.open && todayHours?.close
+                    ? `${todayHours.day}: ${todayHours.open} – ${todayHours.close}`
                     : "Otevírací doba bude doplněna"}
                 </time>
               </div>
@@ -192,10 +218,10 @@ function Hero() {
                 </span>
 
                 <a
-                  href="tel:+420721700777"
+                  href={`tel:${settings?.phone || ""}`}
                   aria-label="Zavolat do restaurace Naan O Namak"
                 >
-                  +420 721 700 777
+                  {settings?.phone || ""}
                 </a>
               </div>
             </div>
@@ -203,10 +229,10 @@ function Hero() {
         </div>
       </section>
       <div className="hero__mobile-actions">
-        <a href="tel:+420721700777">📞 Zavolat</a>
+        <a href={`tel:${settings?.phone || ""}`}>📞 Zavolat</a>
 
         <a
-          href="https://maps.app.goo.gl/vbrWUgVyCbaiBvWy6"
+          href={settings?.mapUrl || ""}
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -1,10 +1,37 @@
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import { useEffect, useState } from "react";
+
+import { sanityClient } from "../lib/sanityClient";
+import { restaurantSettingsQuery } from "../lib/queries";
 import logo from "../assets/icons/logo.webp";
 import "./Footer.css";
 import instagramIcon from "../assets/icons/instagram.png";
 
 function Footer() {
+  const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    sanityClient
+      .fetch(restaurantSettingsQuery)
+      .then((data) => {
+        if (cancelled) {
+          return;
+        }
+
+        setSettings(data);
+      })
+      .catch((error) => {
+        console.error("Sanity restaurant settings error:", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const currentYear = new Date().getFullYear();
 
   return (
@@ -95,11 +122,18 @@ function Footer() {
             <h2 className="footer__heading">Kontakt</h2>
 
             <address className="footer__address">
-              <span>Květnového povstání 21/21, Praha-Benice</span>
+              <span>
+                {settings?.address?.line1 || ""}
+                {settings?.address?.line2 && `, ${settings.address.line2}`}
+              </span>
 
-              <a href="tel:+420721700777">+420 721 700 777</a>
+              <a href={`tel:${settings?.phone || ""}`}>
+                {settings?.phone || ""}
+              </a>
 
-              <a href="mailto:info@naanonamak.cz">info@naanonamak.cz</a>
+              <a href={`mailto:${settings?.email || ""}`}>
+                {settings?.email || ""}
+              </a>
             </address>
           </div>
 
@@ -108,16 +142,14 @@ function Footer() {
             <h2 className="footer__heading">Otevírací doba</h2>
 
             <div className="footer__hours-list">
-              <div>
-                <span>Po – Pá</span>
-
-                <time dateTime="11:00-22:00">11:00 – 22:00</time>
-              </div>
-              <div>
-                <span>So – Ne</span>
-
-                <time dateTime="11:30-23:00">11:30 – 22:00</time>
-              </div>
+              {settings?.openingHours?.map((hours) => (
+                <div key={hours.day}>
+                  <span>{hours.day}</span>
+                  <time dateTime={`${hours.open}-${hours.close}`}>
+                    {hours.open} – {hours.close}
+                  </time>
+                </div>
+              ))}
             </div>
 
             <Link to="/rezervace" className="footer__reservation">
