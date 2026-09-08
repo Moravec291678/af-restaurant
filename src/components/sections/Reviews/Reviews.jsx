@@ -1,21 +1,33 @@
 import "./Reviews.css";
+import { useEffect, useState } from "react";
 
-const reviews = [
-  {
-    text: "„Jídlo 5/5, obsluha 5/5, atmosféra 5/5. Tiché prostředí, bez čekání a s možností parkování.“",
-    author: "Tanya Dikova",
-  },
-  {
-    text: "„Nová rodinná restaurace. Moc dobré jídlo a milá obsluha. Příjemné tiché prostředí a bez čekání.“",
-    author: "Veronika Procházková",
-  },
-  {
-    text: "„Skvělá restaurace s výborným perským jídlem. Jídlo bylo opravdu velmi chutné a obsluha byla milá a přátelská. Všechno bylo perfektní. Určitě doporučuji a rád se sem znovu vr❤️❤️“",
-    author: "Sultan",
-  },
-];
+import { sanityClient } from "../../../lib/sanityClient";
+import { reviewsQuery } from "../../../lib/queries";
 
 function Reviews() {
+  const [reviews, setReviews] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    sanityClient
+      .fetch(reviewsQuery)
+      .then((data) => {
+        if (cancelled || !Array.isArray(data)) {
+          return;
+        }
+
+        setReviews(data);
+      })
+      .catch((error) => {
+        console.error("Sanity reviews error:", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <section className="reviews" aria-labelledby="reviews-title">
       <div className="reviews__inner">
@@ -31,10 +43,13 @@ function Reviews() {
         </div>
 
         <div className="reviews__list">
-          {reviews.map((review, index) => (
-            <article className="reviews__item" key={index}>
-              <div className="reviews__stars" aria-label="5 z 5 hvězdiček">
-                ★★★★★
+          {reviews?.map((review) => (
+            <article className="reviews__item" key={review._id}>
+              <div
+                className="reviews__stars"
+                aria-label={`${review.rating} z 5 hvězdiček`}
+              >
+                {"★".repeat(review.rating)}
               </div>
 
               <blockquote>{review.text}</blockquote>
