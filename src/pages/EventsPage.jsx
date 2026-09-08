@@ -1,12 +1,44 @@
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import { useEffect, useState } from "react";
+
+import { sanityClient } from "../lib/sanityClient";
+import { eventsQuery } from "../lib/queries";
+import { getSanityImageUrl } from "../lib/sanityImage";
 
 import "./EventsPage.css";
 
-const events = [];
-
 function EventsPage() {
-  const hasEvents = events.length > 0;
+  const [events, setEvents] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    sanityClient
+      .fetch(eventsQuery)
+      .then((data) => {
+        if (cancelled || !Array.isArray(data)) {
+          return;
+        }
+
+        const mappedEvents = data.map((event) => ({
+          ...event,
+          id: event._id,
+          image: getSanityImageUrl(event.image),
+        }));
+
+        setEvents(mappedEvents);
+      })
+      .catch((error) => {
+        console.error("Sanity events error:", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const hasEvents = events && events.length > 0;
 
   return (
     <main className="events-page">
@@ -43,7 +75,11 @@ function EventsPage() {
 
                   <div className="events-page__event-content">
                     <span className="events-page__event-date">
-                      {event.date}
+                      {new Date(event.date).toLocaleDateString("cs-CZ", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
                     </span>
 
                     <h2 className="events-page__event-title">{event.title}</h2>
@@ -53,7 +89,13 @@ function EventsPage() {
                     </p>
 
                     <div className="events-page__event-meta">
-                      <span>{event.time}</span>
+                      <span>
+                        {new Date(event.date).toLocaleTimeString("cs-CZ", {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </span>
+
                       <span>{event.location}</span>
                     </div>
 
@@ -77,8 +119,8 @@ function EventsPage() {
 
               <p className="events-page__empty-description">
                 Plánujete oslavu, firemní večírek, svatbu nebo jinou událost?
-                Připravíme pro vás catering s tradiční perskou i českou
-                kuchyní a postaráme se o to, aby vaše setkání bylo výjimečné.
+                Připravíme pro vás catering s tradiční perskou i českou kuchyní
+                a postaráme se o to, aby vaše setkání bylo výjimečné.
               </p>
 
               <HashLink

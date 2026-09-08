@@ -1,0 +1,14 @@
+{"_id":"menuCategory-polevky-salaty","_type":"menuCategory","title":"Polévky & saláty","slug":{"_type":"slug","current":"polevky-salaty"},"order":2,"active":true}
+{"_id":"menuCategory-orientalni-speciality","_type":"menuCategory","title":"Orientální speciality","slug":{"_type":"slug","current":"orientalni-speciality"},"order":3,"active":true}
+{"_id":"menuCategory-gril","_type":"menuCategory","title":"Z grilu","slug":{"_type":"slug","current":"gril"},"order":4,"active":true}
+{"_id":"menuCategory-mix-grill","_type":"menuCategory","title":"Mix Grill","slug":{"_type":"slug","current":"mix-grill"},"order":5,"active":true}
+{"_id":"menuCategory-vegetarianska","_type":"menuCategory","title":"Vegetariánské","slug":{"_type":"slug","current":"vegetarianska"},"order":6,"active":true}
+{"_id":"menuCategory-ryby","_type":"menuCategory","title":"Ryby","slug":{"_type":"slug","current":"ryby"},"order":7,"active":true}
+{"_id":"menuCategory-prilohy","_type":"menuCategory","title":"Přílohy","slug":{"_type":"slug","current":"prilohy"},"order":8,"active":true}
+{"_id":"menuCategory-dezerty","_type":"menuCategory","title":"Dezerty","slug":{"_type":"slug","current":"dezerty"},"order":9,"active":true}
+{"_id":"menuCategory-nealko","_type":"menuCategory","title":"Nealko","slug":{"_type":"slug","current":"nealko"},"order":10,"active":true}
+{"_id":"menuCategory-domaci-napoje","_type":"menuCategory","title":"Domácí nápoje","slug":{"_type":"slug","current":"domaci-napoje"},"order":11,"active":true}
+{"_id":"menuCategory-teple-napoje","_type":"menuCategory","title":"Teplé nápoje","slug":{"_type":"slug","current":"teple-napoje"},"order":12,"active":true}
+{"_id":"menuCategory-pivo","_type":"menuCategory","title":"Pivo","slug":{"_type":"slug","current":"pivo"},"order":13,"active":true}
+{"_id":"menuCategory-vino","_type":"menuCategory","title":"Víno","slug":{"_type":"slug","current":"vino"},"order":14,"active":true}
+{"_id":"menuCategory-tvrdy-alkohol","_type":"menuCategory","title":"Destiláty","slug":{"_type":"slug","current":"tvrdy-alkohol"},"order":15,"active":true}

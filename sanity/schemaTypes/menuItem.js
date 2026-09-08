@@ -55,5 +55,17 @@ export default {
         },
       ],
     },
+    {
+      name: "active",
+      title: "Active",
+      type: "boolean",
+      initialValue: true,
+    },
+
+    {
+      name: "order",
+      title: "Display order",
+      type: "number",
+    },
   ],
 };

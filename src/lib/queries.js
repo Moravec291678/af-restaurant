@@ -58,3 +58,33 @@ export const galleryImagesQuery = `*[
   showOnHomepage,
   order
 }`;
+export const eventsQuery = `*[
+  _type == "event"
+  && active != false
+] | order(date asc, order asc, title asc) {
+  _id,
+  title,
+  "slug": slug.current,
+  date,
+  location,
+  description,
+  image,
+  active,
+  order
+}`;
+export const eventBySlugQuery = `*[
+  _type == "event"
+  && active != false
+  && slug.current == $slug
+][0]{
+  _id,
+  title,
+  "slug": slug.current,
+  date,
+  location,
+  description,
+  image,
+  content,
+  active,
+  order
+}`;

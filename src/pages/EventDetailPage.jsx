@@ -1,8 +1,64 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import { PortableText } from "@portabletext/react";
+
+import { sanityClient } from "../lib/sanityClient";
+import { eventBySlugQuery } from "../lib/queries";
+import { getSanityImageUrl } from "../lib/sanityImage";
 
 import "./EventDetailPage.css";
 
 function EventDetailPage() {
+  const { slug } = useParams();
+  const [event, setEvent] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    sanityClient
+      .fetch(eventBySlugQuery, { slug })
+      .then((data) => {
+        if (cancelled) {
+          return;
+        }
+
+        setEvent(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Sanity event detail error:", error);
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
+
+  if (isLoading) {
+    return null;
+  }
+
+  if (!event) {
+    return (
+      <main className="event-detail-page">
+        <div className="container">
+          <div className="event-detail-page__inner">
+            <Link to="/akce" className="event-detail-page__back">
+              ← ZPĚT NA AKCE
+            </Link>
+
+            <section className="event-detail-page__empty">
+              <h1>Akce nebyla nalezena</h1>
+              <p>Tato akce již není dostupná nebo neexistuje.</p>
+            </section>
+          </div>
+        </div>
+      </main>
+    );
+  }
   return (
     <main className="event-detail-page">
       <div className="container">
@@ -12,46 +68,55 @@ function EventDetailPage() {
           </Link>
 
           <article className="event-detail">
-            <div className="event-detail__image">
-              <img src={event01} alt="Perský večer" />
-            </div>
+            {event?.image && (
+              <div className="event-detail__image">
+                <img src={getSanityImageUrl(event.image)} alt={event.title} />
+              </div>
+            )}
 
             <div className="event-detail__content">
               <span className="event-detail__eyebrow">NAAN O NAMAK</span>
 
-              <h1 className="event-detail__title">Perský večer</h1>
+              <h1 className="event-detail-page__title">{event?.title}</h1>
 
               <div className="event-detail__decorative-line" />
 
               <div className="event-detail__info">
                 <div className="event-detail__info-item">
                   <span>DATUM</span>
-                  <strong>12. října 2026</strong>
+                  <strong>
+                    {event?.date &&
+                      new Date(event.date).toLocaleDateString("cs-CZ", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                  </strong>
                 </div>
 
                 <div className="event-detail__info-item">
                   <span>ČAS</span>
-                  <strong>18:00</strong>
+                  <strong>
+                    {event?.date &&
+                      new Date(event.date).toLocaleTimeString("cs-CZ", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                  </strong>
                 </div>
 
                 <div className="event-detail__info-item">
                   <span>MÍSTO</span>
-                  <strong>Naan O Namak</strong>
+                  <strong>{event?.location}</strong>
                 </div>
               </div>
 
               <div className="event-detail__text">
                 <h2>O akci</h2>
 
-                <p>
-                  Přijďte si užít večer plný tradiční perské kuchyně,
-                  autentických chutí a příjemné atmosféry.
-                </p>
+                {event?.description && <p>{event.description}</p>}
 
-                <p>
-                  Čeká vás výběr tradičních pokrmů připravených s důrazem na
-                  kvalitní suroviny a tradiční způsob přípravy.
-                </p>
+                {event?.content && <PortableText value={event.content} />}
               </div>
 
               <div className="event-detail__cta">
