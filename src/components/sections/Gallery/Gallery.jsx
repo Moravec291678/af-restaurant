@@ -2,6 +2,10 @@ import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { sanityClient } from "../../../lib/sanityClient";
+import { galleryImagesQuery } from "../../../lib/queries";
+import { getSanityImageUrl } from "../../../lib/sanityImage";
+
 import gallery01 from "../../../assets/images/gallery06.webp";
 import gallery02 from "../../../assets/images/tata.webp";
 import gallery03 from "../../../assets/images/gallery05.webp";
@@ -34,13 +38,46 @@ const galleryItems = [
 
 function Gallery() {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [sanityItems, setSanityItems] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    sanityClient
+      .fetch(galleryImagesQuery)
+      .then((items) => {
+        if (cancelled || !Array.isArray(items)) {
+          return;
+        }
+
+        setSanityItems(items);
+      })
+      .catch((error) => {
+        console.error("Sanity gallery error:", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  const displayItems =
+    sanityItems && sanityItems.length > 0
+      ? sanityItems
+          .filter((item) => item.showOnHomepage)
+          .map((item) => ({
+            id: item._id,
+            image: getSanityImageUrl(item.image),
+            alt: item.alt || "Fotografie restaurace Naan O Namak",
+          }))
+          .filter((item) => item.image)
+      : galleryItems;
   const isLightboxOpen = activeIndex !== null;
 
   const showPrevious = () => {
     setActiveIndex((current) => {
       if (current === null) return null;
 
-      return current === 0 ? galleryItems.length - 1 : current - 1;
+      return current === 0 ? displayItems.length - 1 : current - 1;
     });
   };
 
@@ -48,7 +85,7 @@ function Gallery() {
     setActiveIndex((current) => {
       if (current === null) return null;
 
-      return current === galleryItems.length - 1 ? 0 : current + 1;
+      return current === displayItems.length - 1 ? 0 : current + 1;
     });
   };
 
@@ -137,7 +174,7 @@ function Gallery() {
           ========================================= */}
 
           <div className="gallery__grid">
-            {galleryItems.map((item, index) => (
+            {displayItems.map((item, index) => (
               <button
                 key={item.id}
                 type="button"
@@ -218,13 +255,13 @@ function Gallery() {
               onTouchEnd={handleTouchEnd}
             >
               <img
-                src={galleryItems[activeIndex].image}
-                alt={galleryItems[activeIndex].alt}
+                src={displayItems[activeIndex].image}
+                alt={displayItems[activeIndex].alt}
                 className="gallery__lightbox-image"
               />
 
               <span className="gallery__lightbox-counter">
-                {activeIndex + 1} / {galleryItems.length}
+                {activeIndex + 1} / {displayItems.length}
               </span>
             </div>
 

@@ -47,3 +47,14 @@ export const lunchMenuQuery = `*[
     price
   }
 }`;
+export const galleryImagesQuery = `*[
+  _type == "galleryImage"
+  && active != false
+] | order(order asc, _createdAt asc) {
+  _id,
+  image,
+  alt,
+  active,
+  showOnHomepage,
+  order
+}`;

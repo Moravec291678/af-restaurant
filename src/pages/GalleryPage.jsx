@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { sanityClient } from "../lib/sanityClient";
+import { galleryImagesQuery } from "../lib/queries";
+import { getSanityImageUrl } from "../lib/sanityImage";
 
 import gallery03 from "../assets/images/tata.webp";
 
@@ -44,7 +47,39 @@ const galleryItems = [
 
 function Gallery() {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [sanityItems, setSanityItems] = useState(null);
 
+  useEffect(() => {
+    let cancelled = false;
+
+    sanityClient
+      .fetch(galleryImagesQuery)
+      .then((items) => {
+        if (cancelled || !Array.isArray(items)) {
+          return;
+        }
+
+        setSanityItems(items);
+      })
+      .catch((error) => {
+        console.error("Sanity gallery page error:", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const displayItems =
+    sanityItems && sanityItems.length > 0
+      ? sanityItems
+          .map((item) => ({
+            id: item._id,
+            image: getSanityImageUrl(item.image),
+            alt: item.alt || "Fotografie restaurace Naan O Namak",
+          }))
+          .filter((item) => item.image)
+      : galleryItems;
   const isLightboxOpen = activeIndex !== null;
   const [touchStart, setTouchStart] = useState(null);
 
@@ -52,7 +87,7 @@ function Gallery() {
     setActiveIndex((current) => {
       if (current === null) return null;
 
-      return current === 0 ? galleryItems.length - 1 : current - 1;
+      return current === 0 ? displayItems.length - 1 : current - 1;
     });
   };
 
@@ -60,7 +95,7 @@ function Gallery() {
     setActiveIndex((current) => {
       if (current === null) return null;
 
-      return current === galleryItems.length - 1 ? 0 : current + 1;
+      return current === displayItems.length - 1 ? 0 : current + 1;
     });
   };
 
@@ -127,7 +162,7 @@ function Gallery() {
           </header>
 
           <div className="gallery-page__grid">
-            {galleryItems.map((item, index) => (
+            {displayItems.map((item, index) => (
               <button
                 key={item.id}
                 type="button"
@@ -201,13 +236,13 @@ function Gallery() {
             onClick={(event) => event.stopPropagation()}
           >
             <img
-              src={galleryItems[activeIndex].image}
-              alt={galleryItems[activeIndex].alt}
+              src={displayItems[activeIndex].image}
+              alt={displayItems[activeIndex].alt}
               className="gallery-page__lightbox-image"
             />
 
             <span className="gallery-page__lightbox-counter">
-              {activeIndex + 1} / {galleryItems.length}
+              {activeIndex + 1} / {displayItems.length}
             </span>
           </div>
 
