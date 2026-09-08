@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import "./Menu.css";
 import { getMenuImage } from "../lib/menuImages";
 import { sanityClient } from "../lib/sanityClient";
@@ -78,7 +78,7 @@ function Menu() {
       ]
     : categories;
 
-  const displayItems = sanityItems ?? [];
+  const displayItems = useMemo(() => sanityItems ?? [], [sanityItems]);
   const imageItems = useMemo(
     () => displayItems.filter((item) => item.image),
     [displayItems],
@@ -143,19 +143,19 @@ function Menu() {
 
   const closeLightbox = () => setLightboxIndex(null);
 
-  const showPreviousImage = () => {
+  const showPreviousImage = useCallback(() => {
     setLightboxIndex((currentIndex) => {
       if (currentIndex === null || imageItems.length === 0) return currentIndex;
       return (currentIndex - 1 + imageItems.length) % imageItems.length;
     });
-  };
+  }, [imageItems.length]);
 
-  const showNextImage = () => {
+  const showNextImage = useCallback(() => {
     setLightboxIndex((currentIndex) => {
       if (currentIndex === null || imageItems.length === 0) return currentIndex;
       return (currentIndex + 1) % imageItems.length;
     });
-  };
+  }, [imageItems.length]);
 
   useEffect(() => {
     if (lightboxIndex === null) return undefined;
@@ -174,7 +174,7 @@ function Menu() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [lightboxIndex]);
+  }, [lightboxIndex, showPreviousImage, showNextImage]);
 
   const filteredItems = useMemo(() => {
     const normalizedSearch = searchQuery.trim().toLowerCase();

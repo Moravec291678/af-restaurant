@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { useLocation } from "react-router-dom";
 
@@ -156,17 +156,21 @@ function Seo() {
     ? pathname.replace("/akce/", "")
     : "";
 
-  const metadata = event
-    ? {
-        title: `${event.title} – Naan O Namak | Benice`,
-        description:
-          event.description ||
-          `Přijďte na akci ${event.title} v restauraci Naan O Namak v Praze-Benicích.`,
-      }
-    : (pageMetadata[pathname] ?? {
-        title: "Stránka nebyla nalezena – Naan O Namak",
-        description: "Požadovaná stránka nebyla nalezena.",
-      });
+  const metadata = useMemo(
+    () =>
+      event
+        ? {
+            title: `${event.title} – Naan O Namak | Benice`,
+            description:
+              event.description ||
+              `Přijďte na akci ${event.title} v restauraci Naan O Namak v Praze-Benicích.`,
+          }
+        : (pageMetadata[pathname] ?? {
+            title: "Stránka nebyla nalezena – Naan O Namak",
+            description: "Požadovaná stránka nebyla nalezena.",
+          }),
+    [event, pathname],
+  );
 
   const canonicalUrl = `${siteUrl}${pathname === "/" ? "/" : pathname}`;
 

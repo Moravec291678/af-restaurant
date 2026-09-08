@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import logo from "../assets/icons/logo.webp";
 

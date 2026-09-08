@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { sanityClient } from "../../../lib/sanityClient";
@@ -74,21 +74,19 @@ function Gallery() {
     sanityGalleryItems.length > 0 ? sanityGalleryItems : galleryItems;
   const isLightboxOpen = activeIndex !== null;
 
-  const showPrevious = () => {
+  const showPrevious = useCallback(() => {
     setActiveIndex((current) => {
       if (current === null) return null;
-
       return current === 0 ? displayItems.length - 1 : current - 1;
     });
-  };
+  }, [displayItems.length]);
 
-  const showNext = () => {
+  const showNext = useCallback(() => {
     setActiveIndex((current) => {
       if (current === null) return null;
-
       return current === displayItems.length - 1 ? 0 : current + 1;
     });
-  };
+  }, [displayItems.length]);
 
   const closeLightbox = () => {
     setActiveIndex(null);
@@ -122,7 +120,7 @@ function Gallery() {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [isLightboxOpen]);
+  }, [isLightboxOpen, showPrevious, showNext]);
 
   /* =========================================
      SWIPE

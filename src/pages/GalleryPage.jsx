@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { sanityClient } from "../lib/sanityClient";
 import { galleryImagesQuery } from "../lib/queries";
 import { getSanityImageUrl } from "../lib/sanityImage";
@@ -84,21 +84,19 @@ function Gallery() {
   const isLightboxOpen = activeIndex !== null;
   const [touchStart, setTouchStart] = useState(null);
 
-  const showPrevious = () => {
+  const showPrevious = useCallback(() => {
     setActiveIndex((current) => {
       if (current === null) return null;
-
       return current === 0 ? displayItems.length - 1 : current - 1;
     });
-  };
+  }, [displayItems.length]);
 
-  const showNext = () => {
+  const showNext = useCallback(() => {
     setActiveIndex((current) => {
       if (current === null) return null;
-
       return current === displayItems.length - 1 ? 0 : current + 1;
     });
-  };
+  }, [displayItems.length]);
 
   const closeLightbox = () => {
     setActiveIndex(null);
@@ -141,7 +139,7 @@ function Gallery() {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [isLightboxOpen]);
+  }, [isLightboxOpen, showPrevious, showNext]);
 
   return (
     <main className="gallery-page">

@@ -177,7 +177,7 @@ function Contact() {
               referrerPolicy="no-referrer-when-downgrade"
             />
             <a
-              href="https://maps.app.goo.gl/vbrWUgVyCbaiBvWy6"
+              href={settings?.mapUrl || ""}
               target="_blank"
               rel="noopener noreferrer"
               className="contact__map-link"
