@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import heroImage from "../../../assets/images/hero.webp";
-
 import { sanityClient } from "../../../lib/sanityClient";
 import { lunchMenuQuery } from "../../../lib/queries";
+import { getSanityImageUrl } from "../../../lib/sanityImage";
 
 import "./LunchMenu.css";
 
@@ -33,6 +32,7 @@ function LunchMenu() {
   }, []);
 
   const items = lunchMenu?.items ?? [];
+  const lunchImageUrl = getSanityImageUrl(lunchMenu?.image);
 
   return (
     <section
@@ -88,12 +88,17 @@ function LunchMenu() {
 
             {/* IMAGE */}
             <div className="lunch-menu__image">
-              <img
-                src={heroImage}
-                alt="Jídlo z nabídky restaurace Naan O Namak v Praze-Benicích"
-                loading="lazy"
-                decoding="async"
-              />
+              {lunchImageUrl && (
+                <img
+                  src={lunchImageUrl}
+                  alt={
+                    lunchMenu?.imageAlt ||
+                    "Jídlo z nabídky restaurace Naan O Namak v Praze-Benicích"
+                  }
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
 
               <div
                 className="lunch-menu__image-overlay"

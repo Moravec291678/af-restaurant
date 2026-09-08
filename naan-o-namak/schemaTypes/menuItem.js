@@ -56,6 +56,12 @@ export default {
       ],
     },
     {
+      name: 'showAsSpecialty',
+      title: 'Show as specialty',
+      type: 'boolean',
+      initialValue: false,
+    },
+    {
       name: 'active',
       title: 'Active',
       type: 'boolean',

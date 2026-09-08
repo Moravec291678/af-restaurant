@@ -1,39 +1,34 @@
+import { useEffect, useState } from "react";
+
 import "./Specialties.css";
 
-import qabuliPalow from "../../../assets/images/menu/qabuliPalow.webp";
-import mantu from "../../../assets/images/menu/mantu.webp";
-import pro2Osoby from "../../../assets/images/menu/pro2Osoby.webp";
+import { sanityClient } from "../../../lib/sanityClient";
+import { menuItemsQuery } from "../../../lib/queries";
+import { getSanityImageUrl } from "../../../lib/sanityImage";
 
 function Specialties() {
-  const specialties = [
-    {
-      id: "qabuli-palow",
-      name: "Qabuli Palow",
-      description:
-        "Dušená rýže Basmati s rozinkami a mrkví dle výběru masa, se směsí zeleniny v rajčatové omáčce.",
-      price: "299 Kč",
-      image: qabuliPalow,
-      imageAlt: "Qabuli Palow",
-    },
-    {
-      id: "mantu",
-      name: "Mantu",
-      description:
-        "Plněné taštičky s mletým hovězím masem a cibulí vařené v páře, navrchu hrách v rajčatové omáčce, čerstvé bylinky a jogurt s česnekem.",
-      price: "199 Kč",
-      image: mantu,
-      imageAlt: "Mantu",
-    },
-    {
-      id: "mix-grill-2",
-      name: "Mix Grill pro 2 osoby",
-      description:
-        "Kuřecí, jehněčí a hovězí špízy, jehněčí kotlety, placky, salát, čatní, grilovaná zelenina, turshi a hranolky.",
-      price: "599 Kč",
-      image: pro2Osoby,
-      imageAlt: "Mix Grill pro 2 osoby",
-    },
-  ];
+  const [specialties, setSpecialties] = useState([]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    sanityClient
+      .fetch(menuItemsQuery)
+      .then((data) => {
+        if (cancelled || !Array.isArray(data)) {
+          return;
+        }
+
+        setSpecialties(data.filter((item) => item.showAsSpecialty).slice(0, 3));
+      })
+      .catch((error) => {
+        console.error("Sanity specialties error:", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <section className="specialties" id="speciality">
@@ -47,28 +42,44 @@ function Specialties() {
         </div>
 
         <div className="specialties__grid">
-          {specialties.map((specialty) => (
-            <article className="specialties__card" key={specialty.id}>
-              <div className="specialties__image">
-                <img
-                  src={specialty.image}
-                  alt={specialty.imageAlt}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
+          {specialties.map((specialty) => {
+            const imageUrl = getSanityImageUrl(specialty.image);
 
-              <div className="specialties__content">
-                <h3 className="specialties__name">{specialty.name}</h3>
+            return (
+              <article className="specialties__card" key={specialty._id}>
+                <div className="specialties__image">
+                  {imageUrl && (
+                    <img
+                      src={imageUrl}
+                      alt={specialty.imageAlt || specialty.name}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                </div>
 
-                <p className="specialties__description">
-                  {specialty.description}
-                </p>
+                <div className="specialties__content">
+                  <h3 className="specialties__name">{specialty.name}</h3>
 
-                <span className="specialties__price">{specialty.price}</span>
-              </div>
-            </article>
-          ))}
+                  <p className="specialties__description">
+                    {specialty.description}
+                  </p>
+
+                  <span className="specialties__price">
+                    {specialty.price != null
+                      ? `${specialty.price} Kč`
+                      : specialty.variants?.length
+                        ? `od ${Math.min(
+                            ...specialty.variants
+                              .map((variant) => variant.price)
+                              .filter((price) => price != null),
+                          )} Kč`
+                        : ""}
+                  </span>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         <div className="specialties__action">

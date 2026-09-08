@@ -19,6 +19,7 @@ export const menuItemsQuery = `*[
   image,
   imageAlt,
   variants,
+  showAsSpecialty,
   active,
   order
 }`;
