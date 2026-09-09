@@ -153,7 +153,7 @@
 }
 
 .footer__address span,
-.footer__address a {
+.footer__address a:not(.footer__facebook) {
   display: block;
 
   color: rgba(242, 236, 226, 0.63);
@@ -168,11 +168,11 @@
   transition: color 0.2s ease;
 }
 
-.footer__address a:first-of-type {
+.footer__address a:not(.footer__facebook):first-of-type {
   margin-top: 0.35rem;
 }
 
-.footer__address a:hover {
+.footer__address a:not(.footer__facebook):hover {
   color: var(--color-gold);
 }
 
@@ -992,5 +992,111 @@
   .footer__creator-instagram img {
     width: 12px;
     height: 12px;
+  }
+}
+
+/* =====================================================
+   FACEBOOK LINK
+===================================================== */
+
+.footer__address .footer__facebook {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+flex-direction: row-reverse;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+
+  color: rgba(242, 236, 226, 0.63);
+
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 400;
+  line-height: 1.45;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition: color 0.2s ease;
+}
+
+/* -----------------------------------------
+   FACEBOOK ICON
+----------------------------------------- */
+
+.footer__address .footer__facebook-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 30px;
+
+  width: 30px;
+  height: 30px;
+
+  border: 1px solid rgba(201, 169, 106, 0.28);
+  border-radius: 50%;
+
+  background: transparent;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.footer__address .footer__facebook-icon img {
+  display: block;
+
+  width: 15px;
+  height: 15px;
+
+  object-fit: contain;
+
+  transition: transform 0.25s ease;
+}
+
+/* -----------------------------------------
+   HOVER
+----------------------------------------- */
+
+.footer__address .footer__facebook:hover {
+  color: var(--color-gold);
+}
+
+.footer__address .footer__facebook:hover .footer__facebook-icon {
+  background: rgba(201, 169, 106, 0.1);
+  border-color: var(--color-gold);
+
+  transform: translateY(-2px);
+}
+
+.footer__address .footer__facebook:hover .footer__facebook-icon img {
+  transform: scale(1.08);
+}
+
+/* -----------------------------------------
+   FOCUS
+----------------------------------------- */
+
+.footer__address .footer__facebook:focus-visible {
+  outline: 1px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+/* -----------------------------------------
+   REDUCED MOTION
+----------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__address .footer__facebook,
+  .footer__address .footer__facebook-icon,
+  .footer__address .footer__facebook-icon img {
+    transition: none;
+  }
+
+  .footer__address .footer__facebook:hover .footer__facebook-icon {
+    transform: none;
   }
 }

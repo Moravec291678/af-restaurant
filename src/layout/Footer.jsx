@@ -7,6 +7,7 @@ import { restaurantSettingsQuery } from "../lib/queries";
 import logo from "../assets/icons/logo.webp";
 import "./Footer.css";
 import instagramIcon from "../assets/icons/instagram.png";
+import facebookIcon from "../assets/icons/facebook.png";
 
 function Footer() {
   const [settings, setSettings] = useState(null);
@@ -130,7 +131,18 @@ function Footer() {
               <a href={`tel:${settings?.phone || ""}`}>
                 {settings?.phone || ""}
               </a>
-
+              <a
+                href="https://www.facebook.com/p/NAAN-O-NAMAK-61593164313650/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__facebook"
+                aria-label="Facebook Naan O Namak"
+              >
+                <span className="footer__facebook-icon">
+                  <img src={facebookIcon} alt="" aria-hidden="true" />
+                </span>
+                <span>NAAN O NAMAK</span>
+              </a>
               <a href={`mailto:${settings?.email || ""}`}>
                 {settings?.email || ""}
               </a>
