@@ -125,7 +125,7 @@ function EventsPage() {
 
               <HashLink
                 smooth
-                to="/#kontakt"
+                to="/rezervace"
                 className="events-page__catering-button"
               >
                 POPTAT CATERING
