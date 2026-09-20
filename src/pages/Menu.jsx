@@ -214,17 +214,27 @@ function Menu() {
         <div className="container">
           <div className="menu-page__hero-content">
             <span className="menu-page__eyebrow">
-              ❖ AUTENTICKÁ PERSKÁ KUCHYNĚ ❖
+              {isEnglish
+                ? "❖ AUTHENTIC PERSIAN CUISINE ❖"
+                : "❖ AUTENTICKÁ PERSKÁ KUCHYNĚ ❖"}
             </span>
 
             <h1 className="menu-page__title">
-              Jídelní lístek <br /> Naan O Namak
+              {isEnglish ? (
+                <>
+                  Menu <br /> Naan O Namak
+                </>
+              ) : (
+                <>
+                  Jídelní lístek <br /> Naan O Namak
+                </>
+              )}
             </h1>
 
             <p className="menu-page__intro">
-              Objevte tradiční chutě perské a středoasijské kuchyně v restauraci
-              Naan O Namak v Praze-Benicích – od mantu a Qabuli Palow po
-              speciality z grilu.
+              {isEnglish
+                ? "Discover the traditional flavours of Persian and Central Asian cuisine at Naan O Namak in Prague-Benice — from mantu and Qabuli Palow to grilled specialties."
+                : "Objevte tradiční chutě perské a středoasijské kuchyně v restauraci Naan O Namak v Praze-Benicích – od mantu a Qabuli Palow po speciality z grilu."}
             </p>
           </div>
         </div>
@@ -240,16 +250,24 @@ function Menu() {
 
           <header className="menu-page__header">
             <div>
-              <span className="menu-page__section-label">STÁLÁ NABÍDKA</span>
+              <span className="menu-page__section-label">
+                {isEnglish ? "À LA CARTE" : "STÁLÁ NABÍDKA"}
+              </span>
 
               <h2 id="menu-page-title" className="menu-page__heading">
-                Naše nabídka
+                {isEnglish ? "Our Menu" : "Naše nabídka"}
               </h2>
             </div>
 
             <p className="menu-page__count">
               {filteredItems.length}{" "}
-              {filteredItems.length === 1 ? "položka" : "položek"}
+              {isEnglish
+                ? filteredItems.length === 1
+                  ? "item"
+                  : "items"
+                : filteredItems.length === 1
+                  ? "položka"
+                  : "položek"}
             </p>
           </header>
 
@@ -257,7 +275,10 @@ function Menu() {
               CATEGORY NAVIGATION
           ================================================= */}
 
-          <nav className="menu-page__categories" aria-label="Kategorie jídel">
+          <nav
+            className="menu-page__categories"
+            aria-label={isEnglish ? "Menu categories" : "Kategorie jídel"}
+          >
             {displayCategories.map((category) => (
               <button
                 key={category.id}
