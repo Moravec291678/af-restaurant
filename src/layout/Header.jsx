@@ -1,23 +1,40 @@
+import { useLanguage } from "../context/useLanguage";
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import logo from "../assets/icons/logo.webp";
+import czechFlag from "../assets/icons/cz.png";
+import englishFlag from "../assets/icons/en.png";
 
 import "./Header.css";
 
-const primaryNavigation = [
-  { label: "Speciality", type: "hash", to: "/#speciality" },
-  { label: "Polední menu", type: "hash", to: "/#poledni-menu" },
-  { label: "Jídelní lístek", type: "route", to: "/jidelni-listek" },
-  { label: "Galerie", type: "route", to: "/galerie" },
-  { label: "Akce", type: "route", to: "/akce" },
-  { label: "O nás", type: "route", to: "/o-nas" },
-  { label: "Kontakt", type: "hash", to: "/#kontakt" },
+const primaryNavigation = (isEnglish) => [
+  {
+    label: isEnglish ? "Specialties" : "Speciality",
+    type: "hash",
+    to: "/#speciality",
+  },
+  {
+    label: isEnglish ? "Lunch Menu" : "Polední menu",
+    type: "hash",
+    to: "/#poledni-menu",
+  },
+  {
+    label: isEnglish ? "Menu" : "Jídelní lístek",
+    type: "route",
+    to: "/jidelni-listek",
+  },
+  { label: isEnglish ? "Gallery" : "Galerie", type: "route", to: "/galerie" },
+  { label: isEnglish ? "Events" : "Akce", type: "route", to: "/akce" },
+  { label: isEnglish ? "About Us" : "O nás", type: "route", to: "/o-nas" },
+  { label: isEnglish ? "Contact" : "Kontakt", type: "hash", to: "/#kontakt" },
 ];
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { language, toggleLanguage } = useLanguage();
+  const isEnglish = language === "en";
   const { pathname, hash } = useLocation();
   const previousBodyOverflow = useRef("");
 
@@ -114,7 +131,7 @@ function Header() {
       </NavLink>
     );
   };
-
+  const navigation = primaryNavigation(isEnglish);
   return (
     <>
       <header className={`header ${isScrolled ? "header--scrolled" : ""}`}>
@@ -141,7 +158,7 @@ function Header() {
 
           <nav className="header__nav" aria-label="Hlavní navigace">
             <ul className="header__list">
-              {primaryNavigation.map((item) => (
+              {navigation.map((item) => (
                 <li key={item.to} className="header__item">
                   {renderNavigationLink(item)}
                 </li>
@@ -149,9 +166,31 @@ function Header() {
             </ul>
           </nav>
 
-          <NavLink to="/rezervace" className="header__button">
-            Rezervovat stůl
-          </NavLink>
+          <div className="header__actions">
+            <NavLink to="/rezervace" className="header__button">
+              {isEnglish ? "Book a Table" : "Rezervovat stůl"}
+            </NavLink>
+
+            <button
+              type="button"
+              className={`language-switch ${
+                isEnglish
+                  ? "language-switch--english"
+                  : "language-switch--czech"
+              }`}
+              onClick={toggleLanguage}
+              aria-label={isEnglish ? "Switch to Czech" : "Switch to English"}
+              title={isEnglish ? "Switch to Czech" : "Switch to English"}
+            >
+              <span
+                key={language}
+                className="language-switch__flag"
+                aria-hidden="true"
+              >
+                <img src={isEnglish ? czechFlag : englishFlag} alt="" />
+              </span>
+            </button>
+          </div>
 
           <button
             type="button"
@@ -176,7 +215,7 @@ function Header() {
       >
         <nav aria-label="Mobilní navigace">
           <ul className="mobile-menu__list">
-            {primaryNavigation.map((item) => (
+            {navigation.map((item) => (
               <li key={`mobile-${item.to}`}>
                 {renderNavigationLink(item, false)}
               </li>
@@ -188,7 +227,7 @@ function Header() {
             className="mobile-menu__button"
             onClick={closeMenu}
           >
-            Rezervovat stůl
+            {isEnglish ? "Book a Table" : "Rezervovat stůl"}
           </NavLink>
         </nav>
       </aside>

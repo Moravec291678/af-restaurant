@@ -5,12 +5,13 @@ export const menuItemsQuery = `*[
   _id,
   name,
   "category": category->{
-    _id,
-    title,
-    "slug": slug.current,
-    order,
-    active
-  },
+  _id,
+  title,
+  titleEn,
+  "slug": slug.current,
+  order,
+  active
+},
   description,
   portion,
   price,
@@ -29,6 +30,7 @@ export const menuCategoriesQuery = `*[
 ] | order(order asc, title asc) {
   _id,
   title,
+  titleEn,
   "slug": slug.current,
   order,
   active

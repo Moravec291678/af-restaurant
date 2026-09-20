@@ -4,6 +4,7 @@ import { getMenuImage } from "../lib/menuImages";
 import { sanityClient } from "../lib/sanityClient";
 import { menuCategoriesQuery, menuItemsQuery } from "../lib/queries";
 import { getSanityImageUrl } from "../lib/sanityImage";
+import { useLanguage } from "../context/useLanguage";
 /* =========================================================
    CATEGORIES
    ========================================================= */
@@ -61,6 +62,7 @@ function formatPrice(price) {
    ========================================================= */
 
 function Menu() {
+  const { isEnglish } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("vse");
   const [vegetarianOnly, setVegetarianOnly] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -70,10 +72,14 @@ function Menu() {
   const [sanityCategories, setSanityCategories] = useState(null);
   const displayCategories = sanityCategories
     ? [
-        { id: "vse", label: "Vše" },
+        {
+          id: "vse",
+          label: isEnglish ? "All" : "Vše",
+        },
         ...sanityCategories.map((category) => ({
           id: category.slug,
-          label: category.title,
+          label:
+            isEnglish && category.titleEn ? category.titleEn : category.title,
         })),
       ]
     : categories;

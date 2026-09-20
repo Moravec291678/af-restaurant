@@ -170,6 +170,80 @@
 }
 
 /* ===========================================================
+   HEADER ACTIONS + LANGUAGE COIN
+=========================================================== */
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  min-width: max-content;
+}
+
+.language-switch {
+  display: inline-flex;
+  flex: 0 0 36px;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgba(201, 169, 106, 0.65);
+  border-radius: 50%;
+  background: rgba(14, 14, 14, 0.72);
+  cursor: pointer;
+  perspective: 500px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.language-switch:hover {
+  border-color: var(--color-gold);
+  background: rgba(201, 169, 106, 0.12);
+  box-shadow: 0 0 18px rgba(201, 169, 106, 0.2);
+}
+
+.language-switch__flag {
+  display: inline-block;
+  font-size: 1.5rem;
+  line-height: 1;
+  backface-visibility: hidden;
+}
+.language-switch__flag img {
+  display: block;
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.language-switch--english .language-switch__flag,
+.language-switch--czech .language-switch__flag {
+  animation: coinFlip 0.65s ease;
+}
+
+@keyframes coinFlip {
+  0% {
+    transform: rotateY(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotateY(90deg) scale(0.7);
+  }
+
+  100% {
+    transform: rotateY(180deg) scale(1);
+  }
+}
+
+.language-switch:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+/* ===========================================================
    HAMBURGER
 =========================================================== */
 

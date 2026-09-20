@@ -1,34 +1,39 @@
 export default {
-  name: "menuCategory",
-  title: "Menu category",
-  type: "document",
+  name: 'menuCategory',
+  title: 'Menu category',
+  type: 'document',
   fields: [
     {
-      name: "title",
-      title: "Name",
-      type: "string",
+      name: 'title',
+      title: 'Name',
+      type: 'string',
+    },
+    {
+      name: 'titleEn',
+      title: 'Name (English)',
+      type: 'string',
     },
 
     {
-      name: "slug",
-      title: "Slug",
-      type: "slug",
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
       options: {
-        source: "title",
+        source: 'title',
       },
     },
 
     {
-      name: "order",
-      title: "Display order",
-      type: "number",
+      name: 'order',
+      title: 'Display order',
+      type: 'number',
     },
 
     {
-      name: "active",
-      title: "Active",
-      type: "boolean",
+      name: 'active',
+      title: 'Active',
+      type: 'boolean',
       initialValue: true,
     },
   ],
-};
+}
