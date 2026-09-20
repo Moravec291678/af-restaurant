@@ -53,8 +53,10 @@ const allergens = [
    HELPERS
    ========================================================= */
 
-function formatPrice(price) {
-  return `${price.toLocaleString("cs-CZ")} Kč`;
+function formatPrice(price, isEnglish) {
+  const formattedPrice = price.toLocaleString(isEnglish ? "en-GB" : "cs-CZ");
+
+  return isEnglish ? `${formattedPrice} CZK` : `${formattedPrice} Kč`;
 }
 
 /* =========================================================
@@ -321,7 +323,11 @@ function Menu() {
                       type="button"
                       className="menu-page__item-image"
                       onClick={() => openLightbox(item)}
-                      aria-label={`Zobrazit fotografii ${item.name}`}
+                      aria-label={
+                        isEnglish
+                          ? `View photo of ${isEnglish && item.nameEn ? item.nameEn : item.name}`
+                          : `Zobrazit fotografii ${item.name}`
+                      }
                     >
                       <img
                         src={item.image}
@@ -364,7 +370,7 @@ function Menu() {
 
                     {item.price && (
                       <span className="menu-page__price">
-                        {formatPrice(item.price)}
+                        {formatPrice(item.price, isEnglish)}
                       </span>
                     )}
                   </div>
@@ -405,7 +411,9 @@ function Menu() {
                               </>
                             )}
 
-                            <strong>{formatPrice(variant.price)}</strong>
+                            <strong>
+                              {formatPrice(variant.price, isEnglish)}
+                            </strong>
                           </span>
                         </div>
                       ))}
@@ -423,7 +431,10 @@ function Menu() {
                       </span>
 
                       {item.allergens?.length > 0 && (
-                        <span>Alergeny: {item.allergens.join(", ")}</span>
+                        <span>
+                          {isEnglish ? "Allergens: " : "Alergeny: "}
+                          {item.allergens.join(", ")}
+                        </span>
                       )}
                     </div>
                   )}
