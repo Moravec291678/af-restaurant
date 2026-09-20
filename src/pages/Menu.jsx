@@ -191,14 +191,18 @@ function Menu() {
 
       const matchesVegetarian = !vegetarianOnly || item.vegetarian;
 
+      const itemName = isEnglish && item.nameEn ? item.nameEn : item.name;
+      const itemDescription =
+        isEnglish && item.descriptionEn ? item.descriptionEn : item.description;
+
       const matchesSearch =
         !normalizedSearch ||
-        item.name.toLowerCase().includes(normalizedSearch) ||
-        item.description?.toLowerCase().includes(normalizedSearch);
+        itemName.toLowerCase().includes(normalizedSearch) ||
+        itemDescription?.toLowerCase().includes(normalizedSearch);
 
       return matchesCategory && matchesVegetarian && matchesSearch;
     });
-  }, [activeCategory, vegetarianOnly, searchQuery, displayItems]);
+  }, [activeCategory, vegetarianOnly, searchQuery, displayItems, isEnglish]);
 
   return (
     <main className="menu-page">
@@ -317,7 +321,9 @@ function Menu() {
 
                   <div className="menu-page__item-top">
                     <div className="menu-page__item-heading">
-                      <h3 className="menu-page__item-name">{item.name}</h3>
+                      <h3 className="menu-page__item-name">
+                        {isEnglish && item.nameEn ? item.nameEn : item.name}
+                      </h3>
 
                       {item.vegetarian &&
                         ![
@@ -342,8 +348,14 @@ function Menu() {
                     )}
                   </div>
 
-                  {item.description && (
-                    <p className="menu-page__description">{item.description}</p>
+                  {(isEnglish && item.descriptionEn
+                    ? item.descriptionEn
+                    : item.description) && (
+                    <p className="menu-page__description">
+                      {isEnglish && item.descriptionEn
+                        ? item.descriptionEn
+                        : item.description}
+                    </p>
                   )}
 
                   {item.variants && (
@@ -353,12 +365,22 @@ function Menu() {
                           className="menu-page__variant"
                           key={`${item.id}-${variant.label}`}
                         >
-                          <span>{variant.label}</span>
+                          <span>
+                            {isEnglish && variant.labelEn
+                              ? variant.labelEn
+                              : variant.label}
+                          </span>
 
                           <span>
-                            {variant.portion && (
+                            {(isEnglish && variant.portionEn
+                              ? variant.portionEn
+                              : variant.portion) && (
                               <>
-                                <small>{variant.portion}</small>{" "}
+                                <small>
+                                  {isEnglish && variant.portionEn
+                                    ? variant.portionEn
+                                    : variant.portion}
+                                </small>{" "}
                               </>
                             )}
 
@@ -369,9 +391,15 @@ function Menu() {
                     </div>
                   )}
 
-                  {item.portion && (
+                  {(isEnglish && item.portionEn
+                    ? item.portionEn
+                    : item.portion) && (
                     <div className="menu-page__meta">
-                      <span>{item.portion}</span>
+                      <span>
+                        {isEnglish && item.portionEn
+                          ? item.portionEn
+                          : item.portion}
+                      </span>
 
                       {item.allergens?.length > 0 && (
                         <span>Alergeny: {item.allergens.join(", ")}</span>

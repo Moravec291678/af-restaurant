@@ -4,6 +4,7 @@ export const menuItemsQuery = `*[
 ] | order(category->order asc, order asc, name asc) {
   _id,
   name,
+   nameEn,
   "category": category->{
   _id,
   title,
@@ -13,7 +14,9 @@ export const menuItemsQuery = `*[
   active
 },
   description,
+  descriptionEn,
   portion,
+  portionEn,
   price,
   vegetarian,
   allergens,
