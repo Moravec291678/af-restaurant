@@ -183,11 +183,19 @@ function Header() {
               title={isEnglish ? "Switch to Czech" : "Switch to English"}
             >
               <span
-                key={language}
-                className="language-switch__flag"
+                className={`language-switch__coin ${
+                  isEnglish ? "language-switch__coin--english" : ""
+                }`}
+                c
                 aria-hidden="true"
               >
-                <img src={isEnglish ? czechFlag : englishFlag} alt="" />
+                <span className="language-switch__face language-switch__face--front">
+                  <img src={isEnglish ? czechFlag : englishFlag} alt="" />
+                </span>
+
+                <span className="language-switch__face language-switch__face--back">
+                  <img src={czechFlag} alt="" />
+                </span>
               </span>
             </button>
           </div>

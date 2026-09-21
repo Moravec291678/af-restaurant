@@ -5,8 +5,10 @@ import "./Specialties.css";
 import { sanityClient } from "../../../lib/sanityClient";
 import { menuItemsQuery } from "../../../lib/queries";
 import { getSanityImageUrl } from "../../../lib/sanityImage";
+import { useLanguage } from "../../../context/useLanguage";
 
 function Specialties() {
+  const { isEnglish } = useLanguage();
   const [specialties, setSpecialties] = useState([]);
 
   useEffect(() => {
@@ -36,7 +38,7 @@ function Specialties() {
         <div className="specialties__header">
           <h2 className="specialties__title">
             <span aria-hidden="true">—</span>
-            Naše speciality
+            {isEnglish ? "Our Specialties" : "Naše speciality"}
             <span aria-hidden="true">—</span>
           </h2>
         </div>
@@ -59,10 +61,16 @@ function Specialties() {
                 </div>
 
                 <div className="specialties__content">
-                  <h3 className="specialties__name">{specialty.name}</h3>
+                  <h3 className="specialties__name">
+                    {isEnglish && specialty.nameEn
+                      ? specialty.nameEn
+                      : specialty.name}
+                  </h3>
 
                   <p className="specialties__description">
-                    {specialty.description}
+                    {isEnglish && specialty.descriptionEn
+                      ? specialty.descriptionEn
+                      : specialty.description}
                   </p>
 
                   <span className="specialties__price">
@@ -86,7 +94,7 @@ function Specialties() {
 
         <div className="specialties__action">
           <a href="/jidelni-listek" className="specialties__button">
-            Více o specialitách
+            {isEnglish ? "Discover More Specialties" : "Více o specialitách"}
           </a>
         </div>
       </div>

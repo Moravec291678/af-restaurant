@@ -1,10 +1,14 @@
 import "./Reviews.css";
+
 import { useEffect, useState } from "react";
+import { useLanguage } from "../../../context/useLanguage";
 
 import { sanityClient } from "../../../lib/sanityClient";
 import { reviewsQuery } from "../../../lib/queries";
 
 function Reviews() {
+  const { isEnglish } = useLanguage();
+
   const [reviews, setReviews] = useState(null);
 
   useEffect(() => {
@@ -32,13 +36,18 @@ function Reviews() {
     <section className="reviews" aria-labelledby="reviews-title">
       <div className="reviews__inner">
         <div className="reviews__heading">
-          <span className="reviews__eyebrow">Hodnocení hostů</span>
+          <span className="reviews__eyebrow">
+            {isEnglish ? "Guest Reviews" : "Hodnocení hostů"}
+          </span>
 
-          <h2 id="reviews-title">Co říkají naši hosté</h2>
+          <h2 id="reviews-title">
+            {isEnglish ? "What Our Guests Say" : "Co říkají naši hosté"}
+          </h2>
 
           <p>
-            Vaše zkušenost je pro nás důležitá. Podívejte se, jak Naan O Namak
-            hodnotí naši hosté na Googlu.
+            {isEnglish
+              ? "Your experience matters to us. See how our guests rate Naan O Namak on Google."
+              : "Vaše zkušenost je pro nás důležitá. Podívejte se, jak Naan O Namak hodnotí naši hosté na Googlu."}
           </p>
         </div>
 
@@ -47,7 +56,11 @@ function Reviews() {
             <article className="reviews__item" key={review._id}>
               <div
                 className="reviews__stars"
-                aria-label={`${review.rating} z 5 hvězdiček`}
+                aria-label={
+                  isEnglish
+                    ? `${review.rating} out of 5 stars`
+                    : `${review.rating} z 5 hvězdiček`
+                }
               >
                 {"★".repeat(review.rating)}
               </div>
@@ -65,7 +78,7 @@ function Reviews() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Zobrazit další recenze
+          {isEnglish ? "Read More Reviews" : "Zobrazit další recenze"}
         </a>
       </div>
     </section>

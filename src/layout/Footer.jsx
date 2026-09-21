@@ -8,8 +8,10 @@ import logo from "../assets/icons/logo.webp";
 import "./Footer.css";
 import instagramIcon from "../assets/icons/instagram.png";
 import facebookIcon from "../assets/icons/facebook.png";
+import { useLanguage } from "../context/useLanguage";
 
 function Footer() {
+  const { isEnglish } = useLanguage();
   const [settings, setSettings] = useState(null);
 
   useEffect(() => {
@@ -49,7 +51,9 @@ function Footer() {
               smooth
               to="/#hero"
               className="footer__logo"
-              aria-label="Naan O Namak – domů"
+              aria-label={
+                isEnglish ? "Naan O Namak – home" : "Naan O Namak – domů"
+              }
             >
               <img
                 src={logo}
@@ -62,9 +66,9 @@ function Footer() {
             </HashLink>
 
             <p className="footer__description">
-              Perská a středoasijská restaurace v Praze-Benicích. Tradiční
-              receptury, čerstvé suroviny a atmosféra, ke které se budete rádi
-              vracet.
+              {isEnglish
+                ? "A Persian and Central Asian restaurant in Prague-Benice. Traditional recipes, fresh ingredients, and an atmosphere you'll want to return to."
+                : "Perská a středoasijská restaurace v Praze-Benicích. Tradiční receptury, čerstvé suroviny a atmosféra, ke které se budete rádi vracet."}
             </p>
 
             <div className="footer__creator">
@@ -84,35 +88,42 @@ function Footer() {
           </div>
 
           {/* RYCHLÉ ODKAZY */}
-          <nav className="footer__navigation" aria-label="Rychlé odkazy">
-            <h2 className="footer__heading">Rychlé odkazy</h2>
+          <nav
+            className="footer__navigation"
+            aria-label={isEnglish ? "Quick links" : "Rychlé odkazy"}
+          >
+            <h2 className="footer__heading">
+              {isEnglish ? "Quick Links" : "Rychlé odkazy"}
+            </h2>
 
             <ul className="footer__links">
               <li>
                 <HashLink smooth to="/#speciality">
-                  Speciality
+                  {isEnglish ? "Specialties" : "Speciality"}
                 </HashLink>
               </li>
               <li>
                 <HashLink smooth to="/#poledni-menu">
-                  Polední menu
+                  {isEnglish ? "Lunch Menu" : "Polední menu"}
                 </HashLink>
               </li>
               <li>
-                <Link to="/jidelni-listek">Jídelní lístek</Link>
+                <Link to="/jidelni-listek">
+                  {isEnglish ? "Menu" : "Jídelní lístek"}
+                </Link>
               </li>
               <li>
-                <Link to="/galerie">Galerie</Link>
+                <Link to="/galerie">{isEnglish ? "Gallery" : "Galerie"}</Link>
               </li>
               <li>
-                <Link to="/akce">Akce</Link>
+                <Link to="/akce">{isEnglish ? "Events" : "Akce"}</Link>
               </li>
               <li>
-                <Link to="/o-nas">O nás</Link>
+                <Link to="/o-nas">{isEnglish ? "About Us" : "O nás"}</Link>
               </li>
               <li>
                 <HashLink smooth to="/#kontakt">
-                  Kontakt
+                  {isEnglish ? "Contact" : "Kontakt"}
                 </HashLink>
               </li>
             </ul>
@@ -120,7 +131,9 @@ function Footer() {
 
           {/* KONTAKT */}
           <div className="footer__contact">
-            <h2 className="footer__heading">Kontakt</h2>
+            <h2 className="footer__heading">
+              {isEnglish ? "Contact" : "Kontakt"}
+            </h2>
 
             <address className="footer__address">
               <span>
@@ -151,7 +164,9 @@ function Footer() {
 
           {/* OTEVÍRACÍ DOBA */}
           <div className="footer__hours">
-            <h2 className="footer__heading">Otevírací doba</h2>
+            <h2 className="footer__heading">
+              {isEnglish ? "Opening Hours" : "Otevírací doba"}
+            </h2>
 
             <div className="footer__hours-list">
               {settings?.openingHours?.map((hours) => (
@@ -165,7 +180,7 @@ function Footer() {
             </div>
 
             <Link to="/rezervace" className="footer__reservation">
-              Rezervovat stůl
+              {isEnglish ? "Book a Table" : "Rezervovat stůl"}
             </Link>
           </div>
         </div>
@@ -176,16 +191,20 @@ function Footer() {
 
         <div className="footer__bottom">
           <p className="footer__copyright">
-            © {currentYear} Naan O Namak – Perská restaurace v Benicích. Všechna
-            práva vyhrazena.
+            © {currentYear} Naan O Namak –{" "}
+            {isEnglish
+              ? "Persian Restaurant in Benice. All rights reserved."
+              : "Perská restaurace v Benicích. Všechna práva vyhrazena."}
           </p>
 
           <div className="footer__legal">
-            <Link to="/ochrana-osobnich-udaju">Ochrana osobních údajů</Link>
-
+            <Link to="/ochrana-osobnich-udaju">
+              {isEnglish ? "Privacy Policy" : "Ochrana osobních údajů"}
+            </Link>
             <span aria-hidden="true">•</span>
-
-            <Link to="/obchodni-podminky">Obchodní podmínky</Link>
+            <Link to="/obchodni-podminky">
+              {isEnglish ? "Terms and Conditions" : "Obchodní podmínky"}
+            </Link>
           </div>
         </div>
       </div>

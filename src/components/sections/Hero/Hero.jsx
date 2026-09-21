@@ -5,6 +5,7 @@ import { restaurantSettingsQuery } from "../../../lib/queries";
 
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import { useLanguage } from "../../../context/useLanguage";
 
 import "./Hero.css";
 
@@ -33,6 +34,7 @@ const heroVideos = [
 ];
 
 function Hero() {
+  const { isEnglish } = useLanguage();
   const [settings, setSettings] = useState(null);
 
   useEffect(() => {
@@ -124,17 +126,20 @@ function Hero() {
         <div className="container">
           <div className="hero__content">
             <div className="hero__badge">
-              ❖ AUTENTICKÁ ORIENTÁLNÍ GASTRONOMIE ❖
+              {isEnglish
+                ? "❖ AUTHENTIC PERSIAN & CENTRAL ASIAN CUISINE ❖"
+                : "❖ AUTENTICKÁ ORIENTÁLNÍ GASTRONOMIE ❖"}
             </div>
 
             <h1 id="hero-title" className="hero__title">
               Naan O Namak <br />
-              restaurace v Benicích
+              {isEnglish ? "Restaurant in Benice" : "restaurace v Benicích"}
             </h1>
 
             <p className="hero__description">
-              Autentická perská a středoasijská kuchyně v Praze-Benicích.
-              Přijďte na oběd nebo večeři a ochutnejte naše speciality z grilu.
+              {isEnglish
+                ? "Authentic Persian and Central Asian cuisine in Prague-Benice. Join us for lunch or dinner and enjoy our grilled specialties."
+                : "Autentická perská a středoasijská kuchyně v Praze-Benicích. Přijďte na oběd nebo večeři a ochutnejte naše speciality z grilu."}
             </p>
 
             <div className="hero__buttons">
@@ -142,7 +147,7 @@ function Hero() {
                 to="/jidelni-listek"
                 className="hero__button hero__button--primary"
               >
-                Prohlédnout menu
+                {isEnglish ? "Explore the Menu" : "Prohlédnout menu"}
               </Link>
 
               <HashLink
@@ -150,7 +155,7 @@ function Hero() {
                 to="/#kontakt"
                 className="hero__button hero__button--secondary"
               >
-                Kde nás najdete
+                {isEnglish ? "Find Us" : "Kde nás najdete"}
               </HashLink>
             </div>
 
@@ -172,7 +177,9 @@ function Hero() {
                   📍
                 </span>
 
-                <span className="hero__footer-label">Adresa:</span>
+                <span className="hero__footer-label">
+                  {isEnglish ? "Address:" : "Adresa:"}
+                </span>
 
                 <a
                   href={settings?.mapUrl || ""}
@@ -192,7 +199,9 @@ function Hero() {
                 <span className="hero__footer-label">
                   {todayHours?.day && /[-–—]/.test(todayHours.day)
                     ? ""
-                    : "Dnes:"}
+                    : isEnglish
+                      ? "Today:"
+                      : "Dnes:"}
                 </span>
 
                 <time
@@ -204,7 +213,9 @@ function Hero() {
                 >
                   {todayHours?.open && todayHours?.close
                     ? `${todayHours.day}: ${todayHours.open} – ${todayHours.close}`
-                    : "Otevírací doba bude doplněna"}
+                    : isEnglish
+                      ? "Opening hours to be announced"
+                      : "Otevírací doba bude doplněna"}
                 </time>
               </div>
 
@@ -214,7 +225,9 @@ function Hero() {
                 </span>
 
                 <span className="hero__footer-label">
-                  Rezervace &amp; Dotazy:
+                  {isEnglish
+                    ? "Reservations & Enquiries:"
+                    : "Rezervace & Dotazy:"}
                 </span>
 
                 <a
@@ -229,14 +242,16 @@ function Hero() {
         </div>
       </section>
       <div className="hero__mobile-actions">
-        <a href={`tel:${settings?.phone || ""}`}>📞 Zavolat</a>
+        <a href={`tel:${settings?.phone || ""}`}>
+          📞 {isEnglish ? "Call" : "Zavolat"}
+        </a>
 
         <a
           href={settings?.mapUrl || ""}
           target="_blank"
           rel="noopener noreferrer"
         >
-          📍 Navigovat
+          📍 {isEnglish ? "Get Directions" : "Navigovat"}
         </a>
       </div>
     </>

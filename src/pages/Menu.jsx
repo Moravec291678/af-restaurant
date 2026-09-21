@@ -10,22 +10,30 @@ import { useLanguage } from "../context/useLanguage";
    ========================================================= */
 
 const categories = [
-  { id: "vse", label: "Vše" },
-  { id: "predkrmy", label: "Předkrmy" },
-  { id: "polevky-salaty", label: "Polévky & saláty" },
-  { id: "orientalni-speciality", label: "Orientální speciality" },
-  { id: "gril", label: "Z grilu" },
-  { id: "mix-grill", label: "Mix Grill" },
-  { id: "vegetarianska", label: "Vegetariánské" },
-  { id: "ryby", label: "Ryby" },
-  { id: "prilohy", label: "Přílohy" },
-  { id: "dezerty", label: "Dezerty" },
-  { id: "nealko", label: "Nealko" },
-  { id: "domaci-napoje", label: "Domácí nápoje" },
-  { id: "teple-napoje", label: "Teplé nápoje" },
-  { id: "pivo", label: "Pivo" },
-  { id: "vino", label: "Víno" },
-  { id: "tvrdy-alkohol", label: "Destiláty" },
+  { id: "vse", label: "Vše", labelEn: "All" },
+  { id: "predkrmy", label: "Předkrmy", labelEn: "Starters" },
+  {
+    id: "polevky-salaty",
+    label: "Polévky & saláty",
+    labelEn: "Soups & Salads",
+  },
+  {
+    id: "orientalni-speciality",
+    label: "Orientální speciality",
+    labelEn: "Oriental Specialties",
+  },
+  { id: "gril", label: "Z grilu", labelEn: "From the Grill" },
+  { id: "mix-grill", label: "Mix Grill", labelEn: "Mixed Grill" },
+  { id: "vegetarianska", label: "Vegetariánské", labelEn: "Vegetarian" },
+  { id: "ryby", label: "Ryby", labelEn: "Fish" },
+  { id: "prilohy", label: "Přílohy", labelEn: "Side Dishes" },
+  { id: "dezerty", label: "Dezerty", labelEn: "Desserts" },
+  { id: "nealko", label: "Nealko", labelEn: "Soft Drinks" },
+  { id: "domaci-napoje", label: "Domácí nápoje", labelEn: "Homemade Drinks" },
+  { id: "teple-napoje", label: "Teplé nápoje", labelEn: "Hot Drinks" },
+  { id: "pivo", label: "Pivo", labelEn: "Beer" },
+  { id: "vino", label: "Víno", labelEn: "Wine" },
+  { id: "tvrdy-alkohol", label: "Destiláty", labelEn: "Spirits" },
 ];
 
 /* =========================================================
@@ -33,20 +41,28 @@ const categories = [
    ========================================================= */
 
 const allergens = [
-  { id: 1, label: "Obiloviny obsahující lepek" },
-  { id: 2, label: "Korýši" },
-  { id: 3, label: "Vejce" },
-  { id: 4, label: "Ryby" },
-  { id: 5, label: "Arašídy" },
-  { id: 6, label: "Sójové boby" },
-  { id: 7, label: "Mléko" },
-  { id: 8, label: "Skořápkové plody" },
-  { id: 9, label: "Celer" },
-  { id: 10, label: "Hořčice" },
-  { id: 11, label: "Sezamová semena" },
-  { id: 12, label: "Oxid siřičitý a siřičitany" },
-  { id: 13, label: "Vlčí bob" },
-  { id: 14, label: "Měkkýši" },
+  {
+    id: 1,
+    label: "Obiloviny obsahující lepek",
+    labelEn: "Cereals containing gluten",
+  },
+  { id: 2, label: "Korýši", labelEn: "Crustaceans" },
+  { id: 3, label: "Vejce", labelEn: "Eggs" },
+  { id: 4, label: "Ryby", labelEn: "Fish" },
+  { id: 5, label: "Arašídy", labelEn: "Peanuts" },
+  { id: 6, label: "Sójové boby", labelEn: "Soybeans" },
+  { id: 7, label: "Mléko", labelEn: "Milk" },
+  { id: 8, label: "Skořápkové plody", labelEn: "Nuts" },
+  { id: 9, label: "Celer", labelEn: "Celery" },
+  { id: 10, label: "Hořčice", labelEn: "Mustard" },
+  { id: 11, label: "Sezamová semena", labelEn: "Sesame seeds" },
+  {
+    id: 12,
+    label: "Oxid siřičitý a siřičitany",
+    labelEn: "Sulphur dioxide and sulphites",
+  },
+  { id: 13, label: "Vlčí bob", labelEn: "Lupin" },
+  { id: 14, label: "Měkkýši", labelEn: "Molluscs" },
 ];
 
 /* =========================================================
@@ -84,7 +100,10 @@ function Menu() {
             isEnglish && category.titleEn ? category.titleEn : category.title,
         })),
       ]
-    : categories;
+    : categories.map((category) => ({
+        ...category,
+        label: isEnglish ? category.labelEn : category.label,
+      }));
 
   const displayItems = useMemo(() => sanityItems ?? [], [sanityItems]);
   const imageItems = useMemo(
@@ -331,7 +350,11 @@ function Menu() {
                     >
                       <img
                         src={item.image}
-                        alt={item.imageAlt || item.name}
+                        alt={
+                          isEnglish && item.nameEn
+                            ? item.nameEn
+                            : item.imageAlt || item.name
+                        }
                         loading="lazy"
                         decoding="async"
                       />
@@ -364,7 +387,9 @@ function Menu() {
                           "vino",
                           "tvrdý-alkohol",
                         ].includes(item.category) && (
-                          <span className="menu-page__badge">VEGE</span>
+                          <span className="menu-page__badge">
+                            {isEnglish ? "VEGETARIAN" : "VEGE"}
+                          </span>
                         )}
                     </div>
 
@@ -445,9 +470,13 @@ function Menu() {
             <div className="menu-page__empty">
               <span className="menu-page__empty-mark">◆</span>
 
-              <h3>Nic jsme nenašli</h3>
+              <h3>{isEnglish ? "No results found" : "Nic jsme nenašli"}</h3>
 
-              <p>Zkuste změnit kategorii nebo hledaný výraz.</p>
+              <p>
+                {isEnglish
+                  ? "Try changing the category or search term."
+                  : "Zkuste změnit kategorii nebo hledaný výraz."}
+              </p>
 
               <button
                 type="button"
@@ -457,7 +486,7 @@ function Menu() {
                   setSearchQuery("");
                 }}
               >
-                Zobrazit celý lístek
+                {isEnglish ? "View full menu" : "Zobrazit celý lístek"}
               </button>
             </div>
           )}
@@ -473,7 +502,9 @@ function Menu() {
               aria-expanded={showAllergens}
               onClick={() => setShowAllergens((currentValue) => !currentValue)}
             >
-              <span>Informace o alergenech</span>
+              <span>
+                {isEnglish ? "Allergen information" : "Informace o alergenech"}
+              </span>
 
               <span className="menu-page__allergens-arrow" aria-hidden="true">
                 {showAllergens ? "−" : "+"}
@@ -483,9 +514,9 @@ function Menu() {
             {showAllergens && (
               <div className="menu-page__allergens-content">
                 <p className="menu-page__allergens-intro">
-                  Číselné označení alergenů bude doplněno podle finálních
-                  receptur jednotlivých pokrmů. Níže je připravená legenda pro
-                  jejich následné zobrazení u jídel.
+                  {isEnglish
+                    ? "Allergen numbers will be added according to the final recipes of each dish. The legend below is prepared for displaying them alongside menu items."
+                    : "Číselné označení alergenů bude doplněno podle finálních receptur jednotlivých pokrmů. Níže je připravená legenda pro jejich následné zobrazení u jídel."}
                 </p>
 
                 <div className="menu-page__allergens-grid">
@@ -493,7 +524,7 @@ function Menu() {
                     <div className="menu-page__allergen" key={allergen.id}>
                       <span>{allergen.id}</span>
 
-                      <p>{allergen.label}</p>
+                      <p>{isEnglish ? allergen.labelEn : allergen.label}</p>
                     </div>
                   ))}
                 </div>
@@ -511,8 +542,9 @@ function Menu() {
             </span>
 
             <p>
-              Informace o složení pokrmů a alergenech vám rádi upřesníme také
-              přímo v restauraci.
+              {isEnglish
+                ? "Our team will be happy to provide further information about ingredients and allergens in the restaurant."
+                : "Informace o složení pokrmů a alergenech vám rádi upřesníme také přímo v restauraci."}
             </p>
           </div>
         </div>
@@ -523,7 +555,15 @@ function Menu() {
           className="menu-page__lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label={`Fotografie ${imageItems[lightboxIndex].name}`}
+          aria-label={
+            isEnglish
+              ? `Photo of ${
+                  isEnglish && imageItems[lightboxIndex].nameEn
+                    ? imageItems[lightboxIndex].nameEn
+                    : imageItems[lightboxIndex].name
+                }`
+              : `Fotografie ${imageItems[lightboxIndex].name}`
+          }
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) closeLightbox();
           }}
@@ -532,7 +572,7 @@ function Menu() {
             type="button"
             className="menu-page__lightbox-close"
             onClick={closeLightbox}
-            aria-label="Zavřít fotografii"
+            aria-label={isEnglish ? "Close photo" : "Zavřít fotografii"}
           >
             ×
           </button>
@@ -543,7 +583,9 @@ function Menu() {
                 type="button"
                 className="menu-page__lightbox-nav menu-page__lightbox-nav--previous"
                 onClick={showPreviousImage}
-                aria-label="Předchozí fotografie"
+                aria-label={
+                  isEnglish ? "Previous photo" : "Předchozí fotografie"
+                }
               >
                 ‹
               </button>
@@ -552,7 +594,7 @@ function Menu() {
                 type="button"
                 className="menu-page__lightbox-nav menu-page__lightbox-nav--next"
                 onClick={showNextImage}
-                aria-label="Další fotografie"
+                aria-label={isEnglish ? "Next photo" : "Další fotografie"}
               >
                 ›
               </button>
@@ -563,11 +605,17 @@ function Menu() {
             <img
               src={imageItems[lightboxIndex].image}
               alt={
-                imageItems[lightboxIndex].imageAlt ||
-                imageItems[lightboxIndex].name
+                isEnglish && imageItems[lightboxIndex].nameEn
+                  ? imageItems[lightboxIndex].nameEn
+                  : imageItems[lightboxIndex].imageAlt ||
+                    imageItems[lightboxIndex].name
               }
             />
-            <figcaption>{imageItems[lightboxIndex].name}</figcaption>
+            <figcaption>
+              {isEnglish && imageItems[lightboxIndex].nameEn
+                ? imageItems[lightboxIndex].nameEn
+                : imageItems[lightboxIndex].name}
+            </figcaption>
           </figure>
         </div>
       )}
