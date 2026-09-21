@@ -65,7 +65,9 @@ function Reviews() {
                 {"★".repeat(review.rating)}
               </div>
 
-              <blockquote>{review.text}</blockquote>
+              <blockquote>
+                {(isEnglish && review.textEn) || review.text}
+              </blockquote>
 
               <span className="reviews__author">{review.author}</span>
             </article>

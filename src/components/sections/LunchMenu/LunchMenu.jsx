@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { useLanguage } from "../../../context/useLanguage";
 import { sanityClient } from "../../../lib/sanityClient";
 import { lunchMenuQuery } from "../../../lib/queries";
 import { getSanityImageUrl } from "../../../lib/sanityImage";
-
 import "./LunchMenu.css";
 
 function LunchMenu() {
   const { isEnglish } = useLanguage();
-
   const [lunchMenu, setLunchMenu] = useState(null);
 
   useEffect(() => {
@@ -19,10 +16,7 @@ function LunchMenu() {
     sanityClient
       .fetch(lunchMenuQuery)
       .then((data) => {
-        if (cancelled) {
-          return;
-        }
-
+        if (cancelled) return;
         setLunchMenu(data);
       })
       .catch((error) => {
@@ -37,6 +31,30 @@ function LunchMenu() {
   const items = lunchMenu?.items ?? [];
   const lunchImageUrl = getSanityImageUrl(lunchMenu?.image);
 
+  const eyebrow =
+    (isEnglish && lunchMenu?.eyebrowEn) ||
+    lunchMenu?.eyebrow ||
+    (isEnglish ? "❖ WEEKDAY LUNCH MENU ❖" : "❖ MENU PRO VŠEDNÍ DEN ❖");
+
+  const title =
+    (isEnglish && lunchMenu?.titleEn) ||
+    lunchMenu?.title ||
+    (isEnglish ? "Lunch Menu" : "Polední menu");
+
+  const description =
+    (isEnglish && lunchMenu?.descriptionEn) ||
+    lunchMenu?.description ||
+    (isEnglish
+      ? "Every weekday, we prepare a selection of popular Czech dishes for you."
+      : "Každý všední den pro vás připravujeme výběr oblíbených českých jídel.");
+
+  const imageAlt =
+    (isEnglish && lunchMenu?.imageAltEn) ||
+    lunchMenu?.imageAlt ||
+    (isEnglish
+      ? "A dish from the Naan O Namak restaurant in Prague-Benice"
+      : "Jídlo z nabídky restaurace Naan O Namak v Praze-Benicích");
+
   return (
     <section
       className="lunch-menu"
@@ -46,22 +64,13 @@ function LunchMenu() {
       <div className="container">
         <div className="lunch-menu__inner">
           <header className="lunch-menu__header">
-            <p className="lunch-menu__eyebrow">
-              {isEnglish
-                ? "❖ WEEKDAY LUNCH MENU ❖"
-                : lunchMenu?.eyebrow || "❖ MENU PRO VŠEDNÍ DEN ❖"}
-            </p>
+            <p className="lunch-menu__eyebrow">{eyebrow}</p>
 
             <h2 id="lunch-menu-title" className="lunch-menu__title">
-              {isEnglish ? "Lunch Menu" : lunchMenu?.title || "Polední menu"}
+              {title}
             </h2>
 
-            <p className="lunch-menu__subtitle">
-              {isEnglish
-                ? "Every weekday, we prepare a selection of popular Czech dishes for you."
-                : lunchMenu?.description ||
-                  "Každý všední den pro vás připravujeme výběr oblíbených českých jídel."}
-            </p>
+            <p className="lunch-menu__subtitle">{description}</p>
           </header>
 
           <div className="lunch-menu__content">
@@ -73,13 +82,11 @@ function LunchMenu() {
                 >
                   <div className="lunch-menu__item-content">
                     <h3 className="lunch-menu__item-name">
-                      {isEnglish && item.titleEn ? item.titleEn : item.title}
+                      {(isEnglish && item.titleEn) || item.title}
                     </h3>
 
                     <p className="lunch-menu__item-description">
-                      {isEnglish && item.descriptionEn
-                        ? item.descriptionEn
-                        : item.description}
+                      {(isEnglish && item.descriptionEn) || item.description}
                     </p>
                   </div>
 
@@ -94,22 +101,13 @@ function LunchMenu() {
               {lunchImageUrl && (
                 <img
                   src={lunchImageUrl}
-                  alt={
-                    isEnglish
-                      ? lunchMenu?.imageAltEn ||
-                        "A dish from the Naan O Namak restaurant in Prague-Benice"
-                      : lunchMenu?.imageAlt ||
-                        "Jídlo z nabídky restaurace Naan O Namak v Praze-Benicích"
-                  }
+                  alt={imageAlt}
                   loading="lazy"
                   decoding="async"
                 />
               )}
 
-              <div
-                className="lunch-menu__image-overlay"
-                aria-hidden="true"
-              ></div>
+              <div className="lunch-menu__image-overlay" aria-hidden="true" />
             </div>
           </div>
 
