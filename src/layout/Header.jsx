@@ -186,7 +186,7 @@ function Header() {
                 className={`language-switch__coin ${
                   isEnglish ? "language-switch__coin--english" : ""
                 }`}
-                c
+                
                 aria-hidden="true"
               >
                 <span className="language-switch__face language-switch__face--front">

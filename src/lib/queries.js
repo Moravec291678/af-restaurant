@@ -135,12 +135,13 @@ export const restaurantSettingsQuery = `*[
   },
   phone,
   email,
-  openingHours[]{
-    day,
-    open,
-    close
-  },
-  mapUrl,
+ openingHours[]{
+  day,
+  dayEn,
+  open,
+  close
+},
+mapUrl,
   mapEmbedUrl,
   reservationUrl
 }`;

@@ -136,7 +136,8 @@ function Contact() {
                 <div className="contact__value contact__opening-hours">
                   {settings?.openingHours?.map((hours) => (
                     <span key={hours.day}>
-                      {hours.day}: {hours.open} – {hours.close}
+                      {isEnglish && hours.dayEn ? hours.dayEn : hours.day}:{" "}
+                      {hours.open} – {hours.close}
                     </span>
                   ))}
                 </div>
@@ -165,16 +166,18 @@ function Contact() {
 
           {/* MAP */}
           <div className="contact__map">
-            <iframe
-              title={
-                isEnglish
-                  ? "Map of Naan O Namak restaurant in Prague-Benice"
-                  : "Mapa restaurace Naan O Namak v Praze-Benicích"
-              }
-              src={settings?.mapEmbedUrl || ""}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+            {settings?.mapEmbedUrl && (
+              <iframe
+                title={
+                  isEnglish
+                    ? "Map of Naan O Namak restaurant in Prague-Benice"
+                    : "Mapa restaurace Naan O Namak v Praze-Benicích"
+                }
+                src={settings.mapEmbedUrl}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            )}
 
             <a
               href={settings?.mapUrl || ""}

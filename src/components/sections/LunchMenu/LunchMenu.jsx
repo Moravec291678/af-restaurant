@@ -16,6 +16,8 @@ function LunchMenu() {
     sanityClient
       .fetch(lunchMenuQuery)
       .then((data) => {
+        console.log("LUNCH MENU DATA:", data);
+
         if (cancelled) return;
         setLunchMenu(data);
       })
