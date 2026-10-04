@@ -351,9 +351,9 @@ function Menu() {
                       <img
                         src={item.image}
                         alt={
-                          isEnglish && item.nameEn
-                            ? item.nameEn
-                            : item.imageAlt || item.name
+                          (isEnglish && item.imageAltEn) ||
+                          (isEnglish && item.nameEn) ||
+                          item.imageAlt || item.name
                         }
                         loading="lazy"
                         decoding="async"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LanguageContext from "./languageContextBase";
 
 export function LanguageProvider({ children }) {
@@ -7,6 +7,10 @@ export function LanguageProvider({ children }) {
 
     return savedLanguage === "en" ? "en" : "cs";
   });
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
 
   const toggleLanguage = () => {
     setLanguage((currentLanguage) => {

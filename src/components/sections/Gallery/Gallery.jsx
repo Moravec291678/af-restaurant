@@ -19,21 +19,25 @@ const galleryItems = [
     id: 1,
     image: gallery01,
     alt: "Perské jídlo v restauraci Naan o Namak",
+    altEn: "Persian food at Naan o Namak restaurant",
   },
   {
     id: 2,
     image: gallery02,
     alt: "Perské jídlo v restauraci Naan o Namak",
+    altEn: "Persian food at Naan o Namak restaurant",
   },
   {
     id: 3,
     image: gallery03,
     alt: "Perské jídlo v restauraci Naan o Namak",
+    altEn: "Persian food at Naan o Namak restaurant",
   },
   {
     id: 4,
     image: gallery04,
     alt: "Perské jídlo v restauraci Naan o Namak",
+    altEn: "Persian food at Naan o Namak restaurant",
   },
 ];
 
@@ -70,12 +74,17 @@ function Gallery() {
       .map((item) => ({
         id: item._id,
         image: getSanityImageUrl(item.image),
-        alt: item.alt || "Fotografie restaurace Naan O Namak",
+        alt: (isEnglish && item.altEn) || item.alt || (isEnglish ? "Photo of Naan O Namak restaurant" : "Fotografie restaurace Naan O Namak"),
       }))
       .filter((item) => item.image) ?? [];
 
   const displayItems =
-    sanityGalleryItems.length > 0 ? sanityGalleryItems : galleryItems;
+    sanityGalleryItems.length > 0
+      ? sanityGalleryItems
+      : galleryItems.map((item) => ({
+          ...item,
+          alt: (isEnglish && item.altEn) || item.alt,
+        }));
 
   const isLightboxOpen = activeIndex !== null;
 

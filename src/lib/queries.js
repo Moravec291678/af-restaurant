@@ -22,6 +22,7 @@ export const menuItemsQuery = `*[
   allergens,
   image,
   imageAlt,
+  imageAltEn,
   variants,
   showAsSpecialty,
   active,
@@ -129,6 +130,7 @@ export const restaurantSettingsQuery = `*[
   _id,
   name,
   shortDescription,
+  shortDescriptionEn,
   address{
     line1,
     line2

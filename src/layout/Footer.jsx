@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
 import { useEffect, useState } from "react";
 
 import { sanityClient } from "../lib/sanityClient";
@@ -47,8 +46,7 @@ function Footer() {
         <div className="footer__main">
           {/* BRAND */}
           <div className="footer__brand">
-            <HashLink
-              smooth
+            <Link
               to="/#hero"
               className="footer__logo"
               aria-label={
@@ -63,7 +61,7 @@ function Footer() {
                 loading="lazy"
                 decoding="async"
               />
-            </HashLink>
+            </Link>
 
             <p className="footer__description">
               {isEnglish
@@ -98,14 +96,14 @@ function Footer() {
 
             <ul className="footer__links">
               <li>
-                <HashLink smooth to="/#speciality">
+                <Link to="/#speciality">
                   {isEnglish ? "Specialties" : "Speciality"}
-                </HashLink>
+                </Link>
               </li>
               <li>
-                <HashLink smooth to="/#poledni-menu">
+                <Link to="/#poledni-menu">
                   {isEnglish ? "Lunch Menu" : "Polední menu"}
-                </HashLink>
+                </Link>
               </li>
               <li>
                 <Link to="/jidelni-listek">
@@ -122,9 +120,9 @@ function Footer() {
                 <Link to="/o-nas">{isEnglish ? "About Us" : "O nás"}</Link>
               </li>
               <li>
-                <HashLink smooth to="/#kontakt">
+                <Link to="/#kontakt">
                   {isEnglish ? "Contact" : "Kontakt"}
-                </HashLink>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -171,7 +169,7 @@ function Footer() {
             <div className="footer__hours-list">
               {settings?.openingHours?.map((hours) => (
                 <div key={hours.day}>
-                  <span>{hours.day}</span>
+                  <span>{(isEnglish && hours.dayEn) || hours.day}</span>
                   <time dateTime={`${hours.open}-${hours.close}`}>
                     {hours.open} – {hours.close}
                   </time>

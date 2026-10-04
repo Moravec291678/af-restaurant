@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
 import { useEffect, useState } from "react";
 import { sanityClient } from "../lib/sanityClient";
 import { eventsQuery } from "../lib/queries";
@@ -142,13 +141,12 @@ function EventsPage() {
                   : "Plánujete oslavu, firemní večírek, svatbu nebo jinou událost? Připravíme pro vás catering s tradiční perskou i českou kuchyní a postaráme se o to, aby vaše setkání bylo výjimečné."}
               </p>
 
-              <HashLink
-                smooth
+              <Link
                 to="/rezervace"
                 className="events-page__catering-button"
               >
                 {isEnglish ? "ENQUIRE ABOUT CATERING" : "POPTAT CATERING"}
-              </HashLink>
+              </Link>
             </section>
           )}
 

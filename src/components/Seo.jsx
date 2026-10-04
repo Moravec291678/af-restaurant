@@ -6,6 +6,7 @@ import logo from "../assets/icons/logo.webp";
 
 import { sanityClient } from "../lib/sanityClient";
 import { eventBySlugQuery, restaurantSettingsQuery } from "../lib/queries";
+import { useLanguage } from "../context/useLanguage";
 
 const siteUrl = "https://naanonamak.cz";
 const brandImageUrl = new URL(logo, siteUrl).href;
@@ -46,6 +47,15 @@ const pageMetadata = {
     description:
       "Rezervujte si stůl v restauraci Naan O Namak v Praze-Benicích a vychutnejte si perskou a středoasijskou kuchyni.",
   },
+};
+
+const pageMetadataEn = {
+  "/": { title: "Naan O Namak | Persian Restaurant in Benice, Prague", description: "Discover authentic Persian and Central Asian cuisine at Naan O Namak in Prague-Benice. Explore our menu and book a table." },
+  "/jidelni-listek": { title: "Menu | Naan O Namak Restaurant, Benice", description: "Explore our menu in Prague-Benice, from mantu and Qabuli Palow to grilled specialties." },
+  "/galerie": { title: "Gallery | Naan O Namak Restaurant, Benice", description: "Explore the Naan O Namak gallery and discover our restaurant and Persian cuisine in Prague-Benice." },
+  "/akce": { title: "Events and Catering | Naan O Namak, Benice", description: "Upcoming events and catering at Naan O Namak restaurant in Prague-Benice." },
+  "/o-nas": { title: "About Us | Naan O Namak Persian Restaurant", description: "Meet Naan O Namak, serving Persian and Central Asian cuisine, traditional recipes and grilled specialties in Prague-Benice." },
+  "/rezervace": { title: "Book a Table | Naan O Namak, Benice", description: "Book a table at Naan O Namak in Prague-Benice and enjoy Persian and Central Asian cuisine." },
 };
 
 const dayMap = {
@@ -149,6 +159,7 @@ function setMeta(selector, attribute, value) {
 
 function Seo() {
   const { pathname } = useLocation();
+  const { isEnglish } = useLanguage();
   const [settings, setSettings] = useState(null);
   const [event, setEvent] = useState(null);
 
@@ -160,16 +171,18 @@ function Seo() {
     () =>
       event
         ? {
-            title: `${event.title} – Naan O Namak | Benice`,
+            title: `${(isEnglish && event.titleEn) || event.title} – Naan O Namak | Benice`,
             description:
-              event.description ||
-              `Přijďte na akci ${event.title} v restauraci Naan O Namak v Praze-Benicích.`,
+              (isEnglish && event.descriptionEn) || event.description ||
+              (isEnglish
+                ? `Join us for ${event.titleEn || event.title} at Naan O Namak in Prague-Benice.`
+                : `Přijďte na akci ${event.title} v restauraci Naan O Namak v Praze-Benicích.`),
           }
-        : (pageMetadata[pathname] ?? {
-            title: "Stránka nebyla nalezena – Naan O Namak",
-            description: "Požadovaná stránka nebyla nalezena.",
+        : ((isEnglish ? pageMetadataEn[pathname] : pageMetadata[pathname]) ?? {
+            title: isEnglish ? "Page not found | Naan O Namak" : "Stránka nebyla nalezena – Naan O Namak",
+            description: isEnglish ? "The requested page could not be found." : "Požadovaná stránka nebyla nalezena.",
           }),
-    [event, pathname],
+    [event, pathname, isEnglish],
   );
 
   const canonicalUrl = `${siteUrl}${pathname === "/" ? "/" : pathname}`;
@@ -264,7 +277,7 @@ function Seo() {
     }
 
     canonical.href = canonicalUrl;
-  }, [canonicalUrl, metadata]);
+  }, [canonicalUrl, metadata, isEnglish]);
 
   const restaurantSchema = {
     "@context": "https://schema.org",

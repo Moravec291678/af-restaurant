@@ -1,9 +1,11 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import { useLanguage } from "../context/useLanguage";
 
 import "./Reservation.css";
 
 function Reservation() {
+  const { isEnglish } = useLanguage();
   const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState("");
 
@@ -22,13 +24,15 @@ function Reservation() {
 
       form.reset();
 
-      setStatus(
-        "Děkujeme. Vaše žádost o rezervaci byla odeslána. Ozveme se vám s potvrzením.",
-      );
+      setStatus(isEnglish
+        ? "Thank you. Your reservation request has been sent. We will contact you to confirm."
+        : "Děkujeme. Vaše žádost o rezervaci byla odeslána. Ozveme se vám s potvrzením.");
     } catch (error) {
       console.error("Reservation error:", error);
 
-      setStatus("Rezervaci se nepodařilo odeslat. Zkuste to prosím znovu.");
+      setStatus(isEnglish
+        ? "We couldn't send your reservation request. Please try again."
+        : "Rezervaci se nepodařilo odeslat. Zkuste to prosím znovu.");
     } finally {
       setIsSending(false);
     }
@@ -38,13 +42,14 @@ function Reservation() {
     <main className="reservation-page">
       <section className="reservation-hero">
         <div className="container">
-          <p className="reservation-eyebrow">Rezervace</p>
+          <p className="reservation-eyebrow">{isEnglish ? "Reservations" : "Rezervace"}</p>
 
-          <h1>Rezervujte si svůj stůl</h1>
+          <h1>{isEnglish ? "Book your table" : "Rezervujte si svůj stůl"}</h1>
 
           <p className="reservation-intro">
-            Těšíme se na vaši návštěvu. Vyplňte údaje níže a pošlete nám
-            požadavek na rezervaci.
+            {isEnglish
+              ? "We look forward to welcoming you. Fill in the details below to request a reservation."
+              : "Těšíme se na vaši návštěvu. Vyplňte údaje níže a pošlete nám požadavek na rezervaci."}
           </p>
         </div>
       </section>
@@ -53,19 +58,19 @@ function Reservation() {
         <div className="container">
           <form className="reservation-form" onSubmit={handleSubmit}>
             <div className="reservation-field">
-              <label htmlFor="reservation-date">Datum</label>
+              <label htmlFor="reservation-date">{isEnglish ? "Date" : "Datum"}</label>
 
               <input id="reservation-date" name="date" type="date" required />
             </div>
 
             <div className="reservation-field">
-              <label htmlFor="reservation-time">Čas</label>
+              <label htmlFor="reservation-time">{isEnglish ? "Time" : "Čas"}</label>
 
               <input id="reservation-time" name="time" type="time" required />
             </div>
 
             <div className="reservation-field">
-              <label htmlFor="reservation-guests">Počet osob</label>
+              <label htmlFor="reservation-guests">{isEnglish ? "Guests" : "Počet osob"}</label>
 
               <select
                 id="reservation-guests"
@@ -74,38 +79,33 @@ function Reservation() {
                 defaultValue=""
               >
                 <option value="" disabled>
-                  Vyberte počet osob
+                  {isEnglish ? "Select the number of guests" : "Vyberte počet osob"}
                 </option>
 
-                <option value="1">1 osoba</option>
-                <option value="2">2 osoby</option>
-                <option value="3">3 osoby</option>
-                <option value="4">4 osoby</option>
-                <option value="5">5 osob</option>
-                <option value="6">6 osob</option>
-                <option value="7">7 osob</option>
-                <option value="8">8 osob</option>
-                <option value="9">9 osob</option>
-                <option value="10">10 osob</option>
-                <option value="11+">11 a více osob</option>
+                {Array.from({ length: 10 }, (_, index) => index + 1).map((count) => (
+                  <option key={count} value={String(count)}>
+                    {count} {isEnglish ? (count === 1 ? "guest" : "guests") : count === 1 ? "osoba" : count < 5 ? "osoby" : "osob"}
+                  </option>
+                ))}
+                <option value="11+">{isEnglish ? "11 or more guests" : "11 a více osob"}</option>
               </select>
             </div>
 
             <div className="reservation-field">
-              <label htmlFor="reservation-name">Jméno</label>
+              <label htmlFor="reservation-name">{isEnglish ? "Name" : "Jméno"}</label>
 
               <input
                 id="reservation-name"
                 name="name"
                 type="text"
-                placeholder="Vaše jméno"
+                placeholder={isEnglish ? "Your name" : "Vaše jméno"}
                 autoComplete="name"
                 required
               />
             </div>
 
             <div className="reservation-field">
-              <label htmlFor="reservation-phone">Telefon</label>
+              <label htmlFor="reservation-phone">{isEnglish ? "Phone" : "Telefon"}</label>
 
               <input
                 id="reservation-phone"
@@ -119,7 +119,7 @@ function Reservation() {
 
             <div className="reservation-field">
               <label htmlFor="reservation-email">
-                E-mail <span>(volitelné)</span>
+                {isEnglish ? "Email" : "E-mail"} <span>({isEnglish ? "optional" : "volitelné"})</span>
               </label>
 
               <input
@@ -133,27 +133,27 @@ function Reservation() {
 
             <div className="reservation-field reservation-field-full">
               <label htmlFor="reservation-note">
-                Poznámka <span>(volitelné)</span>
+                {isEnglish ? "Note" : "Poznámka"} <span>({isEnglish ? "optional" : "volitelné"})</span>
               </label>
 
               <textarea
                 id="reservation-note"
                 name="note"
                 rows="5"
-                placeholder="Například dětská židle, oslava narozenin apod."
+                placeholder={isEnglish ? "For example, a high chair or birthday celebration" : "Například dětská židle, oslava narozenin apod."}
               />
             </div>
 
             <div className="reservation-submit">
               <button type="submit" disabled={isSending}>
-                {isSending ? "Odesílám…" : "Odeslat rezervaci"}
+                {isSending ? (isEnglish ? "Sending…" : "Odesílám…") : (isEnglish ? "Send reservation request" : "Odeslat rezervaci")}
               </button>
             </div>
 
             {status && (
               <p
                 className={`reservation-status ${
-                  status.includes("nepodařilo") ? "is-error" : "is-success"
+                  status.includes(isEnglish ? "couldn't" : "nepodařilo") ? "is-error" : "is-success"
                 }`}
                 role="status"
               >
@@ -163,8 +163,9 @@ function Reservation() {
           </form>
 
           <p className="reservation-note">
-            Odesláním formuláře zašlete požadavek na rezervaci. Rezervace bude
-            platná až po jejím potvrzení restaurací.
+            {isEnglish
+              ? "Submitting this form sends a reservation request. Your reservation is confirmed only after the restaurant contacts you."
+              : "Odesláním formuláře zašlete požadavek na rezervaci. Rezervace bude platná až po jejím potvrzení restaurací."}
           </p>
         </div>
       </section>

@@ -1,7 +1,6 @@
 import { useLanguage } from "../context/useLanguage";
 import { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../assets/icons/logo.webp";
 import czechFlag from "../assets/icons/cz.png";
 import englishFlag from "../assets/icons/en.png";
@@ -101,14 +100,13 @@ function Header() {
   ) => {
     if (type === "hash") {
       return (
-        <HashLink
-          smooth
+        <Link
           to={to}
           className={includeDesktopClass ? "header__link" : undefined}
           onClick={closeMenu}
         >
           {label}
-        </HashLink>
+        </Link>
       );
     }
 
@@ -124,7 +122,6 @@ function Header() {
         }
         onClick={() => {
           closeMenu();
-          window.scrollTo(0, 0);
         }}
       >
         {label}
@@ -136,11 +133,10 @@ function Header() {
     <>
       <header className={`header ${isScrolled ? "header--scrolled" : ""}`}>
         <div className="container header__container">
-          <HashLink
-            smooth
+          <Link
             to="/#hero"
             className="header__logo"
-            aria-label="Naan O Namak – domovská stránka"
+            aria-label={isEnglish ? "Naan O Namak – home page" : "Naan O Namak – domovská stránka"}
             onClick={closeMenu}
           >
             <div className="header__logo-content">
@@ -154,9 +150,9 @@ function Header() {
                 decoding="sync"
               />
             </div>
-          </HashLink>
+          </Link>
 
-          <nav className="header__nav" aria-label="Hlavní navigace">
+          <nav className="header__nav" aria-label={isEnglish ? "Main navigation" : "Hlavní navigace"}>
             <ul className="header__list">
               {navigation.map((item) => (
                 <li key={item.to} className="header__item">
@@ -205,7 +201,9 @@ function Header() {
             className={`header__hamburger ${
               isMenuOpen ? "header__hamburger--active" : ""
             }`}
-            aria-label={isMenuOpen ? "Zavřít navigaci" : "Otevřít navigaci"}
+            aria-label={isEnglish
+              ? isMenuOpen ? "Close navigation" : "Open navigation"
+              : isMenuOpen ? "Zavřít navigaci" : "Otevřít navigaci"}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
             onClick={toggleMenu}
@@ -221,7 +219,7 @@ function Header() {
         className={`mobile-menu ${isMenuOpen ? "mobile-menu--open" : ""}`}
         aria-hidden={!isMenuOpen}
       >
-        <nav aria-label="Mobilní navigace">
+        <nav aria-label={isEnglish ? "Mobile navigation" : "Mobilní navigace"}>
           <ul className="mobile-menu__list">
             {navigation.map((item) => (
               <li key={`mobile-${item.to}`}>

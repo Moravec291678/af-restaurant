@@ -93,7 +93,7 @@ function LunchMenu() {
                   </div>
 
                   <span className="lunch-menu__item-price">
-                    {item.price} Kč
+                    {item.price} {isEnglish ? "CZK" : "Kč"}
                   </span>
                 </article>
               ))}

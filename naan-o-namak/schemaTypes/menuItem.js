@@ -44,6 +44,7 @@ export default {
     },
 
     {name: 'imageAlt', title: 'Image alternative text', type: 'string'},
+    {name: 'imageAltEn', title: 'Image alternative text (English)', type: 'string'},
 
     {
       name: 'variants',

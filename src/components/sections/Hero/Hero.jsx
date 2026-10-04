@@ -4,7 +4,6 @@ import { sanityClient } from "../../../lib/sanityClient";
 import { restaurantSettingsQuery } from "../../../lib/queries";
 
 import { Link } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
 import { useLanguage } from "../../../context/useLanguage";
 
 import "./Hero.css";
@@ -150,13 +149,12 @@ function Hero() {
                 {isEnglish ? "Explore the Menu" : "Prohlédnout menu"}
               </Link>
 
-              <HashLink
-                smooth
+              <Link
                 to="/#kontakt"
                 className="hero__button hero__button--secondary"
               >
                 {isEnglish ? "Find Us" : "Kde nás najdete"}
-              </HashLink>
+              </Link>
             </div>
 
             <span
@@ -185,7 +183,7 @@ function Hero() {
                   href={settings?.mapUrl || ""}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Otevřít adresu restaurace Naan O Namak na Google Maps"
+                  aria-label={isEnglish ? "Open Naan O Namak in Google Maps" : "Otevřít adresu restaurace Naan O Namak na Google Maps"}
                 >
                   {settings?.address?.line1 || ""}
                 </a>
@@ -212,7 +210,7 @@ function Hero() {
                   }
                 >
                   {todayHours?.open && todayHours?.close
-                    ? `${todayHours.day}: ${todayHours.open} – ${todayHours.close}`
+                    ? `${(isEnglish && todayHours.dayEn) || todayHours.day}: ${todayHours.open} – ${todayHours.close}`
                     : isEnglish
                       ? "Opening hours to be announced"
                       : "Otevírací doba bude doplněna"}
@@ -232,7 +230,7 @@ function Hero() {
 
                 <a
                   href={`tel:${settings?.phone || ""}`}
-                  aria-label="Zavolat do restaurace Naan O Namak"
+                  aria-label={isEnglish ? "Call Naan O Namak restaurant" : "Zavolat do restaurace Naan O Namak"}
                 >
                   {settings?.phone || ""}
                 </a>

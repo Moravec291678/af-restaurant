@@ -53,7 +53,7 @@ function Specialties() {
                   {imageUrl && (
                     <img
                       src={imageUrl}
-                      alt={specialty.imageAlt || specialty.name}
+                      alt={(isEnglish && specialty.imageAltEn) || (isEnglish && specialty.nameEn) || specialty.imageAlt || specialty.name}
                       loading="lazy"
                       decoding="async"
                     />
@@ -75,14 +75,14 @@ function Specialties() {
 
                   <span className="specialties__price">
                     {specialty.price != null
-                      ? `${specialty.price} Kč`
+                      ? `${specialty.price} ${isEnglish ? "CZK" : "Kč"}`
                       : (() => {
                           const variantPrices = specialty.variants
                             ?.map((variant) => variant.price)
                             .filter((price) => price != null);
 
                           return variantPrices?.length
-                            ? `od ${Math.min(...variantPrices)} Kč`
+                            ? `${isEnglish ? "from" : "od"} ${Math.min(...variantPrices)} ${isEnglish ? "CZK" : "Kč"}`
                             : "";
                         })()}
                   </span>
