@@ -2,14 +2,12 @@ import { useCallback, useEffect, useState } from "react";
 import { sanityClient } from "../lib/sanityClient";
 import { galleryImagesQuery } from "../lib/queries";
 import { getSanityImageUrl } from "../lib/sanityImage";
+import { useLanguage } from "../context/useLanguage";
 
 import gallery03 from "../assets/images/tata.webp";
-
 import gallery05 from "../assets/images/gallery05.webp";
 import gallery06 from "../assets/images/gallery06.webp";
-
 import gallery08 from "../assets/images/gallery08.webp";
-
 import gallery10 from "../assets/images/gallery10.webp";
 
 import "./GalleryPage.css";
@@ -19,35 +17,40 @@ const galleryItems = [
     id: 3,
     image: gallery03,
     alt: "Perské jídlo v restauraci Naan o Namak",
+    altEn: "Persian food at Naan o Namak restaurant",
   },
-
   {
     id: 5,
     image: gallery05,
     alt: "Interiér restaurace Naan o Namak",
+    altEn: "Interior of Naan o Namak restaurant",
   },
   {
     id: 6,
     image: gallery06,
     alt: "Perské speciality v restauraci Naan o Namak",
+    altEn: "Persian specialties at Naan o Namak restaurant",
   },
-
   {
     id: 8,
     image: gallery08,
     alt: "Prostředí restaurace Naan o Namak",
+    altEn: "The atmosphere at Naan o Namak restaurant",
   },
-
   {
     id: 10,
     image: gallery10,
     alt: "Atmosféra restaurace Naan o Namak",
+    altEn: "The atmosphere at Naan o Namak restaurant",
   },
 ];
 
 function Gallery() {
+  const { isEnglish } = useLanguage();
+
   const [activeIndex, setActiveIndex] = useState(null);
   const [sanityItems, setSanityItems] = useState(null);
+  const [touchStart, setTouchStart] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -55,10 +58,7 @@ function Gallery() {
     sanityClient
       .fetch(galleryImagesQuery)
       .then((items) => {
-        if (cancelled || !Array.isArray(items)) {
-          return;
-        }
-
+        if (cancelled || !Array.isArray(items)) return;
         setSanityItems(items);
       })
       .catch((error) => {
@@ -75,32 +75,44 @@ function Gallery() {
       ?.map((item) => ({
         id: item._id,
         image: getSanityImageUrl(item.image),
-        alt: item.alt || "Fotografie restaurace Naan O Namak",
+        alt:
+          (isEnglish && item.altEn) ||
+          item.alt ||
+          (isEnglish
+            ? "Photo of Naan o Namak restaurant"
+            : "Fotografie restaurace Naan o Namak"),
       }))
       .filter((item) => item.image) ?? [];
 
+  const fallbackItems = galleryItems.map((item) => ({
+    ...item,
+    alt: (isEnglish && item.altEn) || item.alt,
+  }));
+
   const displayItems =
-    sanityGalleryItems.length > 0 ? sanityGalleryItems : galleryItems;
+    sanityGalleryItems.length > 0 ? sanityGalleryItems : fallbackItems;
+
   const isLightboxOpen = activeIndex !== null;
-  const [touchStart, setTouchStart] = useState(null);
 
   const showPrevious = useCallback(() => {
     setActiveIndex((current) => {
-      if (current === null) return null;
+      if (current === null || displayItems.length === 0) return null;
+
       return current === 0 ? displayItems.length - 1 : current - 1;
     });
   }, [displayItems.length]);
 
   const showNext = useCallback(() => {
     setActiveIndex((current) => {
-      if (current === null) return null;
+      if (current === null || displayItems.length === 0) return null;
+
       return current === displayItems.length - 1 ? 0 : current + 1;
     });
   }, [displayItems.length]);
 
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setActiveIndex(null);
-  };
+  }, []);
 
   const handleTouchStart = (event) => {
     setTouchStart(event.touches[0].clientX);
@@ -139,7 +151,31 @@ function Gallery() {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [isLightboxOpen, showPrevious, showNext]);
+  }, [isLightboxOpen, closeLightbox, showPrevious, showNext]);
+
+  const text = isEnglish
+    ? {
+        title: "Gallery",
+        description:
+          "A place where traditional Oriental cuisine, hospitality, and the atmosphere of our table come together.",
+        footer: "We look forward to welcoming you.",
+        enlarge: "Enlarge photo",
+        preview: "Gallery photo preview",
+        close: "Close photo",
+        previous: "Previous photo",
+        next: "Next photo",
+      }
+    : {
+        title: "Galerie",
+        description:
+          "Místo, kde se potkává tradiční orientální kuchyně, pohostinnost a atmosféra našeho stolu.",
+        footer: "Těšíme se na vaši návštěvu.",
+        enlarge: "Zvětšit fotografii",
+        preview: "Náhled fotografie galerie",
+        close: "Zavřít fotografii",
+        previous: "Předchozí fotografie",
+        next: "Další fotografie",
+      };
 
   return (
     <main className="gallery-page">
@@ -150,12 +186,9 @@ function Gallery() {
 
             <span className="gallery-page__eyebrow">NAAN O NAMAK</span>
 
-            <h1 className="gallery-page__title">Galerie</h1>
+            <h1 className="gallery-page__title">{text.title}</h1>
 
-            <p className="gallery-page__description">
-              Místo, kde se potkává tradiční orientální kuchyně, pohostinnost a
-              atmosféra našeho stolu.
-            </p>
+            <p className="gallery-page__description">{text.description}</p>
 
             <div className="gallery-page__decorative-line" aria-hidden="true" />
           </header>
@@ -167,7 +200,7 @@ function Gallery() {
                 type="button"
                 className="gallery-page__item"
                 onClick={() => setActiveIndex(index)}
-                aria-label={`Zvětšit fotografii: ${item.alt}`}
+                aria-label={`${text.enlarge}: ${item.alt}`}
               >
                 <span className="gallery-page__image">
                   <img
@@ -177,10 +210,7 @@ function Gallery() {
                     decoding="async"
                   />
 
-                  <span
-                    className="gallery-page__overlay"
-                    aria-hidden="true"
-                  ></span>
+                  <span className="gallery-page__overlay" aria-hidden="true" />
                 </span>
               </button>
             ))}
@@ -189,7 +219,7 @@ function Gallery() {
           <div className="gallery-page__footer">
             <span className="gallery-page__footer-line" aria-hidden="true" />
 
-            <p>Těšíme se na vaši návštěvu.</p>
+            <p>{text.footer}</p>
 
             <span className="gallery-page__footer-line" aria-hidden="true" />
           </div>
@@ -201,7 +231,7 @@ function Gallery() {
           className="gallery-page__lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label="Náhled fotografie galerie"
+          aria-label={text.preview}
           onClick={closeLightbox}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
@@ -213,7 +243,7 @@ function Gallery() {
               event.stopPropagation();
               closeLightbox();
             }}
-            aria-label="Zavřít fotografii"
+            aria-label={text.close}
           >
             ×
           </button>
@@ -225,7 +255,7 @@ function Gallery() {
               event.stopPropagation();
               showPrevious();
             }}
-            aria-label="Předchozí fotografie"
+            aria-label={text.previous}
           >
             ‹
           </button>
@@ -252,7 +282,7 @@ function Gallery() {
               event.stopPropagation();
               showNext();
             }}
-            aria-label="Další fotografie"
+            aria-label={text.next}
           >
             ›
           </button>

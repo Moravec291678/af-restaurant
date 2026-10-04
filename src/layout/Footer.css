@@ -176,6 +176,10 @@
   color: var(--color-gold);
 }
 
+.footer__address a[href^="mailto:"] {
+  overflow-wrap: anywhere;
+}
+
 /* =========================================================
    OPENING HOURS
 ========================================================= */

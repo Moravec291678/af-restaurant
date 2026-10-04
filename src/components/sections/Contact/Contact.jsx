@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import { useLanguage } from "../../../context/useLanguage";
 import { sanityClient } from "../../../lib/sanityClient";
 import { restaurantSettingsQuery } from "../../../lib/queries";
 
 import "./Contact.css";
 
 function Contact() {
+  const { isEnglish } = useLanguage();
+
   const [settings, setSettings] = useState(null);
 
   useEffect(() => {
@@ -29,24 +32,21 @@ function Contact() {
       cancelled = true;
     };
   }, []);
+
   return (
     <section className="contact" id="kontakt" aria-labelledby="contact-title">
       <div className="container">
         <div className="contact__inner">
-          {/* =========================================
-              CONTACT INFO
-          ========================================= */}
-
           <div className="contact__info">
             <div className="contact__heading">
               <span className="contact__line" aria-hidden="true" />
-
-              <h2 id="contact-title">Kde nás najdete</h2>
+              <h2 id="contact-title">
+                {isEnglish ? "Where to Find Us" : "Kde nás najdete"}
+              </h2>
             </div>
 
             <div className="contact__details">
               {/* ADDRESS */}
-
               <div className="contact__item">
                 <span className="contact__icon" aria-hidden="true">
                   <svg
@@ -61,7 +61,9 @@ function Contact() {
                 </span>
 
                 <div>
-                  <span className="contact__label">Adresa</span>
+                  <span className="contact__label">
+                    {isEnglish ? "Address" : "Adresa"}
+                  </span>
 
                   <address>
                     {settings?.address?.line1 || ""}
@@ -71,7 +73,6 @@ function Contact() {
               </div>
 
               {/* PHONE */}
-
               <div className="contact__item">
                 <span className="contact__icon" aria-hidden="true">
                   <svg
@@ -85,7 +86,9 @@ function Contact() {
                 </span>
 
                 <div>
-                  <span className="contact__label">Telefon</span>
+                  <span className="contact__label">
+                    {isEnglish ? "Phone" : "Telefon"}
+                  </span>
 
                   <a href={`tel:${settings?.phone || ""}`}>
                     {settings?.phone || ""}
@@ -94,7 +97,6 @@ function Contact() {
               </div>
 
               {/* EMAIL */}
-
               <div className="contact__item">
                 <span className="contact__icon" aria-hidden="true">
                   <svg
@@ -118,7 +120,6 @@ function Contact() {
               </div>
 
               {/* OPENING HOURS */}
-
               <div className="contact__item">
                 <span className="contact__icon" aria-hidden="true">
                   <svg
@@ -135,17 +136,15 @@ function Contact() {
                 <div className="contact__value contact__opening-hours">
                   {settings?.openingHours?.map((hours) => (
                     <span key={hours.day}>
-                      {hours.day}: {hours.open} – {hours.close}
+                      {isEnglish && hours.dayEn ? hours.dayEn : hours.day}:{" "}
+                      {hours.open} – {hours.close}
                     </span>
                   ))}
                 </div>
               </div>
             </div>
 
-            {/* =========================================
-                ACTIONS
-            ========================================= */}
-
+            {/* ACTIONS */}
             <div className="contact__actions">
               <a
                 href={settings?.mapUrl || ""}
@@ -153,35 +152,43 @@ function Contact() {
                 rel="noopener noreferrer"
                 className="contact__button contact__button--primary"
               >
-                Navigovat
+                {isEnglish ? "Get Directions" : "Navigovat"}
               </a>
 
               <Link
                 to="/rezervace"
                 className="contact__button contact__button--secondary"
               >
-                Rezervovat stůl
+                {isEnglish ? "Book a Table" : "Rezervovat stůl"}
               </Link>
             </div>
           </div>
 
-          {/* =========================================
-              MAP
-          ========================================= */}
-
+          {/* MAP */}
           <div className="contact__map">
-            <iframe
-              title="Mapa restaurace Naan O Namak v Praze-Benicích"
-              src={settings?.mapEmbedUrl || ""}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+            {settings?.mapEmbedUrl && (
+              <iframe
+                title={
+                  isEnglish
+                    ? "Map of Naan O Namak restaurant in Prague-Benice"
+                    : "Mapa restaurace Naan O Namak v Praze-Benicích"
+                }
+                src={settings.mapEmbedUrl}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            )}
+
             <a
               href={settings?.mapUrl || ""}
               target="_blank"
               rel="noopener noreferrer"
               className="contact__map-link"
-              aria-label="Otevřít restauraci v Google Maps"
+              aria-label={
+                isEnglish
+                  ? "Open restaurant in Google Maps"
+                  : "Otevřít restauraci v Google Maps"
+              }
             />
           </div>
         </div>

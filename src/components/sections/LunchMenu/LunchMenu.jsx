@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useLanguage } from "../../../context/useLanguage";
 import { sanityClient } from "../../../lib/sanityClient";
 import { lunchMenuQuery } from "../../../lib/queries";
 import { getSanityImageUrl } from "../../../lib/sanityImage";
-
 import "./LunchMenu.css";
 
 function LunchMenu() {
+  const { isEnglish } = useLanguage();
   const [lunchMenu, setLunchMenu] = useState(null);
 
   useEffect(() => {
@@ -16,10 +16,9 @@ function LunchMenu() {
     sanityClient
       .fetch(lunchMenuQuery)
       .then((data) => {
-        if (cancelled) {
-          return;
-        }
+        console.log("LUNCH MENU DATA:", data);
 
+        if (cancelled) return;
         setLunchMenu(data);
       })
       .catch((error) => {
@@ -34,6 +33,30 @@ function LunchMenu() {
   const items = lunchMenu?.items ?? [];
   const lunchImageUrl = getSanityImageUrl(lunchMenu?.image);
 
+  const eyebrow =
+    (isEnglish && lunchMenu?.eyebrowEn) ||
+    lunchMenu?.eyebrow ||
+    (isEnglish ? "❖ WEEKDAY LUNCH MENU ❖" : "❖ MENU PRO VŠEDNÍ DEN ❖");
+
+  const title =
+    (isEnglish && lunchMenu?.titleEn) ||
+    lunchMenu?.title ||
+    (isEnglish ? "Lunch Menu" : "Polední menu");
+
+  const description =
+    (isEnglish && lunchMenu?.descriptionEn) ||
+    lunchMenu?.description ||
+    (isEnglish
+      ? "Every weekday, we prepare a selection of popular Czech dishes for you."
+      : "Každý všední den pro vás připravujeme výběr oblíbených českých jídel.");
+
+  const imageAlt =
+    (isEnglish && lunchMenu?.imageAltEn) ||
+    lunchMenu?.imageAlt ||
+    (isEnglish
+      ? "A dish from the Naan O Namak restaurant in Prague-Benice"
+      : "Jídlo z nabídky restaurace Naan O Namak v Praze-Benicích");
+
   return (
     <section
       className="lunch-menu"
@@ -42,29 +65,17 @@ function LunchMenu() {
     >
       <div className="container">
         <div className="lunch-menu__inner">
-          {/* =========================================
-              HEADER
-              ========================================= */}
           <header className="lunch-menu__header">
-            <p className="lunch-menu__eyebrow">
-              {lunchMenu?.eyebrow || "❖ MENU PRO VŠEDNÍ DEN ❖"}
-            </p>
+            <p className="lunch-menu__eyebrow">{eyebrow}</p>
 
             <h2 id="lunch-menu-title" className="lunch-menu__title">
-              {lunchMenu?.title || "Polední menu"}
+              {title}
             </h2>
 
-            <p className="lunch-menu__subtitle">
-              {lunchMenu?.description ||
-                "Každý všední den pro vás připravujeme výběr oblíbených českých jídel."}
-            </p>
+            <p className="lunch-menu__subtitle">{description}</p>
           </header>
 
-          {/* =========================================
-              CONTENT
-              ========================================= */}
           <div className="lunch-menu__content">
-            {/* MENU ITEMS */}
             <div className="lunch-menu__list">
               {items.map((item, index) => (
                 <article
@@ -72,47 +83,39 @@ function LunchMenu() {
                   key={`${item.title}-${index}`}
                 >
                   <div className="lunch-menu__item-content">
-                    <h3 className="lunch-menu__item-name">{item.title}</h3>
+                    <h3 className="lunch-menu__item-name">
+                      {(isEnglish && item.titleEn) || item.title}
+                    </h3>
 
                     <p className="lunch-menu__item-description">
-                      {item.description}
+                      {(isEnglish && item.descriptionEn) || item.description}
                     </p>
                   </div>
 
                   <span className="lunch-menu__item-price">
-                    {item.price} Kč
+                    {item.price} {isEnglish ? "CZK" : "Kč"}
                   </span>
                 </article>
               ))}
             </div>
 
-            {/* IMAGE */}
             <div className="lunch-menu__image">
               {lunchImageUrl && (
                 <img
                   src={lunchImageUrl}
-                  alt={
-                    lunchMenu?.imageAlt ||
-                    "Jídlo z nabídky restaurace Naan O Namak v Praze-Benicích"
-                  }
+                  alt={imageAlt}
                   loading="lazy"
                   decoding="async"
                 />
               )}
 
-              <div
-                className="lunch-menu__image-overlay"
-                aria-hidden="true"
-              ></div>
+              <div className="lunch-menu__image-overlay" aria-hidden="true" />
             </div>
           </div>
 
-          {/* =========================================
-              ACTION
-              ========================================= */}
           <div className="lunch-menu__action">
             <Link to="/jidelni-listek" className="lunch-menu__button">
-              Prohlédnout jídelní lístek
+              {isEnglish ? "View Full Menu" : "Prohlédnout jídelní lístek"}
             </Link>
           </div>
         </div>

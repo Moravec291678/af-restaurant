@@ -2,6 +2,7 @@ import { createPortal } from "react-dom";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useLanguage } from "../../../context/useLanguage";
 import { sanityClient } from "../../../lib/sanityClient";
 import { galleryImagesQuery } from "../../../lib/queries";
 import { getSanityImageUrl } from "../../../lib/sanityImage";
@@ -18,25 +19,31 @@ const galleryItems = [
     id: 1,
     image: gallery01,
     alt: "Perské jídlo v restauraci Naan o Namak",
+    altEn: "Persian food at Naan o Namak restaurant",
   },
   {
     id: 2,
     image: gallery02,
     alt: "Perské jídlo v restauraci Naan o Namak",
+    altEn: "Persian food at Naan o Namak restaurant",
   },
   {
     id: 3,
     image: gallery03,
     alt: "Perské jídlo v restauraci Naan o Namak",
+    altEn: "Persian food at Naan o Namak restaurant",
   },
   {
     id: 4,
     image: gallery04,
     alt: "Perské jídlo v restauraci Naan o Namak",
+    altEn: "Persian food at Naan o Namak restaurant",
   },
 ];
 
 function Gallery() {
+  const { isEnglish } = useLanguage();
+
   const [activeIndex, setActiveIndex] = useState(null);
   const [sanityItems, setSanityItems] = useState(null);
 
@@ -60,23 +67,31 @@ function Gallery() {
       cancelled = true;
     };
   }, []);
+
   const sanityGalleryItems =
     sanityItems
       ?.filter((item) => item.showOnHomepage)
       .map((item) => ({
         id: item._id,
         image: getSanityImageUrl(item.image),
-        alt: item.alt || "Fotografie restaurace Naan O Namak",
+        alt: (isEnglish && item.altEn) || item.alt || (isEnglish ? "Photo of Naan O Namak restaurant" : "Fotografie restaurace Naan O Namak"),
       }))
       .filter((item) => item.image) ?? [];
 
   const displayItems =
-    sanityGalleryItems.length > 0 ? sanityGalleryItems : galleryItems;
+    sanityGalleryItems.length > 0
+      ? sanityGalleryItems
+      : galleryItems.map((item) => ({
+          ...item,
+          alt: (isEnglish && item.altEn) || item.alt,
+        }));
+
   const isLightboxOpen = activeIndex !== null;
 
   const showPrevious = useCallback(() => {
     setActiveIndex((current) => {
       if (current === null) return null;
+
       return current === 0 ? displayItems.length - 1 : current - 1;
     });
   }, [displayItems.length]);
@@ -84,6 +99,7 @@ function Gallery() {
   const showNext = useCallback(() => {
     setActiveIndex((current) => {
       if (current === null) return null;
+
       return current === displayItems.length - 1 ? 0 : current + 1;
     });
   }, [displayItems.length]);
@@ -92,10 +108,7 @@ function Gallery() {
     setActiveIndex(null);
   };
 
-  /* =========================================
-     KEYBOARD NAVIGATION
-  ========================================= */
-
+  // KEYBOARD NAVIGATION
   useEffect(() => {
     if (!isLightboxOpen) return;
 
@@ -122,10 +135,7 @@ function Gallery() {
     };
   }, [isLightboxOpen, showPrevious, showNext]);
 
-  /* =========================================
-     SWIPE
-  ========================================= */
-
+  // SWIPE
   const [touchStart, setTouchStart] = useState(null);
 
   const handleTouchStart = (event) => {
@@ -154,23 +164,15 @@ function Gallery() {
     <section className="gallery" id="galerie" aria-labelledby="gallery-title">
       <div className="container">
         <div className="gallery__inner">
-          {/* =========================================
-              HEADER
-          ========================================= */}
-
           <header className="gallery__header">
             <div className="gallery__decorative-line" aria-hidden="true" />
 
             <h2 id="gallery-title" className="gallery__title">
-              Galerie
+              {isEnglish ? "Gallery" : "Galerie"}
             </h2>
 
             <div className="gallery__decorative-line" aria-hidden="true" />
           </header>
-
-          {/* =========================================
-              GALLERY GRID
-          ========================================= */}
 
           <div className="gallery__grid">
             {displayItems.map((item, index) => (
@@ -179,7 +181,11 @@ function Gallery() {
                 type="button"
                 className="gallery__item"
                 onClick={() => setActiveIndex(index)}
-                aria-label={`Zvětšit fotografii: ${item.alt}`}
+                aria-label={
+                  isEnglish
+                    ? `Enlarge photo: ${item.alt}`
+                    : `Zvětšit fotografii: ${item.alt}`
+                }
               >
                 <span className="gallery__image">
                   <img
@@ -195,21 +201,13 @@ function Gallery() {
             ))}
           </div>
 
-          {/* =========================================
-              ACTION
-          ========================================= */}
-
           <div className="gallery__action">
             <Link to="/galerie" className="gallery__button">
-              Prohlédnout galerii
+              {isEnglish ? "View Gallery" : "Prohlédnout galerii"}
             </Link>
           </div>
         </div>
       </div>
-
-      {/* =========================================
-          LIGHTBOX
-      ========================================= */}
 
       {isLightboxOpen &&
         createPortal(
@@ -217,21 +215,19 @@ function Gallery() {
             className="gallery__lightbox"
             role="dialog"
             aria-modal="true"
-            aria-label="Náhled fotografie galerie"
+            aria-label={
+              isEnglish ? "Gallery photo preview" : "Náhled fotografie galerie"
+            }
             onClick={closeLightbox}
           >
-            {/* CLOSE */}
-
             <button
               type="button"
               className="gallery__lightbox-close"
               onClick={closeLightbox}
-              aria-label="Zavřít fotografii"
+              aria-label={isEnglish ? "Close photo" : "Zavřít fotografii"}
             >
               ×
             </button>
-
-            {/* PREVIOUS */}
 
             <button
               type="button"
@@ -240,12 +236,10 @@ function Gallery() {
                 event.stopPropagation();
                 showPrevious();
               }}
-              aria-label="Předchozí fotografie"
+              aria-label={isEnglish ? "Previous photo" : "Předchozí fotografie"}
             >
               ‹
             </button>
-
-            {/* IMAGE */}
 
             <div
               className="gallery__lightbox-content"
@@ -264,8 +258,6 @@ function Gallery() {
               </span>
             </div>
 
-            {/* NEXT */}
-
             <button
               type="button"
               className="gallery__lightbox-arrow gallery__lightbox-arrow--next"
@@ -273,7 +265,7 @@ function Gallery() {
                 event.stopPropagation();
                 showNext();
               }}
-              aria-label="Další fotografie"
+              aria-label={isEnglish ? "Next photo" : "Další fotografie"}
             >
               ›
             </button>
